@@ -21,5 +21,4 @@ public class Tabellone {
 		caselle.add(in);
 		return in;
 	}
-
 }
