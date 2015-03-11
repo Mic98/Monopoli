@@ -8,13 +8,29 @@ public class main {
 	
 	private Vector<Giocatore> giocatore;
 	private Tabellone tabellone;
-	private MyMenu menu;
+	private MyMenu menuMonopoli;
 	
+	private final static String TITOLO = "MONOPOLI";
+	private final static String VOCE_01 ="Crea nuova partita";
+	private final static String[] VOCI_MENU={VOCE_01};
 	public main(){		
 		inizializzazione();
 		
-		//Fase di creazione giocatori
+		int scelta;
+		menuMonopoli = new MyMenu(TITOLO, VOCI_MENU);
 		
+		do{
+			scelta = menuMonopoli.scegli();
+			
+			switch(scelta){
+			case 1:break;//Fase di creazione giocatori
+			default:break;
+
+			}
+		}
+			while(scelta != 0);
+		
+				
 	}
 	
 	
