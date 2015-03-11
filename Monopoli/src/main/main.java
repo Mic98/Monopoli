@@ -10,7 +10,7 @@ public class main {
 	private Tabellone tabellone;
 	private MyMenu menu;
 	
-	public main(){
+	public main(){		
 		inizializzazione();
 		
 		//Fase di creazione giocatori
