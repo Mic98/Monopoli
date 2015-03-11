@@ -6,14 +6,15 @@ import utilities.MyMenu;
 
 public class main {
 	
-	private Vector<Giocatore> giocatore;
-	private Tabellone tabellone;
-	private MyMenu menuMonopoli;
+	private static Vector<Giocatore> giocatore;
+	private static Tabellone tabellone;
+	private static MyMenu menuMonopoli;
 	
 	private final static String TITOLO = "MONOPOLI";
 	private final static String VOCE_01 ="Crea nuova partita";
 	private final static String[] VOCI_MENU={VOCE_01};
-	public main(){		
+	
+	public static void main(){		
 		inizializzazione();
 		
 		int scelta;
@@ -35,7 +36,7 @@ public class main {
 	
 	
 	//Crea e instanzia tutte le caselle del tabellone
-	private void inizializzazione(){
+	private static void inizializzazione(){
 		tabellone = new Tabellone();
 		
 		String [] nomi_caselle = Data.getNomiCaselle();
