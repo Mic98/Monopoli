@@ -59,6 +59,8 @@ public class Client {
         while(active){
             try{
                 String input=console.nextLine();
+                //Azioni eseguibili da un giocatore:
+                //1) Lancio dadi
                 if(input.equalsIgnoreCase("LOGOUT")){
                     sOut.writeObject(new Messaggio(nick,"LOGOUT", Messaggio.LOGOUT));
                     active=false;

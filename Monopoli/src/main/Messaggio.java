@@ -8,7 +8,7 @@ public class Messaggio implements Serializable{
     
     private String messaggio, nick;
     private int type;
-    static final int WHOISIN = 0, MESSAGE = 1, LOGOUT = 2;
+    static final int WHOISIN = 0, MESSAGE = 1, LOGOUT = 2, DADI = 3;
     
     Messaggio(String _nick, String _messaggio, int _type){
         this.nick=_nick;
