@@ -3,6 +3,7 @@ package main;
 import java.util.Vector;
 
 import utilities.MyMenu;
+import utilities.MyRandom;
 
 public class main {
 	
@@ -46,4 +47,18 @@ public class main {
 			tabellone.aggiungiCasella(new Casella(nomi_caselle[i], i));
 		}
 	}
+	
+	private static int[] lancioDadi(){
+		int dado1;
+		int dado2;
+				
+		dado1 = MyRandom.estraiIntero(Data.getDadoMIN(), Data.getDadoMAX());
+		dado2 = MyRandom.estraiIntero(Data.getDadoMIN(), Data.getDadoMAX());
+		
+		int [] risultatoTiro = {dado1, dado2};
+		
+		return risultatoTiro;
+	}
+	
+
 }

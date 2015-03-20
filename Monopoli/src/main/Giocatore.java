@@ -10,15 +10,19 @@ package main;
 
 public class Giocatore {
 	
-	private String name;
+	private String nome;
 	private Pedina pedina;
 	
+	public Giocatore(String nome){
+		this.nome=nome;
+		this.pedina = new Pedina(0);
+	}
 	
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.nome = nome;
 	}
 	public Pedina getPedina() {
 		return pedina;
