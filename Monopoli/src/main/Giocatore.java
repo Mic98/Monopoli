@@ -21,7 +21,7 @@ public class Giocatore {
 	public String getNome() {
 		return nome;
 	}
-	public void setName(String name) {
+	public void setName(String nome) {
 		this.nome = nome;
 	}
 	public Pedina getPedina() {
