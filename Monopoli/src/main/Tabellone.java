@@ -44,6 +44,10 @@ public class Tabellone {
 		
 	}
 	
+	public void teleportPlayer(Giocatore g, int casella){
+		g.getPedina().setPosizione(casella);
+	}
+	
 //	public Casella aggiungiCasella(Casella in){
 //		caselle.add(in);
 //		return in;

@@ -14,6 +14,8 @@ import utilities.*;
  *
  */
 public class Main {
+	
+	public Tabellone tabellone;
     
 	private final static String TITOLO_INIZIALE = "MONOPOLI";
 	private final static String VOCE_INIZIALE01 = "Nuova partita";
@@ -31,8 +33,12 @@ public class Main {
 	
 	
 	public static void main(String[] args){
+    }
 	
-  }
+	private void initTabellone(){
+		tabellone = new Tabellone();
+		tabellone.addGiocatore();
+	}
 	
 }
 
