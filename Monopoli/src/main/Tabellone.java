@@ -3,6 +3,7 @@
  */
 package main;
 
+import java.util.Collections;
 import java.util.Vector;
 
 /**
@@ -26,10 +27,25 @@ public class Tabellone {
 		turni_attuali = 0;
 	}
 	
-	public void addGiocatore(Vector<Giocatore> plrs){
+	public void addGiocatori(Vector<Giocatore> plrs){
 		giocatori = plrs;
+		
+		//Scambia casualmente la posizione dei turni dei giocatori
+		Collections.shuffle(plrs);
 	}
 	
+	public int getTurni_attuali() {
+		return turni_attuali;
+	}
+
+	public void setTurni_attuali(int turni_attuali) {
+		this.turni_attuali = turni_attuali;
+	}
+
+	public Vector<Giocatore> getGiocatori() {
+		return giocatori;
+	}
+
 	private void initCaselle(){
 		String[] nomiCaselle = Data.getNomiCaselle();
 		int i=0;
