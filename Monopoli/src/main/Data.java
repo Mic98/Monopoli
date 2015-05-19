@@ -11,8 +11,6 @@ import java.util.Vector;
  */
 public class Data {
 	
-	private static final int DADO_MIN = 1;
-	private static final int DADO_MAX = 6;
 	
 
 	private static final String CASELLA_0 = "VIA"; 
@@ -62,11 +60,5 @@ public class Data {
 		return NOMI_CASELLE;
 	}
 	
-	public static int getDadoMIN(){
-		return DADO_MIN;
-	}
 	
-	public static int getDadoMAX(){
-		return DADO_MAX;
-	}
 }
