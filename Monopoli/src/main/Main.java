@@ -18,16 +18,13 @@ public class Main {
 	//------------VOCI SISTEMA-----------------
 	private final static String BENVENUTI = "Benvenuti nel gioco del Monopoleh!";
 	private final static String ARRIVEDERCI = "GRAZIE PER AVER GIOCATO";
+	private final static String FINE_PARTITA = "La partita e' finita! Un'altra? ";
     
 	//------------MENU PRINCIPALE---------------
 	private final static String TITOLO_INIZIALE = "MONOPOLI";
 	private final static String VOCE_INIZIALE01 = "Nuova partita";
 	private final static String VOCE_INIZIALE02 = "Carica partita";
 	private final static String [] VOCI_MENU_INIZIALE = {VOCE_INIZIALE01, VOCE_INIZIALE02};
-	private final static String TITOLO_CREAZIONE = "";
-	private final static String VOCE_CREAZIONE01 = "Aggiungi Giocatore";
-	private final static String VOCE_CREAZIONE02 = "Inizia partita";
-	private final static String [] VOCI_CREAZIONE = {VOCE_CREAZIONE01, VOCE_CREAZIONE02};
 	
 	//-------------MENU GIOCATORE---------------
 	private final static String TITOLO_TURNO = "Turno di ";
@@ -37,10 +34,9 @@ public class Main {
 	//----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
+	private final static String ERRORE_NUM_GIOCATORI = "ATTENZIONE!!! Minimo 2 massimo 6 giocatori!";
 	
-	private static final MyMenu menuIniziale = new MyMenu(TITOLO_INIZIALE, VOCI_MENU_INIZIALE);
-	private static final MyMenu menuCreazionePartita= new MyMenu(TITOLO_CREAZIONE, VOCI_CREAZIONE);
-	
+	private static final MyMenu menuIniziale = new MyMenu(TITOLO_INIZIALE, VOCI_MENU_INIZIALE);	
 	
 	public static void main(String[] args){
 		System.out.println(BENVENUTI);
@@ -51,7 +47,10 @@ public class Main {
 			scelta = menuIniziale.scegli();
 			
 			switch(scelta){
-			case 1: nuovaPartita(); break;
+			case 1: 
+				nuovaPartita();
+				scelta = finePartita();
+			break;
 			case 2: caricaPartita(); break;
 				
 			case 0:  break;
@@ -70,9 +69,11 @@ public class Main {
 			String name = MyUtil.riceviString(RICHIESTA_NOME_GIOCATORE);
 			g.add(new Giocatore(name));
 			
-			if(MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)){
+			if(!MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)){
 				if(g.size() >= 2 && g.size() <= 6)
 					ok = true;
+				else
+					System.out.println(ERRORE_NUM_GIOCATORI);
 			}
 		}
 		
@@ -84,6 +85,12 @@ public class Main {
 	
 	private static void caricaPartita() {
 		System.out.println("FUNZIONALITA' NON ANCORA IMPLEMENTATA!!!");
+	}
+	
+	private static int finePartita(){
+		//Metodo che gestisce la fine di una partita
+				
+		return MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
 	}
 	
 	
@@ -100,10 +107,10 @@ public class Main {
 			
 			//Stabilisce se un giocatore ha concluso il proprio turno
 			boolean turno = true;
+			int numLanci = 0 ;
 			do{
-				scelta = menuGioco.scegli();
+				int scelta = menuGioco.scegli();
 				
-				int numLanci = 0 ;
 				switch (scelta) {
 					//Lancio dei dadi
 					case 1:
@@ -115,8 +122,6 @@ public class Main {
 						
 					break;
 	
-					default:
-					break;
 				}
 				
 				
@@ -129,7 +134,7 @@ public class Main {
 			
 			//Assegna il turno di gioco al prossimo giocatore 
 			turnGiocatore ++;
-			if(turnGiocatore >= tabellone.getGiocatori().size() - 1)
+			if(turnGiocatore > tabellone.getGiocatori().size() - 1)
 				turnGiocatore = 0;
 			
 			//Cotrolla se abbiamo raggiunto il massimo dei turni disponibili

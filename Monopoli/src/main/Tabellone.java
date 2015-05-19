@@ -70,6 +70,11 @@ public class Tabellone {
 		g.getPedina().setPosizione(casella);
 	}
 	
+	public String toString(){
+		return null;
+		
+	}
+	
 //	public Casella aggiungiCasella(Casella in){
 //		caselle.add(in);
 //		return in;
