@@ -40,7 +40,13 @@ public class Tabellone {
 		}
 	}
 	
-	public void movePlayer(Giocatore g, int step){
+	public void movePlayer(Giocatore g, int step){		
+		int dest = g.getPedina().getPosizione() + step;
+		
+		if(dest >= 40)
+			dest = dest - 40;
+		
+		g.getPedina().setPosizione(dest);
 		
 	}
 	
