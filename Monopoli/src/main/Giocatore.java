@@ -12,6 +12,7 @@ public class Giocatore {
 	
 	private String nome;
 	private Pedina pedina;
+	private boolean attivo;
 	
 	public Giocatore(String nome){
 		this.nome=nome;
@@ -30,5 +31,15 @@ public class Giocatore {
 	public void setPedina(Pedina pedina) {
 		this.pedina = pedina;
 	}
+
+	public boolean isAttivo() {
+		return attivo;
+	}
+
+	public void setAttivo(boolean attivo) {
+		this.attivo = attivo;
+	}
+	
+	
 
 }
