@@ -14,7 +14,7 @@ public class Tabellone {
 
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> giocatori;
-	private int turni_attuali; //Variabile che tiene conto dei turni 
+	private int turniAttuali; //Variabile che tiene conto dei turni 
 	
 	public Tabellone(){
 		//Inizializzazione dei dati delle caselle
@@ -24,7 +24,7 @@ public class Tabellone {
 		//Creazione del vettore del giocatore
 		giocatori = new Vector<Giocatore>();
 		
-		turni_attuali = 0;
+		turniAttuali = 0;
 	}
 	
 	public void addGiocatori(Vector<Giocatore> plrs){
@@ -34,12 +34,12 @@ public class Tabellone {
 		Collections.shuffle(plrs);
 	}
 	
-	public int getTurni_attuali() {
-		return turni_attuali;
+	public int getTurniAttuali() {
+		return turniAttuali;
 	}
 
-	public void setTurni_attuali(int turni_attuali) {
-		this.turni_attuali = turni_attuali;
+	public void setTurniAttuali(int turniAttuali) {
+		this.turniAttuali = turniAttuali;
 	}
 
 	public Vector<Giocatore> getGiocatori() {
@@ -56,18 +56,23 @@ public class Tabellone {
 		}
 	}
 	
+	
+	public Vector<Casella> getCaselle() {
+		return caselle;
+	}
+
 	public void movePlayer(Giocatore g, int step){		
-		int dest = g.getPedina().getPosizione() + step;
+		int dest = g.getPosizione() + step;
 		
 		if(dest >= 40)
 			dest = dest - 40;
 		
-		g.getPedina().setPosizione(dest);
+		g.setPosizione(dest);
 		
 	}
 	
 	public void teleportPlayer(Giocatore g, int casella){
-		g.getPedina().setPosizione(casella);
+		g.setPosizione(casella);
 	}
 	
 	public String toString(){

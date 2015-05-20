@@ -11,7 +11,7 @@ import java.util.Vector;
  */
 public class Data {
 	
-	
+	private static final int PRIGIONE = 10;
 
 	private static final String CASELLA_0 = "VIA"; 
 	private static final String CASELLA_1 = "VICOLO CORTO"; 
@@ -58,6 +58,10 @@ public class Data {
 
 	public static String[] getNomiCaselle() {
 		return NOMI_CASELLE;
+	}
+	
+	public static int getPrigione(){
+		return PRIGIONE;
 	}
 	
 	

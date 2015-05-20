@@ -11,14 +11,14 @@ package main;
 public class Giocatore {
 	
 	private String nome;
-	private Pedina pedina;
+	private int posizione;
 	private boolean inPrigione;
 	private boolean token;
 	
 
 	public Giocatore(String nome){
 		this.nome=nome;
-		this.pedina = new Pedina(0);
+		this.posizione = 0;
 		token=false;
 		inPrigione=false;
 	}
@@ -29,11 +29,11 @@ public class Giocatore {
 	public void setName(String nome) {
 		this.nome = nome;
 	}
-	public Pedina getPedina() {
-		return pedina;
+	public int getPosizione() {
+		return posizione;
 	}
-	public void setPedina(Pedina pedina) {
-		this.pedina = pedina;
+	public void setPosizione(int posizione) {
+		this.posizione = posizione;
 	}
 	
 	public boolean hasToken() {
