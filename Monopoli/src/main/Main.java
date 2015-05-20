@@ -28,7 +28,7 @@ public class Main {
 	private final static String VOCE_INIZIALE01 = "Nuova partita";
 	private final static String VOCE_INIZIALE02 = "Riprendi partita";
 	private final static String VOCE_INIZIALE03 = "Carica partita";
-	private final static String [] VOCI_MENU_INIZIALE = {VOCE_INIZIALE01, VOCE_INIZIALE02};
+	private final static String [] VOCI_MENU_INIZIALE = {VOCE_INIZIALE01, VOCE_INIZIALE02, VOCE_INIZIALE03};
 	
 	//-------------MENU GIOCATORE---------------
 	private final static String TITOLO_TURNO = "Turno di ";
