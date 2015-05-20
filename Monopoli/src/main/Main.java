@@ -13,7 +13,7 @@ import utilities.*;
  */
 public class Main {
 	
-	public static Tabellone tabellone;
+	public static Tabellone tabellone=new Tabellone();
 	public static Dado dado;
 	
 	//------------VOCI SISTEMA-----------------
@@ -22,6 +22,7 @@ public class Main {
 	private final static String FINE_PARTITA = "La partita e' finita! Un'altra? ";
 	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno è concluso premi 0 per passarlo al giocatore successivo";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
+	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n°: %d %s%n";
     
 	//------------MENU PRINCIPALE---------------
 	private final static String TITOLO_INIZIALE = "MONOPOLI";
@@ -32,8 +33,9 @@ public class Main {
 	
 	//-------------MENU GIOCATORE---------------
 	private final static String TITOLO_TURNO = "Turno di ";
-	private final static String VOCE_LANCIO_DADI = "Lancio dadi";
-	private final static String [] VOCI_MENU_GIOCO = {VOCE_LANCIO_DADI};
+	private final static String VOCE_TURNO01 = "Lancio dadi";
+	private final static String VOCE_TURNO02 = "Salva partita";
+	private final static String [] VOCI_MENU_GIOCO = {VOCE_TURNO01, VOCE_TURNO02};
 	
 	//----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
@@ -52,6 +54,7 @@ public class Main {
 	private static final String NESSUNA_PARTITA_SALVATA = "Non c'è nessuna partita preesistente";
 	
 	private static final File filePartita = new File (PARTITA_FILE);
+	
 	
 	
 	
@@ -96,7 +99,6 @@ public class Main {
 			}
 		}
 		
-		tabellone = new Tabellone();
 		tabellone.addGiocatori(nuoviGiocatori);
 		dado = new Dado(1,1);
 		partita();
@@ -233,6 +235,7 @@ public class Main {
 		if(giocatoreAttuale.hasToken() && !giocatoreAttuale.isInPrigione()){
 		    lancioDadi();
 		    tabellone.movePlayer(giocatoreAttuale, dado.risultato());
+		    System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(), giocatoreAttuale.getPosizione(), tabellone.getCaselle().get(giocatoreAttuale.getPosizione()).getNome());
 		    giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci()+1);
 		
 	    if(!dado.sonoUguali()){
