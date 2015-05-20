@@ -12,6 +12,7 @@ public class Giocatore {
 	
 	private String nome;
 	private int posizione;
+	private int numeroLanci;
 	private boolean inPrigione;
 	private boolean token;
 	
@@ -19,6 +20,7 @@ public class Giocatore {
 	public Giocatore(String nome){
 		this.nome=nome;
 		this.posizione = 0;
+		this.numeroLanci = 0;
 		token=false;
 		inPrigione=false;
 	}
@@ -50,6 +52,14 @@ public class Giocatore {
 
 	public void setInPrigione(boolean inPrigione) {
 		this.inPrigione = inPrigione;
+	}
+
+	public int getNumeroLanci() {
+		return numeroLanci;
+	}
+
+	public void setNumeroLanci(int numeroLanci) {
+		this.numeroLanci = numeroLanci;
 	}
 	
 	

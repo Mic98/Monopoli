@@ -115,14 +115,42 @@ public class Main {
 	
 	//Metodo di gioco. Qui e' presente il ciclo infinito del gioco
 		private static void partita(){
+			boolean partitaSalvata = false ;
+			int turnoGiocatore;
 			boolean inGame = true;
-			int turnoGiocatore = 0;
+		
+//questo if serve nel caso si riprenda da una partita salvata per non far ricominciare il giro dal primo giocatore
+			if(giocatoreHaToken())
+			   turnoGiocatore = giocatoreConToken();
+			else
+			   turnoGiocatore = 0;
 			
-			while(inGame){
+			while(inGame && !partitaSalvata){
 				//Seleziona il giocatore attuale per una migliore gestione
 				Giocatore giocatoreAttuale = tabellone.getGiocatori().get(turnoGiocatore);
 				
-				gestioneTurno(giocatoreAttuale);
+				
+				MyMenu menuGioco = new MyMenu(TITOLO_TURNO + giocatoreAttuale.getNome(), VOCI_MENU_GIOCO);
+				
+				
+				int scelta;
+				//Stabilisce se un giocatore ha concluso il proprio turno
+				giocatoreAttuale.setToken(true);
+				
+				do{
+					scelta = menuGioco.scegli();
+					
+					switch (scelta) {
+						//Lancio dei dadi
+						case 1:gestioneTurno(giocatoreAttuale);break;
+						
+	// notare che al momento del salvataggio un giocatore possiede il token, nel caso del caricamento della partita in futuro si saprˆ da quale giocatore riprendere
+						case 2: {salvaPartita();
+						         giocatoreAttuale.setToken(false); 
+						         scelta=0; partitaSalvata = true; 
+						}break;
+					}		
+				}while (giocatoreAttuale.hasToken() && scelta!=0);
 				
 				//Assegna il turno di gioco al prossimo giocatore 
 				turnoGiocatore ++;
@@ -138,6 +166,29 @@ public class Main {
 		}//fine metodo partita
 		
 		
+		//metodo che serve ad individuare il giocatore con il token
+		private static int giocatoreConToken() {
+						
+			int posizioneGiocatore = 0;
+			for(int i=0; i<tabellone.getGiocatori().size();i++)
+			     if(tabellone.getGiocatori().get(i).hasToken())
+                              posizioneGiocatore = i;
+			
+			return posizioneGiocatore;
+			
+		}
+
+		//metodo che serve per sapere se un giocatore possiede il token
+		private static boolean giocatoreHaToken() {
+			
+			for(int i=0; i<tabellone.getGiocatori().size();i++)
+			     if(tabellone.getGiocatori().get(i).hasToken())
+			    	 return true;
+			
+			return false;
+			
+		}
+
 		private static void lancioDadi(){
 			
 			dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(), Dado.getDadoMAX()));
@@ -145,55 +196,6 @@ public class Main {
 		}
 		
 		
-		//Metodo che gestisce il turno del singolo giocatore
-		private static void gestioneTurno(Giocatore giocatore){
-			MyMenu menuGioco = new MyMenu(TITOLO_TURNO + giocatore.getNome(), VOCI_MENU_GIOCO);
-			
-			
-			int scelta;
-			//Stabilisce se un giocatore ha concluso il proprio turno
-			giocatore.setToken(true);
-			
-			int numLanci = 0 ;
-			do{
-				scelta = menuGioco.scegli();
-				
-				switch (scelta) {
-					//Lancio dei dadi
-					case 1:{ 
-						if(giocatore.hasToken() && !giocatore.isInPrigione()){
-						    lancioDadi();
-						    tabellone.movePlayer(giocatore, dado.risultato());
-						    numLanci++;
-						
-					    if(!dado.sonoUguali()){
-							giocatore.setToken(false);
-							System.out.println(MESSAGGIO_FINE_TURNO);
-					    }
-						if(numLanci >= 3 ){
-							giocatore.setToken(false);
-							System.out.println(MESSAGGIO_TROPPI_LANCI);
-							tabellone.teleportPlayer(giocatore, Data.getPrigione()); //AH-AH-AH 
-							giocatore.setInPrigione(true);
-						}
-					}
-						else{
-							lancioDadi();
-							if(dado.sonoUguali()){
-								giocatore.setInPrigione(false);
-							}
-						}
-					}break;
-					
-					case 2: salvaPartita(); giocatore.setToken(false); scelta=0; break;
-
-				}		
-			}while (giocatore.hasToken() && scelta!=0);
-			
-			
-		}
-	
-	
 	
 	private static int finePartita(){
 		//Metodo che gestisce la fine di una partita			
@@ -209,7 +211,7 @@ public class Main {
 			else
 				System.out.printf(NIENTE_DA_SALVARE);
 		
-	}
+	}// fine salvaPartita
 	
 	private static void caricaPartita() {
 		if(ServizioFile.esistenza(filePartita))
@@ -223,12 +225,48 @@ public class Main {
 			System.out.println(FILE_CARICATI);
 	    else
 				  System.out.println(CARICAMENTO_FALLITO);
-	}
+	}//fine caricaPartita
 	
 	
+	private static void gestioneTurno(Giocatore giocatoreAttuale){
+		
+		if(giocatoreAttuale.hasToken() && !giocatoreAttuale.isInPrigione()){
+		    lancioDadi();
+		    tabellone.movePlayer(giocatoreAttuale, dado.risultato());
+		    giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci()+1);
+		
+	    if(!dado.sonoUguali()){
+			giocatoreAttuale.setToken(false);
+			System.out.println(MESSAGGIO_FINE_TURNO);
+			giocatoreAttuale.setNumeroLanci(0);
+	    }
+		if(giocatoreAttuale.getNumeroLanci() >= 3 ){
+			giocatoreAttuale.setToken(false);
+			System.out.println(MESSAGGIO_TROPPI_LANCI);
+			tabellone.teleportPlayer(giocatoreAttuale, Data.getPrigione()); //AH-AH-AH 
+			giocatoreAttuale.setInPrigione(true);
+			giocatoreAttuale.setNumeroLanci(0);
+		    }
+	    }
+		else{
+			lancioDadi();
+			if(dado.sonoUguali()){
+				giocatoreAttuale.setInPrigione(false);
+				giocatoreAttuale.setToken(false);
+	        }
+		
+	    }
+	 }//fine gestioneTurno
+	
+	
+	
+	
+	
+	
+}
 	
 	
 
 	
-}
+
 
