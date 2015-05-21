@@ -28,8 +28,7 @@ public class Main {
 	private final static String TITOLO_INIZIALE = "MONOPOLI";
 	private final static String VOCE_INIZIALE01 = "Nuova partita";
 	private final static String VOCE_INIZIALE02 = "Riprendi partita";
-	private final static String VOCE_INIZIALE03 = "Carica partita";
-	private final static String [] VOCI_MENU_INIZIALE = {VOCE_INIZIALE01, VOCE_INIZIALE02, VOCE_INIZIALE03};
+	private final static String [] VOCI_MENU_INIZIALE = {VOCE_INIZIALE01, VOCE_INIZIALE02};
 	
 	//-------------MENU GIOCATORE---------------
 	private final static String TITOLO_TURNO = "Turno di ";
@@ -72,8 +71,7 @@ public class Main {
 			        scelta = finePartita();
 			        break;
 			case 2: riprendiPartita();break;      
-			case 3: caricaPartita(); break;
-				
+			
 			case 0:  break;
 			
 			}
@@ -105,6 +103,8 @@ public class Main {
 	}
 	
 	private static void riprendiPartita(){
+		
+		caricaPartita();
 		if(!tabellone.getGiocatori().isEmpty()){
 			dado = new Dado(1,1);
 			partita();
@@ -147,10 +147,10 @@ public class Main {
 						case 1:gestioneTurno(giocatoreAttuale);break;
 						
 	// notare che al momento del salvataggio un giocatore possiede il token, nel caso del caricamento della partita in futuro si saprˆ da quale giocatore riprendere
-						case 2: {salvaPartita();
-						         giocatoreAttuale.setToken(false); 
-						         scelta=0; partitaSalvata = true; 
-						}break;
+						case 2: salvaPartita();
+						        giocatoreAttuale.setToken(false); 
+						        scelta=0; partitaSalvata = true; 
+		                        break;
 					}		
 				}while (giocatoreAttuale.hasToken() && scelta!=0);
 				
