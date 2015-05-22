@@ -5,15 +5,21 @@ package main;
 
 import java.util.Collections;
 import java.util.Vector;
+import java.io.*;
+
+
+
 
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class Tabellone {
+public class Tabellone implements Serializable {
 
+	
+	private static final String MESS_VUOTO = "%n La lista giocatori è vuota %n%n";
 	private Vector<Casella> caselle;
-	private Vector<Giocatore> giocatori;
+	private Vector<Giocatore> elencoGiocatori;
 	private int turniAttuali; //Variabile che tiene conto dei turni 
 	
 	public Tabellone(){
@@ -22,13 +28,13 @@ public class Tabellone {
 		initCaselle();
 		
 		//Creazione del vettore del giocatore
-		giocatori = new Vector<Giocatore>();
+		elencoGiocatori = new Vector<Giocatore>();
 		
 		turniAttuali = 0;
 	}
 	
 	public void addGiocatori(Vector<Giocatore> plrs){
-		giocatori = plrs;
+		elencoGiocatori = plrs;
 		
 		//Scambia casualmente la posizione dei turni dei giocatori
 		Collections.shuffle(plrs);
@@ -42,8 +48,8 @@ public class Tabellone {
 		this.turniAttuali = turniAttuali;
 	}
 
-	public Vector<Giocatore> getGiocatori() {
-		return giocatori;
+	public Vector<Giocatore> getElencoGiocatori() {
+		return elencoGiocatori;
 	}
 
 	private void initCaselle(){
@@ -76,7 +82,15 @@ public class Tabellone {
 	}
 	
 	public String toString(){
-		return null;
+StringBuilder visualizza = new StringBuilder();
+		
+		if(elencoGiocatori.isEmpty())
+			visualizza.append(String.format(MESS_VUOTO));
+		else
+		  for(Giocatore g: elencoGiocatori)
+		    	visualizza.append(String.format(g.toString()));	
+		
+        return visualizza.toString();	 
 		
 	}
 	

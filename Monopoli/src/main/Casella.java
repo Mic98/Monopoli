@@ -3,11 +3,13 @@
  */
 package main;
 
+import java.io.*;
+
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class Casella {
+public class Casella implements Serializable {
 	
 	private String nome;
 	private int numero;

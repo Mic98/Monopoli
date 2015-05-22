@@ -3,13 +3,16 @@
  */
 package main;
 
+import java.io.*;
+
 /**
- * @author mrmoddom
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 
-public class Giocatore {
+public class Giocatore implements Serializable {
 	
+	private static final String GIOCATORE = "GIOCATORE: %s";
 	private String nome;
 	private int posizione;
 	private int numeroLanci;
@@ -60,6 +63,14 @@ public class Giocatore {
 
 	public void setNumeroLanci(int numeroLanci) {
 		this.numeroLanci = numeroLanci;
+	}
+	
+	public String toString(){
+		StringBuilder visualizza = new StringBuilder();
+		
+		visualizza.append(String.format("%n%n" + GIOCATORE + "%n", getNome()));
+		
+		return visualizza.toString();
 	}
 	
 	
