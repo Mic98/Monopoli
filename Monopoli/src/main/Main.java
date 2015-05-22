@@ -8,7 +8,7 @@ import java.util.Vector;
 import utilities.*;
 
 /**
- * @author Carlo
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 public class Main {
@@ -39,7 +39,8 @@ public class Main {
 	//----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
-	private final static String ERRORE_NUM_GIOCATORI = "ATTENZIONE!!! Minimo 2 massimo 6 giocatori!";
+	private final static String ERRORE_POCHI_GIOCATORI = "ATTENZIONE!!! Minimo 2 giocatori!";
+	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inzierˆ";
 	
 	private static final MyMenu menuIniziale = new MyMenu(TITOLO_INIZIALE, VOCI_MENU_INIZIALE);
 	
@@ -81,6 +82,9 @@ public class Main {
 		System.out.println(ARRIVEDERCI);
     }	
 
+/**
+ * metodo che si occupa di creare una nuova partita	
+ */
 	private static void nuovaPartita(){
 		Vector<Giocatore> nuoviGiocatori = new Vector<Giocatore>();
 		boolean ok = false;
@@ -89,19 +93,32 @@ public class Main {
 			String nome = MyUtil.riceviString(RICHIESTA_NOME_GIOCATORE);
 			nuoviGiocatori.add(new Giocatore(nome));
 			
-			if(!MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)){
-				if(nuoviGiocatori.size() >= 2 && nuoviGiocatori.size() <= 6)
-					ok = true;
-				else
-					System.out.println(ERRORE_NUM_GIOCATORI);
+			if(MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)){
+				if(nuoviGiocatori.size()>=6){
+						System.out.println(ERRORE_TROPPI_GIOCATORI);
+						ok = true;
+					}
 			}
-		}
+					else{
+						if(nuoviGiocatori.size()<2)
+								System.out.println(ERRORE_POCHI_GIOCATORI);
+						else 
+							ok = true;
+					}
+						
+				}
+		
+		
 		
 		tabellone.addGiocatori(nuoviGiocatori);
 		dado = new Dado(1,1);
 		partita();
 	}
-	
+  
+
+/**
+ * metodo che si occupa di caricare una partita salvata precedenntemente e riprenderla da dove interrotta	
+ */
 	private static void riprendiPartita(){
 		
 		caricaPartita();
@@ -115,7 +132,9 @@ public class Main {
 	}
 	
 	
-	//Metodo di gioco. Qui e' presente il ciclo infinito del gioco
+/**
+ * Metodo di gioco. Qui e' presente il ciclo infinito del gioco
+ */
 		private static void partita(){
 			boolean partitaSalvata = false ;
 			int turnoGiocatore;
@@ -168,7 +187,10 @@ public class Main {
 		}//fine metodo partita
 		
 		
-		//metodo che serve ad individuare il giocatore con il token
+/**
+ * metodo che serve ad individuare il giocatore con il token
+ * @return la posizione nel vettore Giocatori del giocatore in possesso del token
+ */
 		private static int giocatoreConToken() {
 						
 			int posizioneGiocatore = 0;
@@ -180,7 +202,10 @@ public class Main {
 			
 		}
 
-		//metodo che serve per sapere se un giocatore possiede il token
+/**
+ * metodo che serve per sapere se un giocatore possiede il token
+ * @return true se il giocatore possiede il token
+ */
 		private static boolean giocatoreHaToken() {
 			
 			for(int i=0; i<tabellone.getGiocatori().size();i++)
@@ -191,6 +216,9 @@ public class Main {
 			
 		}
 
+/**
+ * metodo per lanciare i dadi 		  
+*/
 		private static void lancioDadi(){
 			
 			dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(), Dado.getDadoMAX()));
@@ -198,23 +226,31 @@ public class Main {
 		}
 		
 		
-	
+/**
+ * 	metodo per far scegliere all'utente se giocare ancora o uscire
+ * @return 1 se il giocatore sceglie di fare un'altra partita 0 altrimenti
+ */
 	private static int finePartita(){
 		//Metodo che gestisce la fine di una partita			
 		return MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
 	}
 	
-	
+/**
+ * metodo per salvare una partita in corso	
+ */
 	private static void salvaPartita() {
 		if(!tabellone.getGiocatori().isEmpty()){
 			  ServizioFile.salvaSingoloOggetto(filePartita, tabellone);
-	           System.out.printf(FILE_SALVATI);
+	           System.out.println(FILE_SALVATI);
 			}
 			else
 				System.out.printf(NIENTE_DA_SALVARE);
 		
 	}// fine salvaPartita
-	
+
+/**
+ * metodo per caricare una partita salvata in precedenza	
+ */
 	private static void caricaPartita() {
 		if(ServizioFile.esistenza(filePartita))
 			try{
@@ -229,7 +265,10 @@ public class Main {
 				  System.out.println(CARICAMENTO_FALLITO);
 	}//fine caricaPartita
 	
-	
+/**	
+ * metodo per gestire il turno di un giocatore
+ * @param giocatoreAttuale il giocatore che pu˜ giocare in questo turno
+ */
 	private static void gestioneTurno(Giocatore giocatoreAttuale){
 		
 		if(giocatoreAttuale.hasToken() && !giocatoreAttuale.isInPrigione()){

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Vector;
 
 /**
- * @author mrmoddom
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 public class Tabellone {
