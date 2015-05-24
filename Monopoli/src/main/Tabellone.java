@@ -14,6 +14,7 @@ import java.io.*;
 public class Tabellone implements Serializable {
 
 	private static final String MESS_VUOTO = "%n La lista giocatori è vuota %n%n";
+	private static final int BONUS_VIA = 500;
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
 	private int turniAttuali; // Variabile che tiene conto dei turni
@@ -65,8 +66,10 @@ public class Tabellone implements Serializable {
 	public void movePlayer(Giocatore g, int step) {
 		int dest = g.getPosizione() + step;
 
-		if (dest >= 40)
+		if (dest >= 40){
 			dest = dest - 40;
+			g.setCapitale(g.getCapitale() + BONUS_VIA);
+		}
 
 		g.setPosizione(dest);
 

@@ -14,8 +14,10 @@ public class Giocatore implements Serializable {
 
 	private static final String GIOCATORE = "GIOCATORE: %s";
 	private static final int POSIZIONE_DEFAULT = 0;
+	private static final int CAPITALE_INIZIALE = 5000;
 
 	private String nome;
+	private int capitale;
 	private int posizione;
 	private int numeroLanci;
 	private boolean inPrigione;
@@ -23,11 +25,13 @@ public class Giocatore implements Serializable {
 
 	public Giocatore(String nome) {
 		this.nome = nome;
-		this.posizione = POSIZIONE_DEFAULT;
-		this.numeroLanci = 0;
+		capitale = CAPITALE_INIZIALE;
+		posizione = POSIZIONE_DEFAULT;
+		numeroLanci = 0;
 		token = false;
 		inPrigione = false;
 	}
+
 
 	public String getNome() {
 		return nome;
@@ -35,6 +39,14 @@ public class Giocatore implements Serializable {
 
 	public void setName(String nome) {
 		this.nome = nome;
+	}
+	
+	public int getCapitale() {
+		return capitale;
+	}
+
+	public void setCapitale(int capitale) {
+		this.capitale = capitale;
 	}
 
 	public int getPosizione() {
