@@ -11,36 +11,40 @@ import java.io.*;
  */
 
 public class Giocatore implements Serializable {
-	
+
 	private static final String GIOCATORE = "GIOCATORE: %s";
+	private static final int POSIZIONE_DEFAULT = 0;
+
 	private String nome;
 	private int posizione;
 	private int numeroLanci;
 	private boolean inPrigione;
 	private boolean token;
-	
 
-	public Giocatore(String nome){
-		this.nome=nome;
-		this.posizione = 0;
+	public Giocatore(String nome) {
+		this.nome = nome;
+		this.posizione = POSIZIONE_DEFAULT;
 		this.numeroLanci = 0;
-		token=false;
-		inPrigione=false;
+		token = false;
+		inPrigione = false;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setName(String nome) {
 		this.nome = nome;
 	}
+
 	public int getPosizione() {
 		return posizione;
 	}
+
 	public void setPosizione(int posizione) {
 		this.posizione = posizione;
 	}
-	
+
 	public boolean hasToken() {
 		return token;
 	}
@@ -64,15 +68,13 @@ public class Giocatore implements Serializable {
 	public void setNumeroLanci(int numeroLanci) {
 		this.numeroLanci = numeroLanci;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		StringBuilder visualizza = new StringBuilder();
-		
+
 		visualizza.append(String.format("%n%n" + GIOCATORE + "%n", getNome()));
-		
+
 		return visualizza.toString();
 	}
-	
-	
 
 }

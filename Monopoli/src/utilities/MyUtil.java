@@ -1,9 +1,8 @@
 package utilities;
 
-
 import java.util.*;
 
-public class MyUtil{
+public class MyUtil {
 
 	private static Scanner in = creaScanner();
 
