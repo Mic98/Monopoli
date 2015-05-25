@@ -20,7 +20,7 @@ public class Dado {
 
 	private int lancio1;
 	private int lancio2;
-
+	
 	/**
 	 * Costruttore della classe dado
 	 * 
@@ -29,10 +29,9 @@ public class Dado {
 	 * @param lancio2
 	 *            risultato del tiro del secondo dado
 	 */
-	public Dado(int lancio1, int lancio2) {
-		this.lancio1 = lancio1;
-		this.lancio2 = lancio2;
-
+	public Dado() {
+		this.lancio1 = DADO_MIN;
+		this.lancio2 = DADO_MIN;
 	}
 
 	/**

@@ -81,7 +81,7 @@ public class Gioco {
 		}
 
 		tabellone.addGiocatori(nuoviGiocatori);
-		dado = new Dado(1, 1);
+		dado = new Dado();
 		partita();
 	}
 
@@ -222,7 +222,7 @@ public class Gioco {
 			}
 		if (!tabellone.getElencoGiocatori().isEmpty()) {
 			System.out.println(FILE_CARICATI);
-			dado = new Dado(1, 1);
+			dado = new Dado();
 			partita();
 		} else
 			System.out.println(NESSUNA_PARTITA_SALVATA);
