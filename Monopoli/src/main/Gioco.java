@@ -133,7 +133,9 @@ public class Gioco {
 				}
 			} while (inTurn);
 
-			System.out.println(MESSAGGIO_FINE_TURNO);
+			if(scelta == 1)
+				System.out.println(MESSAGGIO_FINE_TURNO);
+			
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.setTurnoGiocatore(tabellone.getTurnoGiocatore() + 1);;
 			if (tabellone.getTurnoGiocatore() > tabellone.getElencoGiocatori().size() - 1)
