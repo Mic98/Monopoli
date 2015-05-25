@@ -198,7 +198,23 @@ public class Gioco {
 		return inTurn;
 	}// fine gestioneTurno
 
+	public void checkEndTurn(){
+		//Controlla dove si trova il giocatore
+		for(Giocatore g : tabellone.getElencoGiocatori()){
+			Casella attuale = tabellone.getCaselle().get(g.getPosizione());
+			switch (attuale.getType()) {
+			case 1:
+				Tassa t = (Tassa) attuale;
+				g.setCapitale(g.getCapitale() - t.getMalus());
+			break;
 
+			default:
+				break;
+			}
+		}
+		
+	}	
+	
 	/**
 	 * metodo per lanciare i dadi
 	 */

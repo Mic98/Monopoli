@@ -6,6 +6,7 @@ public class Tassa extends Casella{
 	
 	public Tassa (String nome, int numero, int malus){
 		super(nome, numero);
+		super.setType(Casella.TASSE);
 		this.malus = malus;
 	}
 

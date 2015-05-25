@@ -10,10 +10,13 @@ import java.io.*;
  *
  */
 public class Casella implements Serializable {
+	
+	public static final int NEUTRA = 0,
+							TASSE = 1;
 
 	private String nome;
 	private int numero;
-
+	private int type = 0;
 	/**
 	 * Costruttore della classe Casella
 	 * 
@@ -43,4 +46,11 @@ public class Casella implements Serializable {
 		return numero;
 	}
 
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 }
