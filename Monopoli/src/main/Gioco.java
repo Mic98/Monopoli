@@ -54,6 +54,7 @@ public class Gioco {
 
 	public Gioco() {
 		tabellone = new Tabellone();
+		tabellone = Data.creaTabellone();
 	}
 
 	/**

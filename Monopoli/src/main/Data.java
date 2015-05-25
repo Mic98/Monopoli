@@ -78,7 +78,8 @@ public class Data {
 		return PRIGIONE;
 	}
 	
-	public Tabellone creaTabellone(){
+	public static Tabellone creaTabellone(){
+		
 		Tabellone temporaneo = new Tabellone();
 		
 		temporaneo.aggiungiCasella(new Casella(CASELLA_0, 0));
@@ -91,6 +92,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Casella(CASELLA_7, 7));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_8, 8));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_9, 9));
+		
 		temporaneo.aggiungiCasella(new Casella(CASELLA_10, 10));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_11, 11));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_12, 12));
@@ -101,6 +103,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Casella(CASELLA_17, 17));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_18, 18));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_19, 19));
+		
 		temporaneo.aggiungiCasella(new Casella(CASELLA_20, 20));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_21, 21));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_22, 22));
@@ -111,6 +114,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Casella(CASELLA_27, 27));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_28, 28));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_29, 29));
+		
 		temporaneo.aggiungiCasella(new Casella(CASELLA_30, 30));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_31, 31));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_32, 32));
