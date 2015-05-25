@@ -13,10 +13,10 @@ import java.io.*;
  */
 public class Tabellone implements Serializable {
 
-	private static final String MESS_VUOTO = "%n La lista giocatori è vuota %n%n";
-	private static final int BONUS_VIA = 500;
+	private static final String MESS_VUOTO = "%n La lista giocatori ÔøΩ vuota %n%n";
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
+	int turnoGiocatore;
 	private int turniAttuali; // Variabile che tiene conto dei turni
 
 	public Tabellone() {
@@ -28,6 +28,7 @@ public class Tabellone implements Serializable {
 		elencoGiocatori = new Vector<Giocatore>();
 
 		turniAttuali = 0;
+		turnoGiocatore = 0;
 	}
 
 	public void addGiocatori(Vector<Giocatore> plrs) {
@@ -68,7 +69,6 @@ public class Tabellone implements Serializable {
 
 		if (dest >= 40){
 			dest = dest - 40;
-			g.setCapitale(g.getCapitale() + BONUS_VIA);
 		}
 
 		g.setPosizione(dest);

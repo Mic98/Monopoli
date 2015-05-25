@@ -17,11 +17,11 @@ import utilities.ServizioFile;
  */
 public class Gioco {
 
-	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno  concluso";
+	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno ï¿½ concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
-	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n¡: %d %s%n";
+	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella nï¿½: %d %s%n";
 
-	private final static String TITOLO_TURNO01 = "Turno n¡: ";
+	private final static String TITOLO_TURNO01 = "Turno nï¿½: ";
 	private final static String TITOLO_TURNO02 = " Turno di: ";
 	private final static String VOCE_TURNO01 = "Lancio dadi";
 	private static final String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
@@ -34,7 +34,7 @@ public class Gioco {
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
 	private final static String ERRORE_POCHI_GIOCATORI = "ATTENZIONE!!! Minimo 2 giocatori!";
-	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inzierˆ";
+	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inzierï¿½";
 
 	// ----------SALVATAGGIO E CARICAMENTI DATI-------------------
 	private static final String PARTITA_FILE = "partita.dat";
@@ -42,7 +42,7 @@ public class Gioco {
 	private static final String FILE_CARICATI = "I file sono stati caricati con successo";
 	private static final String FILE_SALVATI = "I file sono stati salvati";
 	private static final String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
-	private static final String NESSUNA_PARTITA_SALVATA = "Non c' nessuna partita preesistente";
+	private static final String NESSUNA_PARTITA_SALVATA = "Non c'ï¿½ nessuna partita preesistente";
 
 	private static final File filePartita = new File(PARTITA_FILE);
 
@@ -88,29 +88,19 @@ public class Gioco {
 	 */
 	public void partita() {
 		boolean partitaInterrotta = false;
-		int turnoGiocatore;
 		boolean inGame = true;
-
-		// questo if serve nel caso si riprenda da una partita salvata per non
-		// far ricominciare il giro dal primo giocatore
-		if (giocatoreHaToken())
-			turnoGiocatore = giocatoreConToken();
-		else
-			turnoGiocatore = 0;
-
+		
 		while (inGame && !partitaInterrotta) {
 			// Seleziona il giocatore attuale per una migliore gestione
 			Giocatore giocatoreAttuale = tabellone.getElencoGiocatori().get(
-					turnoGiocatore);
-
+					tabellone.turnoGiocatore);
+			
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
 					+ giocatoreAttuale.getNome(), VOCI_MENU_GIOCO);
 
 			int scelta;
-			// Stabilisce se un giocatore ha concluso il proprio turno
-			giocatoreAttuale.setToken(true);
-
+			
 			do {
 				scelta = menuGioco.scegli();
 
@@ -122,12 +112,13 @@ public class Gioco {
 
 				// notare che al momento del salvataggio un giocatore possiede
 				// il token, nel caso del caricamento della partita in futuro si
-				// saprˆ da quale giocatore riprendere
+				// saprï¿½ da quale giocatore riprendere
 				case 2:
 					salvaPartita();
-					giocatoreAttuale.setToken(false);
-					scelta = 0;
-					partitaInterrotta = true;
+					if(!MyUtil.yesOrNo("")){
+						scelta = 0; 
+						partitaInterrotta = true;
+					}
 					break;
 
 				case 3:
@@ -135,17 +126,16 @@ public class Gioco {
 					break;
 
 				case 0:
-					giocatoreAttuale.setToken(false);
 					partitaInterrotta = true;
 					break;
 
 				}
-			} while (giocatoreAttuale.hasToken() && scelta != 0);
+			} while (scelta != 0);
 
 			// Assegna il turno di gioco al prossimo giocatore
-			turnoGiocatore++;
-			if (turnoGiocatore > tabellone.getElencoGiocatori().size() - 1)
-				turnoGiocatore = 0;
+			tabellone.turnoGiocatore++;
+			if (tabellone.turnoGiocatore > tabellone.getElencoGiocatori().size() - 1)
+				tabellone.turnoGiocatore = 0;
 
 			// Cotrolla se abbiamo raggiunto il massimo dei turni disponibili
 			tabellone.setTurniAttuali(tabellone.getTurniAttuali() + 1);
@@ -159,16 +149,13 @@ public class Gioco {
 	 * metodo per gestire il turno di un giocatore
 	 * 
 	 * @param giocatoreAttuale
-	 *            il giocatore che pu˜ giocare in questo turno
+	 *            il giocatore che puï¿½ giocare in questo turno
 	 */
 	public void gestioneTurno(Giocatore giocatoreAttuale) {
 
-		if (giocatoreAttuale.hasToken() && !giocatoreAttuale.isInPrigione()) {
+		if (!giocatoreAttuale.isInPrigione()) {
 			lancioDadi();
 			tabellone.movePlayer(giocatoreAttuale, dado.risultato());
-			System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
-					giocatoreAttuale.getPosizione(), tabellone.getCaselle()
-							.get(giocatoreAttuale.getPosizione()).getNome());
 
 			if (!dado.sonoUguali()) {
 				giocatoreAttuale.setToken(false);
@@ -186,6 +173,11 @@ public class Gioco {
 				giocatoreAttuale.setInPrigione(true);
 				giocatoreAttuale.setNumeroLanci(0);
 			}
+			
+			System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
+					giocatoreAttuale.getPosizione(), tabellone.getCaselle()
+							.get(giocatoreAttuale.getPosizione()).getNome());
+			
 		} else {
 			lancioDadi();
 			if (dado.sonoUguali()) {
