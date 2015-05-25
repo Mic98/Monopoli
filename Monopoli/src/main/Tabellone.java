@@ -64,7 +64,7 @@ public class Tabellone implements Serializable {
 		return elencoGiocatori;
 	}
 
-	private void initCaselle() {
+	/**private void initCaselle() {
 		String[] nomiCaselle = Data.getNomiCaselle();
 		int i = 0;
 
@@ -72,7 +72,7 @@ public class Tabellone implements Serializable {
 			caselle.add(new Casella(str, i));
 			i++;
 		}
-	}
+	}*/
 
 	public Vector<Casella> getCaselle() {
 		return caselle;
@@ -109,6 +109,11 @@ public class Tabellone implements Serializable {
 
 		return visualizza.toString();
 
+	}
+
+	public void aggiungiCasella(Casella c) {
+		caselle.add(c);
+		
 	}
 
 }

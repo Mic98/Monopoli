@@ -71,5 +71,14 @@ public class Data {
 	public static int getPrigione() {
 		return PRIGIONE;
 	}
+	
+	public Tabellone creaTabellone(){
+		Tabellone tabellone = new Tabellone();
+		
+		tabellone.aggiungiCasella(new Casella(CASELLA_0, 0));
+		
+		
+		return tabellone;
+	}
 
 }
