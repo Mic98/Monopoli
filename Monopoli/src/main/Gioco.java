@@ -88,10 +88,9 @@ public class Gioco {
 	 * Metodo di gioco. Qui e' presente il ciclo infinito del gioco
 	 */
 	public void partita() {
-		boolean partitaInterrotta = false;
 		boolean inGame = true;
 		
-		while (inGame && !partitaInterrotta) {
+		while (inGame) {
 			// Seleziona il giocatore attuale per una migliore gestione
 			Giocatore giocatoreAttuale = tabellone.getElencoGiocatori().get(
 					tabellone.turnoGiocatore);
@@ -101,14 +100,16 @@ public class Gioco {
 					+ giocatoreAttuale.getNome(), VOCI_MENU_GIOCO);
 
 			int scelta;
+			boolean inTurn = true;
 			
 			do {
+				
 				scelta = menuGioco.scegli();
 
 				switch (scelta) {
 				// Lancio dei dadi
 				case 1:
-					gestioneTurno(giocatoreAttuale);
+					inTurn = gestioneTurno(giocatoreAttuale);
 					break;
 
 				// notare che al momento del salvataggio un giocatore possiede
@@ -118,7 +119,8 @@ public class Gioco {
 					salvaPartita();
 					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){
 						scelta = 0; 
-						partitaInterrotta = true;
+						inGame = false;
+						inTurn = false;
 					}
 					break;
 
@@ -127,11 +129,11 @@ public class Gioco {
 					break;
 
 				case 0:
-					partitaInterrotta = true;
+					inGame = false;
 					break;
 
 				}
-			} while (scelta != 0);
+			} while (inTurn && scelta != 0);
 
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.turnoGiocatore++;
@@ -152,8 +154,9 @@ public class Gioco {
 	 * @param giocatoreAttuale
 	 *            il giocatore che pu� giocare in questo turno
 	 */
-	public void gestioneTurno(Giocatore giocatoreAttuale) {
-
+	public boolean gestioneTurno(Giocatore giocatoreAttuale) {
+		boolean inTurn = false;
+		
 		if (!giocatoreAttuale.isInPrigione()) {
 			lancioDadi();
 			tabellone.movePlayer(giocatoreAttuale, dado.risultato());
@@ -165,25 +168,29 @@ public class Gioco {
 				System.out.println(LANCIO_DOPPIO);
 				giocatoreAttuale.setNumeroLanci(giocatoreAttuale
 						.getNumeroLanci() + 1);
+				inTurn = true;
 			}
+			
 			if (giocatoreAttuale.getNumeroLanci() >= 3) {
 				System.out.println(MESSAGGIO_TROPPI_LANCI);
 				tabellone.teleportPlayer(giocatoreAttuale, Data.getPrigione()); // AH-AH-AH
 				giocatoreAttuale.setInPrigione(true);
 				giocatoreAttuale.setNumeroLanci(0);
+				inTurn = false;
 			}
-			
-			System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
-					giocatoreAttuale.getPosizione(), tabellone.getCaselle()
-							.get(giocatoreAttuale.getPosizione()).getNome());
-			
 		} else {
 			lancioDadi();
 			if (dado.sonoUguali()) {
 				giocatoreAttuale.setInPrigione(false);
+				inTurn = true;
 			}
-
 		}
+		
+		System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
+			giocatoreAttuale.getPosizione(), tabellone.getCaselle()
+					.get(giocatoreAttuale.getPosizione()).getNome());
+		
+		return inTurn;
 	}// fine gestioneTurno
 
 
