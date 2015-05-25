@@ -24,7 +24,8 @@ public class Gioco {
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = " Turno di: ";
 	private final static String VOCE_TURNO01 = "Lancio dadi";
-	private static final String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
+	private final String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
+	private final static String USCITO_DI_PRIGIONE = "Hai tirato doppio, sei uscito di prigione e puoi lanciare ancora";
 	private final static String VOCE_TURNO02 = "Salva partita";
 	private final static String VOCE_TURNO03 = "Mostra elenco giocatori";
 	private final static String[] VOCI_MENU_GIOCO = { VOCE_TURNO01,
@@ -159,39 +160,42 @@ public class Gioco {
 	public boolean gestioneTurno(Giocatore giocatoreAttuale) {
 		boolean inTurn = false;
 		
+		//Se il giocatore non e' in prigione
 		if (!giocatoreAttuale.isInPrigione()) {
-			lancioDadi();
-			tabellone.movePlayer(giocatoreAttuale, dado.risultato());
+			lancioDadi(); //Lancia i dadi
+			tabellone.movePlayer(giocatoreAttuale, dado.risultato()); //Muove il giocatore
 
 			if (!dado.sonoUguali()) {
-				giocatoreAttuale.setNumeroLanci(0);
+				giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
 			} else {
-				System.out.println(LANCIO_DOPPIO);
 				giocatoreAttuale.setNumeroLanci(giocatoreAttuale
-						.getNumeroLanci() + 1);
+						.getNumeroLanci() + 1); //Se invece ha tirato doppi, aumenta il contatore
 				inTurn = true;
+				if (giocatoreAttuale.getNumeroLanci() >= 3) { //Se ha tirato per 3 volte di seguito doppio
+					System.out.println(MESSAGGIO_TROPPI_LANCI); //Lo avvisa
+					tabellone.teleportPlayer(giocatoreAttuale, Data.getPrigione()); // AH-AH-AH (finisce in prigione)
+					giocatoreAttuale.setInPrigione(true); 
+					giocatoreAttuale.setNumeroLanci(0);
+					inTurn = false;
+				} else { //Se ha tirato doppio, ma non e' ancora finito in prigione, lo avvisa di avere a disposizione un altro lancio
+					System.out.println(LANCIO_DOPPIO);
+				}
 			}
-			
-			if (giocatoreAttuale.getNumeroLanci() >= 3) {
-				System.out.println(MESSAGGIO_TROPPI_LANCI);
-				tabellone.teleportPlayer(giocatoreAttuale, Data.getPrigione()); // AH-AH-AH
-				giocatoreAttuale.setInPrigione(true);
-				giocatoreAttuale.setNumeroLanci(0);
-				inTurn = false;
-			}
-		} else {
-			lancioDadi();
-			if (dado.sonoUguali()) {
-				giocatoreAttuale.setInPrigione(false);
-				inTurn = true;
+		} else { //Se e' in prigione
+			lancioDadi(); //Cerca di uscire lanciando i dadi
+			if (dado.sonoUguali()) { //Se sono uguali 
+				giocatoreAttuale.setInPrigione(false); //Esce di prigione
+				inTurn = true; //E ha a disposizione un altro lancio
+				System.out.println(USCITO_DI_PRIGIONE);
 			}
 		}
 		
+		//Aggiorna il giocatore sulla sua posizione attuale
 		System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
 			giocatoreAttuale.getPosizione(), tabellone.getCaselle()
 					.get(giocatoreAttuale.getPosizione()).getNome());
 		
-		
+		//Restituisce true se il giocatore continua il turno
 		return inTurn;
 	}// fine gestioneTurno
 
@@ -201,10 +205,10 @@ public class Gioco {
 	 */
 	public void lancioDadi() {
 
-		dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(),
-				Dado.getDadoMAX()));
-		dado.setLancio2(MyRandom.estraiIntero(Dado.getDadoMIN(),
-				Dado.getDadoMAX()));
+		//dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(),
+				//Dado.getDadoMAX()));
+		//dado.setLancio2(MyRandom.estraiIntero(Dado.getDadoMIN(),
+				//Dado.getDadoMAX()));
 	}
 
 	/**
