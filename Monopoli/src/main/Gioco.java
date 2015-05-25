@@ -45,6 +45,7 @@ public class Gioco {
 	private static final String NESSUNA_PARTITA_SALVATA = "Non c'� nessuna partita preesistente";
 
 	private static final File filePartita = new File(PARTITA_FILE);
+	private static final String PARTITA_SALVATA = null;
 
 	public static Tabellone tabellone;
 	public static Dado dado;
@@ -115,7 +116,7 @@ public class Gioco {
 				// sapr� da quale giocatore riprendere
 				case 2:
 					salvaPartita();
-					if(!MyUtil.yesOrNo("")){
+					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){
 						scelta = 0; 
 						partitaInterrotta = true;
 					}
@@ -158,7 +159,6 @@ public class Gioco {
 			tabellone.movePlayer(giocatoreAttuale, dado.risultato());
 
 			if (!dado.sonoUguali()) {
-				giocatoreAttuale.setToken(false);
 				System.out.println(MESSAGGIO_FINE_TURNO);
 				giocatoreAttuale.setNumeroLanci(0);
 			} else {
@@ -167,7 +167,6 @@ public class Gioco {
 						.getNumeroLanci() + 1);
 			}
 			if (giocatoreAttuale.getNumeroLanci() >= 3) {
-				giocatoreAttuale.setToken(false);
 				System.out.println(MESSAGGIO_TROPPI_LANCI);
 				tabellone.teleportPlayer(giocatoreAttuale, Data.getPrigione()); // AH-AH-AH
 				giocatoreAttuale.setInPrigione(true);
@@ -182,43 +181,11 @@ public class Gioco {
 			lancioDadi();
 			if (dado.sonoUguali()) {
 				giocatoreAttuale.setInPrigione(false);
-				giocatoreAttuale.setToken(false);
 			}
 
 		}
 	}// fine gestioneTurno
 
-	/**
-	 * metodo che serve ad individuare il giocatore con il token
-	 * 
-	 * @return la posizione nel vettore Giocatori del giocatore in possesso del
-	 *         token
-	 */
-	public int giocatoreConToken() {
-
-		int posizioneGiocatore = 0;
-		for (int i = 0; i < tabellone.getElencoGiocatori().size(); i++)
-			if (tabellone.getElencoGiocatori().get(i).hasToken())
-				posizioneGiocatore = i;
-
-		return posizioneGiocatore;
-
-	}
-
-	/**
-	 * metodo che serve per sapere se un giocatore possiede il token
-	 * 
-	 * @return true se il giocatore possiede il token
-	 */
-	public boolean giocatoreHaToken() {
-
-		for (int i = 0; i < tabellone.getElencoGiocatori().size(); i++)
-			if (tabellone.getElencoGiocatori().get(i).hasToken())
-				return true;
-
-		return false;
-
-	}
 
 	/**
 	 * metodo per lanciare i dadi

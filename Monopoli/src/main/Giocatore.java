@@ -19,13 +19,12 @@ public class Giocatore implements Serializable {
 	private int posizione;
 	private int numeroLanci;
 	private boolean inPrigione;
-	private boolean token;
+
 
 	public Giocatore(String nome) {
 		this.nome = nome;
 		posizione = POSIZIONE_DEFAULT;
 		numeroLanci = 0;
-		token = false;
 		inPrigione = false;
 	}
 
@@ -44,14 +43,6 @@ public class Giocatore implements Serializable {
 
 	public void setPosizione(int posizione) {
 		this.posizione = posizione;
-	}
-
-	public boolean hasToken() {
-		return token;
-	}
-
-	public void setToken(boolean token) {
-		this.token = token;
 	}
 
 	public boolean isInPrigione() {
