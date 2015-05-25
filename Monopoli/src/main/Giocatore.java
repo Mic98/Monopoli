@@ -12,12 +12,14 @@ import java.io.*;
 
 public class Giocatore implements Serializable {
 
-	private static final String GIOCATORE = "%n%n GIOCATORE: %s %n";
-	private static final int POSIZIONE_DEFAULT = 0;
+	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
+	private final static int POSIZIONE_DEFAULT = 0;
+	private final static int CAPITALE_DEFAULT = 5000;
 
 
 	private String nome;
 	private int posizione;
+	private int capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
 
@@ -25,6 +27,7 @@ public class Giocatore implements Serializable {
 	public Giocatore(String nome) {
 		this.nome = nome;
 		posizione = POSIZIONE_DEFAULT;
+		capitale = CAPITALE_DEFAULT;
 		numeroLanci = 0;
 		inPrigione = false;
 	}
@@ -44,6 +47,14 @@ public class Giocatore implements Serializable {
 
 	public void setPosizione(int posizione) {
 		this.posizione = posizione;
+	}
+	
+	public int getCapitale(){
+		return capitale;
+	}
+	
+	public void setCapitale(int capitale){
+		this.capitale = capitale;
 	}
 
 	public boolean isInPrigione() {
