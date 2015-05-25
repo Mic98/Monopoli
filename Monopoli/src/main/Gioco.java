@@ -24,7 +24,7 @@ public class Gioco {
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = " Turno di: ";
 	private final static String VOCE_TURNO01 = "Lancio dadi";
-	private final String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
+	private final static String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
 	private final static String USCITO_DI_PRIGIONE = "Hai tirato doppio, sei uscito di prigione e puoi lanciare ancora";
 	private final static String VOCE_TURNO02 = "Salva partita";
 	private final static String VOCE_TURNO03 = "Mostra elenco giocatori";
@@ -38,13 +38,13 @@ public class Gioco {
 	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
 
 	// ----------SALVATAGGIO E CARICAMENTI DATI-------------------
-	private static final String PARTITA_FILE = "partita.dat";
-	private static final String MESS_NO_CAST = "ATTENZIONE! problemi con il cast";
-	private static final String FILE_CARICATI = "I file sono stati caricati con successo";
-	private static final String FILE_SALVATI = "I file sono stati salvati";
-	private static final String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
-	private static final String NESSUNA_PARTITA_SALVATA = "Non c'e' nessuna partita preesistente";
-	private static final String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
+	private final static String PARTITA_FILE = "partita.dat";
+	private final static String MESS_NO_CAST = "ATTENZIONE! problemi con il cast";
+	private final static String FILE_CARICATI = "I file sono stati caricati con successo";
+	private final static String FILE_SALVATI = "I file sono stati salvati";
+	private final static String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
+	private final static String NESSUNA_PARTITA_SALVATA = "Non c'e' nessuna partita preesistente";
+	private final static String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
 
 
 	private static final File filePartita = new File(PARTITA_FILE);

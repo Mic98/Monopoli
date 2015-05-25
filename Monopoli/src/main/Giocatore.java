@@ -12,8 +12,9 @@ import java.io.*;
 
 public class Giocatore implements Serializable {
 
-	private static final String GIOCATORE = "GIOCATORE: %s";
+	private static final String GIOCATORE = "%n%n GIOCATORE: %s %n";
 	private static final int POSIZIONE_DEFAULT = 0;
+
 
 	private String nome;
 	private int posizione;
@@ -64,7 +65,7 @@ public class Giocatore implements Serializable {
 	public String toString() {
 		StringBuilder visualizza = new StringBuilder();
 
-		visualizza.append(String.format("%n%n" + GIOCATORE + "%n", getNome()));
+		visualizza.append(String.format(GIOCATORE, getNome()));
 
 		return visualizza.toString();
 	}
