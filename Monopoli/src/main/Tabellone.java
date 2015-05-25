@@ -13,7 +13,7 @@ import java.io.*;
  */
 public class Tabellone implements Serializable {
 
-	private static final String MESS_VUOTO = "%n La lista giocatori � vuota %n%n";
+	private static final String MESS_VUOTO = "%n La lista giocatori e' vuota %n%n";
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
 	private int turnoGiocatore;
@@ -23,18 +23,18 @@ public class Tabellone implements Serializable {
 	
 		caselle = new Vector<Casella>();
 		initCaselle();
-
+		
 		elencoGiocatori = new Vector<Giocatore>();
-
-		//Resetta il numero di turni e il turno del giocatore attuale
 		turniAttuali = 0;
 		turnoGiocatore = 0;
 	}
 
+	/**
+	 * metodo che mescola l'ordine del vettore elencoGiocatori
+	 * @param plrs vettore contentente la lista dei giocatori
+	 */
 	public void addGiocatori(Vector<Giocatore> plrs) {
 		elencoGiocatori = plrs;
-
-		// Scambia casualmente la posizione dei turni dei giocatori
 		Collections.shuffle(plrs);
 	}
 
@@ -101,8 +101,4 @@ public class Tabellone implements Serializable {
 
 	}
 
-	// public Casella aggiungiCasella(Casella in){
-	// caselle.add(in);
-	// return in;
-	// }
 }

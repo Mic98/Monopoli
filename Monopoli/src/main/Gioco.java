@@ -17,7 +17,7 @@ import utilities.ServizioFile;
  */
 public class Gioco {
 
-	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno � concluso";
+	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n: %d %s%n";
 
@@ -34,7 +34,7 @@ public class Gioco {
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
 	private final static String ERRORE_POCHI_GIOCATORI = "ATTENZIONE!!! Minimo 2 giocatori!";
-	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inzier�";
+	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
 
 	// ----------SALVATAGGIO E CARICAMENTI DATI-------------------
 	private static final String PARTITA_FILE = "partita.dat";
@@ -42,7 +42,7 @@ public class Gioco {
 	private static final String FILE_CARICATI = "I file sono stati caricati con successo";
 	private static final String FILE_SALVATI = "I file sono stati salvati";
 	private static final String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
-	private static final String NESSUNA_PARTITA_SALVATA = "Non c'� nessuna partita preesistente";
+	private static final String NESSUNA_PARTITA_SALVATA = "Non c'e' nessuna partita preesistente";
 	private static final String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
 
 
@@ -133,6 +133,7 @@ public class Gioco {
 				}
 			} while (inTurn);
 
+			System.out.println(MESSAGGIO_FINE_TURNO);
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.setTurnoGiocatore(tabellone.getTurnoGiocatore() + 1);;
 			if (tabellone.getTurnoGiocatore() > tabellone.getElencoGiocatori().size() - 1)
@@ -145,6 +146,7 @@ public class Gioco {
 			}
 		}
 	}// fine metodo partita
+	
 
 	/**
 	 * metodo per gestire il turno di un giocatore
@@ -186,7 +188,7 @@ public class Gioco {
 		System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
 			giocatoreAttuale.getPosizione(), tabellone.getCaselle()
 					.get(giocatoreAttuale.getPosizione()).getNome());
-		System.out.println(MESSAGGIO_FINE_TURNO);
+		
 		
 		return inTurn;
 	}// fine gestioneTurno
