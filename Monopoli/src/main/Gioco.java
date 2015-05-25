@@ -17,11 +17,11 @@ import utilities.ServizioFile;
  */
 public class Gioco {
 
-	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
+	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno � concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n�: %d %s%n";
 
-	private final static String TITOLO_TURNO01 = "Turno n.: ";
+	private final static String TITOLO_TURNO01 = "Turno n�: ";
 	private final static String TITOLO_TURNO02 = " Turno di: ";
 	private final static String VOCE_TURNO01 = "Lancio dadi";
 	private static final String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
@@ -42,10 +42,10 @@ public class Gioco {
 	private static final String FILE_CARICATI = "I file sono stati caricati con successo";
 	private static final String FILE_SALVATI = "I file sono stati salvati";
 	private static final String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
-	private static final String NESSUNA_PARTITA_SALVATA = "Non c'e' nessuna partita preesistente";
-	private static final String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
+	private static final String NESSUNA_PARTITA_SALVATA = "Non c'� nessuna partita preesistente";
 
 	private static final File filePartita = new File(PARTITA_FILE);
+	private static final String PARTITA_SALVATA = null;
 
 	public static Tabellone tabellone;
 	public static Dado dado;
