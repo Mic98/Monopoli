@@ -15,12 +15,11 @@ import utilities.*;
 public class Main {
 
 	// ------------VOCI SISTEMA-----------------
-	private final static String BENVENUTI = "Benvenuti nel gioco del Monopoleh!";
 	private final static String ARRIVEDERCI = "GRAZIE PER AVER GIOCATO";
 	private final static String FINE_PARTITA = "La partita e' finita! Un'altra? ";
 
 	// ------------MENU PRINCIPALE---------------
-	private final static String TITOLO_INIZIALE = "MONOPOLI";
+	private final static String TITOLO_INIZIALE = "Benvenuti nel gioco del Monopoleh!";
 	private final static String VOCE_INIZIALE01 = "Nuova partita";
 	private final static String VOCE_INIZIALE02 = "Riprendi partita";
 	private final static String[] VOCI_MENU_INIZIALE = { VOCE_INIZIALE01,
@@ -31,8 +30,6 @@ public class Main {
 	private static Gioco gioco;
 
 	public static void main(String[] args) {
-		System.out.println(BENVENUTI);
-
 		int scelta;
 
 		do {
@@ -54,7 +51,7 @@ public class Main {
 			}
 		} while (scelta != 0);
 
-		System.out.println(ARRIVEDERCI);
+		System.out.print("\n\n\n"+BelleStringhe.incornicia(ARRIVEDERCI));
 	}
 
 	/**

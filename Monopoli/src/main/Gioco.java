@@ -22,7 +22,7 @@ public class Gioco {
 	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n: %d %s%n";
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
-	private final static String TITOLO_TURNO02 = " Turno di: ";
+	private final static String TITOLO_TURNO02 = "\tTurno di: ";
 	private final static String VOCE_TURNO01 = "Lancio dadi";
 	private final static String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
 	private final static String USCITO_DI_PRIGIONE = "Hai tirato doppio, sei uscito di prigione e puoi lanciare ancora";
@@ -64,7 +64,7 @@ public class Gioco {
 		boolean ok = false;
 
 		while (!ok) {
-			String nome = MyUtil.riceviString(RICHIESTA_NOME_GIOCATORE);
+			String nome = MyUtil.riceviString("\n\n"+RICHIESTA_NOME_GIOCATORE);
 			nuoviGiocatori.add(new Giocatore(nome));
 
 			if (MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)) {
@@ -96,7 +96,7 @@ public class Gioco {
 			// Seleziona il giocatore attuale per una migliore gestione
 			Giocatore giocatoreAttuale = tabellone.getElencoGiocatori().get(
 					tabellone.getTurnoGiocatore());
-			
+						
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
 					+ giocatoreAttuale.getNome(), VOCI_MENU_GIOCO);
@@ -105,9 +105,9 @@ public class Gioco {
 			boolean inTurn = true;
 			
 			do {
-				
+				System.out.print("\n\n");
 				scelta = menuGioco.scegli();
-
+				System.out.print("\n\n");
 				switch (scelta) {
 				// Lancio dei dadi
 				case 1:
@@ -135,7 +135,7 @@ public class Gioco {
 			} while (inTurn);
 
 			if(scelta == 1)
-				System.out.println(MESSAGGIO_FINE_TURNO);
+				System.out.println("\n"+MESSAGGIO_FINE_TURNO);
 			
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.setTurnoGiocatore(tabellone.getTurnoGiocatore() + 1);;
@@ -159,7 +159,6 @@ public class Gioco {
 	 */
 	public boolean gestioneTurno(Giocatore giocatoreAttuale) {
 		boolean inTurn = false;
-		
 		//Se il giocatore non e' in prigione
 		if (!giocatoreAttuale.isInPrigione()) {
 			lancioDadi(); //Lancia i dadi
@@ -205,10 +204,10 @@ public class Gioco {
 	 */
 	public void lancioDadi() {
 
-		//dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(),
-				//Dado.getDadoMAX()));
-		//dado.setLancio2(MyRandom.estraiIntero(Dado.getDadoMIN(),
-				//Dado.getDadoMAX()));
+		dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(),
+				Dado.getDadoMAX()));
+		dado.setLancio2(MyRandom.estraiIntero(Dado.getDadoMIN(),
+				Dado.getDadoMAX()));
 	}
 
 	/**

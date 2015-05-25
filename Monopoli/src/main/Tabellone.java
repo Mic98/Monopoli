@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.Vector;
 import java.io.*;
 
+import utilities.BelleStringhe;
+import utilities.MyUtil;
+
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
@@ -94,8 +97,11 @@ public class Tabellone implements Serializable {
 		if (elencoGiocatori.isEmpty())
 			visualizza.append(String.format(MESS_VUOTO));
 		else
-			for (Giocatore g : elencoGiocatori)
+			visualizza.append(BelleStringhe.incornicia("SITUAZIONE ATTUALE DI GIOCO"));
+			for (Giocatore g : elencoGiocatori){
 				visualizza.append(String.format(g.toString()));
+				visualizza.append("\n\t Posizione: "+caselle.get(g.getPosizione()).getNome()+"%n");
+			}
 
 		return visualizza.toString();
 
