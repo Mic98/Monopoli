@@ -39,6 +39,15 @@ public class Tabellone implements Serializable {
 		Collections.shuffle(plrs);
 	}
 
+	
+	public int getTurnoGiocatore() {
+		return turnoGiocatore;
+	}
+
+	public void setTurnoGiocatore(int turnoGiocatore) {
+		this.turnoGiocatore = turnoGiocatore;
+	}
+
 	public int getTurniAttuali() {
 		return turniAttuali;
 	}

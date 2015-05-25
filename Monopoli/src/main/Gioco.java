@@ -19,7 +19,7 @@ public class Gioco {
 
 	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
-	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n�: %d %s%n";
+	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n: %d %s%n";
 
 	private final static String TITOLO_TURNO01 = "Turno n.: ";
 	private final static String TITOLO_TURNO02 = " Turno di: ";
@@ -93,7 +93,7 @@ public class Gioco {
 		while (inGame) {
 			// Seleziona il giocatore attuale per una migliore gestione
 			Giocatore giocatoreAttuale = tabellone.getElencoGiocatori().get(
-					tabellone.turnoGiocatore);
+					tabellone.getTurnoGiocatore());
 			
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
@@ -133,9 +133,9 @@ public class Gioco {
 			} while (inTurn);
 
 			// Assegna il turno di gioco al prossimo giocatore
-			tabellone.turnoGiocatore++;
-			if (tabellone.turnoGiocatore > tabellone.getElencoGiocatori().size() - 1)
-				tabellone.turnoGiocatore = 0;
+			tabellone.setTurnoGiocatore(tabellone.getTurnoGiocatore() + 1);;
+			if (tabellone.getTurnoGiocatore() > tabellone.getElencoGiocatori().size() - 1)
+				tabellone.setTurnoGiocatore(0);
 
 			// Cotrolla se abbiamo raggiunto il massimo dei turni disponibili
 			tabellone.setTurniAttuali(tabellone.getTurniAttuali() + 1);
@@ -159,7 +159,6 @@ public class Gioco {
 			tabellone.movePlayer(giocatoreAttuale, dado.risultato());
 
 			if (!dado.sonoUguali()) {
-				System.out.println(MESSAGGIO_FINE_TURNO);
 				giocatoreAttuale.setNumeroLanci(0);
 			} else {
 				System.out.println(LANCIO_DOPPIO);
@@ -186,6 +185,7 @@ public class Gioco {
 		System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
 			giocatoreAttuale.getPosizione(), tabellone.getCaselle()
 					.get(giocatoreAttuale.getPosizione()).getNome());
+		System.out.println(MESSAGGIO_FINE_TURNO);
 		
 		return inTurn;
 	}// fine gestioneTurno
