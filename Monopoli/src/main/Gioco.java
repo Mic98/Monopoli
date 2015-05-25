@@ -112,13 +112,9 @@ public class Gioco {
 					inTurn = gestioneTurno(giocatoreAttuale);
 					break;
 
-				// notare che al momento del salvataggio un giocatore possiede
-				// il token, nel caso del caricamento della partita in futuro si
-				// sapr� da quale giocatore riprendere
 				case 2:
 					salvaPartita();
-					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){
-						scelta = 0; 
+					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){ 
 						inGame = false;
 						inTurn = false;
 					}
@@ -130,10 +126,11 @@ public class Gioco {
 
 				case 0:
 					inGame = false;
+					inTurn = false;
 					break;
 
 				}
-			} while (inTurn && scelta != 0);
+			} while (inTurn);
 
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.turnoGiocatore++;
@@ -152,7 +149,7 @@ public class Gioco {
 	 * metodo per gestire il turno di un giocatore
 	 * 
 	 * @param giocatoreAttuale
-	 *            il giocatore che pu� giocare in questo turno
+	 *            il giocatore che puo' giocare in questo turno
 	 */
 	public boolean gestioneTurno(Giocatore giocatoreAttuale) {
 		boolean inTurn = false;
