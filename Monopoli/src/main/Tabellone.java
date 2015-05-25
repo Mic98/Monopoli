@@ -16,15 +16,14 @@ public class Tabellone implements Serializable {
 	private static final String MESS_VUOTO = "%n La lista giocatori e' vuota %n%n";
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
-	int turnoGiocatore;
-	private int turniAttuali; // Variabile che tiene conto dei turni
+	private int turnoGiocatore;
+	private int turniAttuali; 
 
 	public Tabellone() {
-		// Inizializzazione dei dati delle caselle
+	
 		caselle = new Vector<Casella>();
 		initCaselle();
 
-		// Creazione del vettore del giocatore
 		elencoGiocatori = new Vector<Giocatore>();
 
 		turniAttuali = 0;
