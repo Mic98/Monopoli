@@ -12,6 +12,9 @@ import java.util.Vector;
 public class Data {
 
 	private static final int PRIGIONE = 10;
+	private static final int MALUS_PATRIMONIALE = 250;
+	private static final int MALUS_LUSSO = 10;
+	
 
 	private static final String CASELLA_0 = "VIA";
 	private static final String CASELLA_1 = "VICOLO CORTO";
@@ -63,6 +66,9 @@ public class Data {
 			CASELLA_28, CASELLA_29, CASELLA_30, CASELLA_31, CASELLA_32,
 			CASELLA_33, CASELLA_34, CASELLA_35, CASELLA_36, CASELLA_37,
 			CASELLA_38, CASELLA_39 };
+	
+
+	
 
 	public static String[] getNomiCaselle() {
 		return NOMI_CASELLE;
@@ -73,12 +79,51 @@ public class Data {
 	}
 	
 	public Tabellone creaTabellone(){
-		Tabellone tabellone = new Tabellone();
+		Tabellone temporaneo = new Tabellone();
 		
-		tabellone.aggiungiCasella(new Casella(CASELLA_0, 0));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_0, 0));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_1, 1));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_2, 2));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_3, 3));
+		temporaneo.aggiungiCasella(new Tassa(CASELLA_4, 4, MALUS_PATRIMONIALE));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_5, 5));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_6, 6));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_7, 7));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_8, 8));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_9, 9));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_10, 10));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_11, 11));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_12, 12));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_13, 13));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_14, 14));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_15, 15));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_16, 16));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_17, 17));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_18, 18));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_19, 19));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_20, 20));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_21, 21));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_22, 22));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_23, 23));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_24, 24));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_25, 25));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_26, 26));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_27, 27));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_28, 28));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_29, 29));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_30, 30));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_31, 31));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_32, 32));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_33, 33));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_34, 34));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_35, 35));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_36, 36));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_37, 37));
+		temporaneo.aggiungiCasella(new Tassa(CASELLA_38, 38, MALUS_LUSSO));
+		temporaneo.aggiungiCasella(new Casella(CASELLA_39, 39));
 		
 		
-		return tabellone;
+		return temporaneo;
 	}
 
 }

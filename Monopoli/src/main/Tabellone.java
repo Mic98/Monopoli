@@ -27,8 +27,6 @@ public class Tabellone implements Serializable {
 	public Tabellone() {
 	
 		caselle = new Vector<Casella>();
-		initCaselle();
-		
 		elencoGiocatori = new Vector<Giocatore>();
 		turniAttuali = 0;
 		turnoGiocatore = 0;
@@ -64,15 +62,6 @@ public class Tabellone implements Serializable {
 		return elencoGiocatori;
 	}
 
-	/**private void initCaselle() {
-		String[] nomiCaselle = Data.getNomiCaselle();
-		int i = 0;
-
-		for (String str : nomiCaselle) {
-			caselle.add(new Casella(str, i));
-			i++;
-		}
-	}*/
 
 	public Vector<Casella> getCaselle() {
 		return caselle;
