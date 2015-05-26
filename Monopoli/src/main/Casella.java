@@ -16,7 +16,7 @@ public class Casella implements Serializable {
 
 	private String nome;
 	private int numero;
-	private int type = 0;
+	private int tipo = 0;
 	/**
 	 * Costruttore della classe Casella
 	 * 
@@ -46,11 +46,11 @@ public class Casella implements Serializable {
 		return numero;
 	}
 
-	public int getType() {
-		return type;
+	public int getTipo() {
+		return tipo;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 }

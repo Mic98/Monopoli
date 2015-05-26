@@ -32,6 +32,12 @@ public class Giocatore implements Serializable {
 		inPrigione = false;
 	}
 
+	public boolean inBancaRotta(){
+		if(capitale<=0)
+			return true;
+		
+		return false;
+	}
 
 	public String getNome() {
 		return nome;

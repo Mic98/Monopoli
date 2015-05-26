@@ -15,6 +15,7 @@ public class Data {
 	private static final int MALUS_PATRIMONIALE = 250;
 	private static final int MALUS_LUSSO = 10;
 	
+	
 
 	private static final String CASELLA_0 = "VIA";
 	private static final String CASELLA_1 = "VICOLO CORTO";

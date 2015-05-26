@@ -20,6 +20,8 @@ public class Gioco {
 	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n: %d %s%n";
+	private static final String IN_BANCA_ROTTA = "%n%n Hai finito i soldi! Sei in bancarotta, la tua partita è finita.%n";
+	private static final String CASELLA_TASSA = "%nSei finito sulla casella %s, devi %d € alla banca %n";
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = "\tTurno di: ";
@@ -49,6 +51,8 @@ public class Gioco {
 
 	private static final File filePartita = new File(PARTITA_FILE);
 	
+	
+	
 	public static Tabellone tabellone;
 	public static Dado dado;
 
@@ -65,7 +69,7 @@ public class Gioco {
 		boolean ok = false;
 
 		while (!ok) {
-			String nome = MyUtil.riceviString("\n\n"+RICHIESTA_NOME_GIOCATORE);
+			String nome = MyUtil.riceviString("%n%n"+RICHIESTA_NOME_GIOCATORE);
 			nuoviGiocatori.add(new Giocatore(nome));
 
 			if (MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)) {
@@ -136,7 +140,7 @@ public class Gioco {
 			} while (inTurn);
 
 			if(scelta == 1)
-				System.out.println("\n"+MESSAGGIO_FINE_TURNO);
+				System.out.println("%n"+MESSAGGIO_FINE_TURNO);
 			
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.setTurnoGiocatore(tabellone.getTurnoGiocatore() + 1);;
@@ -199,21 +203,25 @@ public class Gioco {
 		return inTurn;
 	}// fine gestioneTurno
 
-	public void checkEndTurn(){
+	public void checkEndTurn(Giocatore giocatoreAttuale){
 		//Controlla dove si trova il giocatore
-		for(Giocatore g : tabellone.getElencoGiocatori()){
-			Casella attuale = tabellone.getCaselle().get(g.getPosizione());
-			switch (attuale.getType()) {
+		
+			Casella casellaAttuale = tabellone.getCaselle().get(giocatoreAttuale.getPosizione());
+			switch (casellaAttuale.getTipo()) {
 			case 1:
-				Tassa t = (Tassa) attuale;
-				g.setCapitale(g.getCapitale() - t.getMalus());
+				Tassa t = (Tassa) casellaAttuale;
+				giocatoreAttuale.setCapitale(giocatoreAttuale.getCapitale() - t.getMalus());
+				System.out.printf(CASELLA_TASSA, t.getNome(), t.getMalus());
 			break;
 
 			default:
 				break;
 			}
-		}
-		
+			if(giocatoreAttuale.inBancaRotta()){
+				System.out.println(IN_BANCA_ROTTA);
+				tabellone.getElencoGiocatori().remove(giocatoreAttuale);
+			}
+			
 	}	
 	
 	/**
