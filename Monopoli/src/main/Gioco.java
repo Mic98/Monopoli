@@ -19,9 +19,9 @@ public class Gioco {
 
 	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
-	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d%nOra sei nella casella n: %d %s%n";
-	private static final String IN_BANCA_ROTTA = "%n%n Hai finito i soldi! Sei in bancarotta, la tua partita è finita.%n";
-	private static final String CASELLA_TASSA = "%nSei finito sulla casella %s, devi %d € alla banca %n";
+	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
+	private static final String IN_BANCA_ROTTA = "\n\n Hai finito i soldi! Sei in bancarotta, la tua partita è finita.%n";
+	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d € alla banca %n";
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = "\tTurno di: ";
@@ -35,6 +35,7 @@ public class Gioco {
 
 	// ----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
+	private static final String ERR_ESISTE_GIA = "Il nome inserito e' gia' esistente, inserirne un altro";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
 	private final static String ERRORE_POCHI_GIOCATORI = "ATTENZIONE!!! Minimo 2 giocatori!";
 	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
@@ -50,6 +51,7 @@ public class Gioco {
 
 
 	private static final File filePartita = new File(PARTITA_FILE);
+	
 	
 	
 	
@@ -69,7 +71,14 @@ public class Gioco {
 		boolean ok = false;
 
 		while (!ok) {
-			String nome = MyUtil.riceviString("%n%n"+RICHIESTA_NOME_GIOCATORE);
+			String nome;
+			do{
+			nome = MyUtil.riceviString("\n\n"+RICHIESTA_NOME_GIOCATORE);
+			if(tabellone.esisteGia(nome, nuoviGiocatori))
+				System.out.printf(ERR_ESISTE_GIA + "%n");
+			}
+			while(tabellone.esisteGia(nome,nuoviGiocatori));
+			
 			nuoviGiocatori.add(new Giocatore(nome));
 
 			if (MyUtil.yesOrNo(FINE_INSERIMENTO_GIOCATORI)) {
@@ -86,7 +95,7 @@ public class Gioco {
 
 		}
 
-		tabellone.addGiocatori(nuoviGiocatori);
+		tabellone.mescolaGiocatori(nuoviGiocatori);
 		dado = new Dado();
 		partita();
 	}

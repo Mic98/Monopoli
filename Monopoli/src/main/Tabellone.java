@@ -34,11 +34,55 @@ public class Tabellone implements Serializable {
 
 	/**
 	 * metodo che mescola l'ordine del vettore elencoGiocatori
+	 * 
 	 * @param plrs vettore contentente la lista dei giocatori
 	 */
-	public void addGiocatori(Vector<Giocatore> plrs) {
+	public void mescolaGiocatori(Vector<Giocatore> plrs) {
 		elencoGiocatori = plrs;
 		Collections.shuffle(plrs);
+	}
+	
+	/**
+	 * metodo che sposta il giocatore lungo il tabellone, verificando l'avvenuto passaggio dal via
+	 * 
+	 * @param g giocatore da spostare
+	 * @param step risultato dato dal tiro dei dadi
+	 */
+	public void movePlayer(Giocatore g, int step) {
+		int dest = g.getPosizione() + step;
+
+		if (dest >= 40){
+			dest = dest - 40;
+			System.out.println(MESSAGGIO_VIA);
+			g.setCapitale(g.getCapitale() + BONUS_VIA);
+		}
+
+		g.setPosizione(dest);
+
+	}
+
+	/**
+	 * metodo che sposta il giocatore senza farlo passare dal via
+	 * 
+	 * @param g giocatore da spostare
+	 * @param casella destinazione del giocatore
+	 */
+	public void teleportPlayer(Giocatore g, int casella) {
+		g.setPosizione(casella);
+	}
+	
+
+	public void aggiungiCasella(Casella c) {
+		caselle.add(c);
+		
+	}
+	
+	public boolean esisteGia(String daControllare, Vector<Giocatore> nuoviGiocatori){
+		for(Giocatore g: nuoviGiocatori)
+		      if(g.getNome().equalsIgnoreCase(daControllare))
+		               return true;
+		           
+		return false;
 	}
 
 	
@@ -67,22 +111,7 @@ public class Tabellone implements Serializable {
 		return caselle;
 	}
 
-	public void movePlayer(Giocatore g, int step) {
-		int dest = g.getPosizione() + step;
 
-		if (dest >= 40){
-			dest = dest - 40;
-			System.out.println(MESSAGGIO_VIA);
-			g.setCapitale(g.getCapitale() + BONUS_VIA);
-		}
-
-		g.setPosizione(dest);
-
-	}
-
-	public void teleportPlayer(Giocatore g, int casella) {
-		g.setPosizione(casella);
-	}
 
 	public String toString() {
 		StringBuilder visualizza = new StringBuilder();
@@ -100,9 +129,5 @@ public class Tabellone implements Serializable {
 
 	}
 
-	public void aggiungiCasella(Casella c) {
-		caselle.add(c);
-		
-	}
 
 }
