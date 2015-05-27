@@ -29,7 +29,7 @@ public class Tabellone implements Serializable {
 	
 		caselle = new Vector<Casella>();
 		elencoGiocatori = new Vector<Giocatore>();
-		turniAttuali = 0;
+		turniAttuali = 1;
 		turnoGiocatore = 0;
 	}
 
@@ -123,7 +123,8 @@ public class Tabellone implements Serializable {
 			visualizza.append(BelleStringhe.incornicia("SITUAZIONE ATTUALE DI GIOCO"));
 			for (Giocatore g : elencoGiocatori){
 				visualizza.append(String.format(g.toString()));
-				visualizza.append("\n\t Posizione: "+caselle.get(g.getPosizione()).getNome()+"%n");
+				visualizza.append("\n\t Posizione: "+ caselle.get(g.getPosizione()).getNome()+"%n");
+				visualizza.append("\n\t Capitale: " + g.getCapitale() + " Û\n");
 			}
 
 		return visualizza.toString();

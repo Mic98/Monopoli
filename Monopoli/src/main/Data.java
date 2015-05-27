@@ -23,7 +23,7 @@ public class Data {
 	private static final String CASELLA_1 = "VICOLO CORTO";
 	private static final String CASELLA_2 = "PROBABILITA";
 	private static final String CASELLA_3 = "VICOLO STRETTO";
-	private static final String CASELLA_4 = "TASSA PATRIMONILAE";
+	private static final String CASELLA_4 = "TASSA PATRIMONIALE";
 	private static final String CASELLA_5 = "STAZIONE SUD";
 	private static final String CASELLA_6 = "BASTIONI GRAN SASSO";
 	private static final String CASELLA_7 = "IMPREVISTI";

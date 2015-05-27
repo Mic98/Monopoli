@@ -25,12 +25,13 @@ public class Gioco {
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = "\tTurno di: ";
+	private final static String TITOLO_TURNO03 = "\tCapitale posseduto: ";
 	private final static String VOCE_TURNO01 = "Lancio dadi";
 	private final static String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
 	private final static String USCITO_DI_PRIGIONE = "Hai tirato doppio, sei uscito di prigione e puoi lanciare ancora";
 	private static final String MESSAGGIO_IN_PRIGIONE = "\nSei finito nella casella \"IN PRIGIONE!\" per questo motivo verrai spostato in prigione";
 	private final static String VOCE_TURNO02 = "Salva partita";
-	private final static String VOCE_TURNO03 = "Mostra elenco giocatori";
+	private final static String VOCE_TURNO03 = "Mostra situazione partita";
 	private final static String[] VOCI_MENU_GIOCO = { VOCE_TURNO01,
 			VOCE_TURNO02, VOCE_TURNO03 };
 
@@ -115,7 +116,8 @@ public class Gioco {
 						
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
-					+ giocatoreAttuale.getNome(), VOCI_MENU_GIOCO);
+					+ giocatoreAttuale.getNome() + TITOLO_TURNO03 + giocatoreAttuale.getCapitale() + " €"
+					, VOCI_MENU_GIOCO);
 
 			giocatoreAttuale.setToken(true);
 			int scelta;
@@ -160,7 +162,7 @@ public class Gioco {
 
 			// Cotrolla se abbiamo raggiunto il massimo dei turni disponibili
 			tabellone.setTurniAttuali(tabellone.getTurniAttuali() + 1);
-			if (tabellone.getTurniAttuali() >= 20) {
+			if (tabellone.getTurniAttuali() > 20) {
 				inGame = false;
 			}
 		}
@@ -181,6 +183,7 @@ public class Gioco {
 			tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato()); //Muove il giocatore
 			controlloDopoTiro(giocatoreAttuale);
             
+				
 			//esegue di nuovo il controllo sulla prigione perchè dopo il tiro dei dadi potrebbe essere in prigione
 			if (!dado.sonoUguali() || giocatoreAttuale.isInPrigione()) {
 				giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
