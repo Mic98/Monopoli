@@ -3,11 +3,11 @@
  */
 package main;
 
-import Caselle.*;
 import java.util.Collections;
 import java.util.Vector;
 import java.io.*;
 
+import caselle.*;
 import utilities.BelleStringhe;
 import utilities.MyUtil;
 
@@ -49,7 +49,7 @@ public class Tabellone implements Serializable {
 	 * @param g giocatore da spostare
 	 * @param step risultato dato dal tiro dei dadi
 	 */
-	public void movePlayer(Giocatore g, int step) {
+	public void muoviGiocatore(Giocatore g, int step) {
 		int dest = g.getPosizione() + step;
 
 		if (dest >= 40){
@@ -68,7 +68,7 @@ public class Tabellone implements Serializable {
 	 * @param g giocatore da spostare
 	 * @param casella destinazione del giocatore
 	 */
-	public void teleportPlayer(Giocatore g, int casella) {
+	public void teleportGiocatore(Giocatore g, int casella) {
 		g.setPosizione(casella);
 	}
 	

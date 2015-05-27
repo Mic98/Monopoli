@@ -4,7 +4,8 @@
 package main;
 
 import java.util.Vector;
-import Caselle.*;
+
+import caselle.*;
 
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
@@ -117,7 +118,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Casella(CASELLA_28, 28));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_29, 29));
 		
-		temporaneo.aggiungiCasella(new Casella(CASELLA_30, 30));
+		temporaneo.aggiungiCasella(new InPrigione(CASELLA_30, 30));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_31, 31));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_32, 32));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_33, 33));

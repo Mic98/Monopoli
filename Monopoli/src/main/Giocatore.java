@@ -22,6 +22,7 @@ public class Giocatore implements Serializable {
 	private int capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
+	private boolean token;
 
 
 	public Giocatore(String nome) {
@@ -30,6 +31,7 @@ public class Giocatore implements Serializable {
 		capitale = CAPITALE_DEFAULT;
 		numeroLanci = 0;
 		inPrigione = false;
+		token = false;
 	}
 
 	public boolean inBancaRotta(){
@@ -77,6 +79,14 @@ public class Giocatore implements Serializable {
 
 	public void setNumeroLanci(int numeroLanci) {
 		this.numeroLanci = numeroLanci;
+	}
+	
+	public boolean hasToken() {
+		return token;
+	}
+
+	public void setToken(boolean token) {
+		this.token = token;
 	}
 
 	public String toString() {
