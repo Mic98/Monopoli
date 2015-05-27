@@ -20,6 +20,8 @@ public class Tabellone implements Serializable {
 	private static final String MESS_VUOTO = "\n La lista giocatori e' vuota \n\n";
 	private static final int BONUS_VIA = 500;
 	private static final String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500Û di bonus \n";
+	
+	
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
 	private int turnoGiocatore;
@@ -85,7 +87,6 @@ public class Tabellone implements Serializable {
 		           
 		return false;
 	}
-
 	
 	public int getTurnoGiocatore() {
 		return turnoGiocatore;
@@ -130,6 +131,5 @@ public class Tabellone implements Serializable {
 		return visualizza.toString();
 
 	}
-
-
+	
 }

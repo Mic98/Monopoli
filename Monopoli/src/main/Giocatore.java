@@ -14,7 +14,7 @@ public class Giocatore implements Serializable {
 
 	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
 	private final static int POSIZIONE_DEFAULT = 0;
-	private final static int CAPITALE_DEFAULT = 5000;
+	private final static int CAPITALE_DEFAULT = 0;
 
 
 	private String nome;
@@ -36,6 +36,20 @@ public class Giocatore implements Serializable {
 
 	public boolean inBancaRotta(){
 		if(capitale<=0)
+			return true;
+		
+		return false;
+	}
+	
+	public boolean piuRicco(Giocatore altroGiocatore){
+		if(this.capitale > altroGiocatore.capitale)
+			return true;
+		
+		return false;
+	}
+	
+	public boolean riccoUguale(Giocatore altroGiocatore){
+		if(this.capitale == altroGiocatore.capitale)
 			return true;
 		
 		return false;
