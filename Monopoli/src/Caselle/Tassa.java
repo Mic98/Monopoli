@@ -1,4 +1,4 @@
-package main;
+package Caselle;
 
 public class Tassa extends Casella{
 	

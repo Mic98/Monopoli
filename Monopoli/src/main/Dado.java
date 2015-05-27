@@ -33,6 +33,17 @@ public class Dado {
 		this.lancio1 = DADO_MIN;
 		this.lancio2 = DADO_MIN;
 	}
+	
+	/**
+	 * metodo per lanciare i dadi
+	 */
+	public void lancioDadi() {
+
+		setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(),
+				Dado.getDadoMAX()));
+		setLancio2(MyRandom.estraiIntero(Dado.getDadoMIN(),
+				Dado.getDadoMAX()));
+	}
 
 	/**
 	 * 

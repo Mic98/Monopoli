@@ -4,6 +4,7 @@
 package main;
 
 import java.util.Vector;
+import Caselle.*;
 
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli

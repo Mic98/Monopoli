@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main;
+package Caselle;
 
 import java.io.*;
 
@@ -16,7 +16,7 @@ public class Casella implements Serializable {
 
 	private String nome;
 	private int numero;
-	private int tipo = 0;
+	private int tipo;
 	/**
 	 * Costruttore della classe Casella
 	 * 
@@ -28,6 +28,7 @@ public class Casella implements Serializable {
 	public Casella(String nome, int numero) {
 		this.nome = nome;
 		this.numero = numero;
+		tipo = 0;
 	}
 
 	/**

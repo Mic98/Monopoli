@@ -3,6 +3,7 @@
  */
 package main;
 
+import Caselle.*;
 import java.io.File;
 import java.util.Vector;
 
@@ -149,7 +150,7 @@ public class Gioco {
 			} while (inTurn);
 
 			if(scelta == 1)
-				System.out.println("%n"+MESSAGGIO_FINE_TURNO);
+				System.out.println("\n"+MESSAGGIO_FINE_TURNO);
 			
 			// Assegna il turno di gioco al prossimo giocatore
 			tabellone.setTurnoGiocatore(tabellone.getTurnoGiocatore() + 1);;
@@ -175,7 +176,7 @@ public class Gioco {
 		boolean inTurn = false;
 		//Se il giocatore non e' in prigione
 		if (!giocatoreAttuale.isInPrigione()) {
-			lancioDadi(); //Lancia i dadi
+			dado.lancioDadi(); //Lancia i dadi
 			tabellone.movePlayer(giocatoreAttuale, dado.risultato()); //Muove il giocatore
 
 			if (!dado.sonoUguali()) {
@@ -195,7 +196,7 @@ public class Gioco {
 				}
 			}
 		} else { //Se e' in prigione
-			lancioDadi(); //Cerca di uscire lanciando i dadi
+			dado.lancioDadi(); //Cerca di uscire lanciando i dadi
 			if (dado.sonoUguali()) { //Se sono uguali 
 				giocatoreAttuale.setInPrigione(false); //Esce di prigione
 				inTurn = true; //E ha a disposizione un altro lancio
@@ -212,7 +213,8 @@ public class Gioco {
 		return inTurn;
 	}// fine gestioneTurno
 
-	public void checkEndTurn(Giocatore giocatoreAttuale){
+	
+	public void controlloFineTurno(Giocatore giocatoreAttuale){
 		//Controlla dove si trova il giocatore
 		
 			Casella casellaAttuale = tabellone.getCaselle().get(giocatoreAttuale.getPosizione());
@@ -233,16 +235,7 @@ public class Gioco {
 			
 	}	
 	
-	/**
-	 * metodo per lanciare i dadi
-	 */
-	public void lancioDadi() {
 
-		dado.setLancio1(MyRandom.estraiIntero(Dado.getDadoMIN(),
-				Dado.getDadoMAX()));
-		dado.setLancio2(MyRandom.estraiIntero(Dado.getDadoMIN(),
-				Dado.getDadoMAX()));
-	}
 
 	/**
 	 * metodo che si occupa di caricare una partita salvata precedenntemente e
