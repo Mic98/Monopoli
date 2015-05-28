@@ -114,14 +114,12 @@ public class Gioco {
 	 */
 	public void partita() {
 		boolean inGame = true;
+		boolean tiro = false;
 		
 		while (inGame && tabellone.getElencoGiocatori().size()>1) {
 			// Seleziona il giocatore attuale per una migliore gestione
 			Giocatore giocatoreAttuale = tabellone.getElencoGiocatori().get(
 					tabellone.getTurnoGiocatore());
-			
-			dado.setLancio1(0);
-			dado.setLancio2(0);
 						
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
@@ -138,9 +136,10 @@ public class Gioco {
 				switch (scelta) {
 				// Lancio dei dadi
 				case 1:
-					if(dado.risultato() == 0)
+					if(!tiro)
 						gestioneTurno(giocatoreAttuale);
 					else 
+						System.out.print("Hai gia' lanciato!");
 						
 					break;
 
@@ -155,7 +154,12 @@ public class Gioco {
 				case 3:
 					System.out.printf(tabellone.toString());
 					break;
-
+					
+				case 4:
+					if(!tiro)
+						System.out.printf("Devi ancora tirare!");
+					break;
+					
 				case 0:
 					inGame = false;
 					giocatoreAttuale.setToken(false);
@@ -186,11 +190,6 @@ public class Gioco {
 			
 		
 	}// fine metodo partita
-	
-	public Giocatore findNextGiocatore(){
-		
-	}
-	
 
 	/**
 	 * metodo per gestire il turno di un giocatore
@@ -202,20 +201,8 @@ public class Gioco {
 		
 		dado.lancioDadi(); //Lancia i dadi
 		
-		if(dado.sonoUguali()){
-			giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1);
-			giocatoreAttuale.setInPrigione(false);
-			tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato());
-		} else {
-			if(!giocatoreAttuale.isInPrigione()){
-				tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato());
-				giocatoreAttuale.setNumeroLanci(0);
-			}
-		}
-		
-		
 		//Se il giocatore non e' in prigione
-		/*if (!giocatoreAttuale.isInPrigione()) {
+		if (!giocatoreAttuale.isInPrigione()) {
 			tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato()); //Muove il giocatore
 			controlloDopoTiro(giocatoreAttuale);
             
@@ -248,7 +235,7 @@ public class Gioco {
 			}
 		} else { //Se e' in prigione
 			gestionePrigione(giocatoreAttuale);
-		}	*/
+		}	
 		
 	}// fine gestioneTurno
 	

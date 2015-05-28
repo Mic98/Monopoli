@@ -22,7 +22,8 @@ public class Giocatore implements Serializable {
 	private int capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
-	private boolean token;
+	private boolean token; //Per sapere se è il suo turno
+	
 
 
 	public Giocatore(String nome) {
