@@ -21,8 +21,8 @@ public class Gioco {
 	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
-	private static final String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita � finita.\n";
-	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d � alla banca \n\n";
+	private static final String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita e' finita.\n";
+	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d euro alla banca \n\n";
 	private static final String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
 	private static final String VINCITORE = "IL VINCITORE E' %s";
 	private static final String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
@@ -114,7 +114,7 @@ public class Gioco {
 	 */
 	public void partita() {
 		boolean inGame = true;
-		boolean tiro = false;
+		boolean passa = false;
 		
 		while (inGame && tabellone.getElencoGiocatori().size()>1) {
 			// Seleziona il giocatore attuale per una migliore gestione
@@ -136,7 +136,7 @@ public class Gioco {
 				switch (scelta) {
 				// Lancio dei dadi
 				case 1:
-					if(!tiro)
+					if(giocatoreAttuale.hasToken())
 						gestioneTurno(giocatoreAttuale);
 					else 
 						System.out.print("Hai gia' lanciato!");
@@ -156,8 +156,11 @@ public class Gioco {
 					break;
 					
 				case 4:
-					if(!tiro)
+					if(giocatoreAttuale.hasToken())
 						System.out.printf("Devi ancora tirare!");
+					else
+						passa = true;
+						
 					break;
 					
 				case 0:
@@ -166,7 +169,7 @@ public class Gioco {
 					break;
 
 				}
-			} while (giocatoreAttuale.hasToken());
+			} while (giocatoreAttuale.hasToken() || !passa);
 
 			if(scelta == 1)
 				System.out.println("\n"+MESSAGGIO_FINE_TURNO);
@@ -207,7 +210,7 @@ public class Gioco {
 			controlloDopoTiro(giocatoreAttuale);
             
 			if(!giocatoreAttuale.inBancaRotta()){
-				//esegue di nuovo il controllo sulla prigione perch� dopo il tiro dei dadi potrebbe essere in prigione
+				//esegue di nuovo il controllo sulla prigione perche' dopo il tiro dei dadi potrebbe essere in prigione
 				if (!dado.sonoUguali() || giocatoreAttuale.isInPrigione()) {
 					stampaPosizione(giocatoreAttuale);
 					giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
@@ -228,10 +231,12 @@ public class Gioco {
 				}
 			  }
 			}
-			else{//se il giocatore � in bancarotta esce dalla partita
+			else{//se il giocatore e' in bancarotta esce dalla partita
 				System.out.println(IN_BANCA_ROTTA);
 				giocatoreAttuale.setToken(false);
+				tabellone.getClassificaFinale().add(giocatoreAttuale);
 				tabellone.getElencoGiocatori().remove(giocatoreAttuale);
+				
 			}
 		} else { //Se e' in prigione
 			gestionePrigione(giocatoreAttuale);
