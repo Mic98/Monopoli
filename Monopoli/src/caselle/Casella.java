@@ -13,7 +13,7 @@ public class Casella implements Serializable {
 	
 	public static final int NEUTRA = 0,
 							TASSE = 1,
-							IN_PRIGIONE = 2;
+							VAI_IN_PRIGIONE = 2; //Casella 30
 
 	private String nome;
 	private int numero;

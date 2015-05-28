@@ -21,8 +21,8 @@ public class Gioco {
 	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
-	private static final String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita è finita.\n";
-	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d € alla banca \n\n";
+	private static final String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita ÔøΩ finita.\n";
+	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d ÔøΩ alla banca \n\n";
 	private static final String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
 	private static final String VINCITORE = "IL VINCITORE E' %s";
 	private static final String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
@@ -119,10 +119,13 @@ public class Gioco {
 			// Seleziona il giocatore attuale per una migliore gestione
 			Giocatore giocatoreAttuale = tabellone.getElencoGiocatori().get(
 					tabellone.getTurnoGiocatore());
+			
+			dado.setLancio1(0);
+			dado.setLancio2(0);
 						
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
-					+ giocatoreAttuale.getNome() + TITOLO_TURNO03 + giocatoreAttuale.getCapitale() + " €"
+					+ giocatoreAttuale.getNome() + TITOLO_TURNO03 + giocatoreAttuale.getCapitale() + " ÔøΩ"
 					, VOCI_MENU_GIOCO);
 
 			giocatoreAttuale.setToken(true);
@@ -135,7 +138,10 @@ public class Gioco {
 				switch (scelta) {
 				// Lancio dei dadi
 				case 1:
-					gestioneTurno(giocatoreAttuale);
+					if(dado.risultato() == 0)
+						gestioneTurno(giocatoreAttuale);
+					else 
+						
 					break;
 
 				case 2:
@@ -181,6 +187,10 @@ public class Gioco {
 		
 	}// fine metodo partita
 	
+	public Giocatore findNextGiocatore(){
+		
+	}
+	
 
 	/**
 	 * metodo per gestire il turno di un giocatore
@@ -192,17 +202,29 @@ public class Gioco {
 		
 		dado.lancioDadi(); //Lancia i dadi
 		
+		if(dado.sonoUguali()){
+			giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1);
+			giocatoreAttuale.setInPrigione(false);
+			tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato());
+		} else {
+			if(!giocatoreAttuale.isInPrigione()){
+				tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato());
+				giocatoreAttuale.setNumeroLanci(0);
+			}
+		}
+		
+		
 		//Se il giocatore non e' in prigione
-		if (!giocatoreAttuale.isInPrigione()) {
+		/*if (!giocatoreAttuale.isInPrigione()) {
 			tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato()); //Muove il giocatore
 			controlloDopoTiro(giocatoreAttuale);
             
 			if(!giocatoreAttuale.inBancaRotta()){
-			//esegue di nuovo il controllo sulla prigione perchè dopo il tiro dei dadi potrebbe essere in prigione
-			if (!dado.sonoUguali() || giocatoreAttuale.isInPrigione()) {
-				stampaPosizione(giocatoreAttuale);
-				giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
-				giocatoreAttuale.setToken(false);
+				//esegue di nuovo il controllo sulla prigione perchÔøΩ dopo il tiro dei dadi potrebbe essere in prigione
+				if (!dado.sonoUguali() || giocatoreAttuale.isInPrigione()) {
+					stampaPosizione(giocatoreAttuale);
+					giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
+					giocatoreAttuale.setToken(false);
 			} else {
 				giocatoreAttuale.setNumeroLanci(giocatoreAttuale
 						.getNumeroLanci() + 1); //Se invece ha tirato doppi, aumenta il contatore
@@ -219,14 +241,14 @@ public class Gioco {
 				}
 			  }
 			}
-			else{//se il giocatore è in bancarotta esce dalla partita
+			else{//se il giocatore ÔøΩ in bancarotta esce dalla partita
 				System.out.println(IN_BANCA_ROTTA);
 				giocatoreAttuale.setToken(false);
 				tabellone.getElencoGiocatori().remove(giocatoreAttuale);
 			}
 		} else { //Se e' in prigione
 			gestionePrigione(giocatoreAttuale);
-		}	
+		}	*/
 		
 	}// fine gestioneTurno
 	
@@ -255,22 +277,23 @@ public class Gioco {
 		
 			Casella casellaAttuale = tabellone.getCaselle().get(giocatoreAttuale.getPosizione());
 			switch (casellaAttuale.getTipo()) {
-			case 1:
-				Tassa t = (Tassa) casellaAttuale;
-				giocatoreAttuale.setCapitale(giocatoreAttuale.getCapitale() - t.getMalus());
-				System.out.printf(CASELLA_TASSA, t.getNome(), t.getMalus());
-			break;
-			
-			case 2: 
-				tabellone.teleportGiocatore(giocatoreAttuale, Data.getPrigione());
-				System.out.println(MESSAGGIO_IN_PRIGIONE);
-				giocatoreAttuale.setInPrigione(true);
-			break;
-			
-
-			default:
+				case Casella.TASSE:
+					Tassa t = (Tassa) casellaAttuale;
+					giocatoreAttuale.setCapitale(giocatoreAttuale.getCapitale() - t.getMalus());
+					System.out.printf(CASELLA_TASSA, t.getNome(), t.getMalus());
+				break;
+				
+				case Casella.VAI_IN_PRIGIONE: 
+					tabellone.teleportGiocatore(giocatoreAttuale, Data.getPrigione());
+					System.out.println(MESSAGGIO_IN_PRIGIONE);
+					giocatoreAttuale.setInPrigione(true);
+				break;
+				
+	
+				default:
 				break;
 			}
+			
 			
 	}	
 	

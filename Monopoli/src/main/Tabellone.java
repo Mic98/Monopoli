@@ -19,11 +19,12 @@ public class Tabellone implements Serializable {
 
 	private static final String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
 	private static final int BONUS_VIA = 500;
-	private static final String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500Û di bonus \n";
+	private static final String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500ï¿½ di bonus \n";
 	
 	
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
+	private Vector<Giocatore> giocatoriFisici;
 	private int turnoGiocatore;
 	private int turniAttuali; 
 
@@ -31,6 +32,7 @@ public class Tabellone implements Serializable {
 	
 		caselle = new Vector<Casella>();
 		elencoGiocatori = new Vector<Giocatore>();
+		giocatoriFisici = new Vector<Giocatore>();
 		turniAttuali = 1;
 		turnoGiocatore = 0;
 	}
@@ -42,6 +44,7 @@ public class Tabellone implements Serializable {
 	 */
 	public void mescolaGiocatori(Vector<Giocatore> plrs) {
 		elencoGiocatori = plrs;
+		giocatoriFisici = plrs;
 		Collections.shuffle(plrs);
 	}
 	
@@ -125,7 +128,7 @@ public class Tabellone implements Serializable {
 			for (Giocatore g : elencoGiocatori){
 				visualizza.append(String.format(g.toString()));
 				visualizza.append("\n\t Posizione: "+ caselle.get(g.getPosizione()).getNome()+"%n");
-				visualizza.append("\n\t Capitale: " + g.getCapitale() + " Û\n");
+				visualizza.append("\n\t Capitale: " + g.getCapitale() + " ï¿½\n");
 			}
 
 		return visualizza.toString();
