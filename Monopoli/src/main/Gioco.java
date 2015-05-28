@@ -36,8 +36,9 @@ public class Gioco {
 	private static final String MESSAGGIO_IN_PRIGIONE = "\nSei finito nella casella \"IN PRIGIONE!\" per questo motivo verrai spostato in prigione";
 	private final static String VOCE_TURNO02 = "Salva partita";
 	private final static String VOCE_TURNO03 = "Mostra situazione partita";
+	private final static String VOCE_TURNO04 = "Passa il turno";
 	private final static String[] VOCI_MENU_GIOCO = { VOCE_TURNO01,
-			VOCE_TURNO02, VOCE_TURNO03 };
+			VOCE_TURNO02, VOCE_TURNO03, VOCE_TURNO04 };
 
 	// ----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
@@ -123,7 +124,7 @@ public class Gioco {
 						
 			MyMenu menuGioco = new MyMenu(TITOLO_TURNO01
 					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
-					+ giocatoreAttuale.getNome() + TITOLO_TURNO03 + giocatoreAttuale.getCapitale() + " �"
+					+ giocatoreAttuale.getNome() + TITOLO_TURNO03 + giocatoreAttuale.getCapitale() + " euro"
 					, VOCI_MENU_GIOCO);
 
 			giocatoreAttuale.setToken(true);
@@ -146,8 +147,10 @@ public class Gioco {
 				case 2:
 					salvaPartita();
 					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){ 
-						inGame = false;
 						giocatoreAttuale.setToken(false);
+						passa = true;
+						inGame = false;
+						
 					}
 					break;
 
@@ -164,12 +167,13 @@ public class Gioco {
 					break;
 					
 				case 0:
-					inGame = false;
 					giocatoreAttuale.setToken(false);
+					passa = true;
+					inGame = false;
 					break;
 
 				}
-			} while (giocatoreAttuale.hasToken() || !passa);
+			} while (giocatoreAttuale.hasToken() && !passa);
 
 			if(scelta == 1)
 				System.out.println("\n"+MESSAGGIO_FINE_TURNO);
