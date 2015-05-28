@@ -90,6 +90,44 @@ public class Tabellone implements Serializable {
 		return false;
 	}
 	
+	
+	public void classifica(){
+		int i = elencoGiocatori.size();
+		while (i>0){
+			classificaFinale.addElement(ilPiuPovero());
+			elencoGiocatori.remove(ilPiuPovero());
+			
+			i--;
+		}	
+	}
+	
+	public Vector<Giocatore> trovaVincitori(){
+		Vector<Giocatore> vincenti = new Vector <Giocatore>();
+		
+		for(int i=classificaFinale.size(); i>0; i--){
+			if(classificaFinale.lastElement().riccoUguale(classificaFinale.get(i-1)))
+				vincenti.add(classificaFinale.get(i-1));
+			
+		}
+		
+		return vincenti;
+	}
+	
+	public Giocatore ilPiuPovero(){
+		Giocatore tmp = null;
+		
+		for(int i=0; i<elencoGiocatori.size();i++)
+			for(int j=0; j<elencoGiocatori.size();j++)
+				if(elencoGiocatori.get(i).piuPovero(elencoGiocatori.get(j)))
+					tmp = elencoGiocatori.get(i);
+		
+		
+		
+			return tmp;
+				
+			
+	}
+	
 	public int getTurnoGiocatore() {
 		return turnoGiocatore;
 	}

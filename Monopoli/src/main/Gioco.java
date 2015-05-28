@@ -24,8 +24,9 @@ public class Gioco {
 	private static final String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita e' finita.\n";
 	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d euro alla banca \n\n";
 	private static final String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
-	private static final String VINCITORE = "IL VINCITORE E' %s";
+	private static final String VINCITORE = "VINCITORE";
 	private static final String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
+	private static final String VINCITORI = "VINCITORI";
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = "\tTurno di: ";
@@ -58,6 +59,7 @@ public class Gioco {
 
 
 	private static final File filePartita = new File(PARTITA_FILE);
+	
 	
 	
 
@@ -115,7 +117,8 @@ public class Gioco {
 	 */
 	public void partita() {
 		boolean inGame = true;
-		boolean passa = false;
+		
+		
 		
 		while (inGame && tabellone.getElencoGiocatori().size()>1) {
 			// Seleziona il giocatore attuale per una migliore gestione
@@ -129,11 +132,13 @@ public class Gioco {
 
 			giocatoreAttuale.setToken(true);
 			int scelta;
+			boolean passa;
 			
 			do {
 				System.out.print("\n\n");
 				scelta = menuGioco.scegli();
 				System.out.print("\n\n");
+				passa = false;
 				switch (scelta) {
 				// Lancio dei dadi
 				case 1:
@@ -173,9 +178,9 @@ public class Gioco {
 					break;
 
 				}
-			} while (giocatoreAttuale.hasToken() && !passa);
+			} while (!passa || giocatoreAttuale.hasToken());
 
-			if(scelta == 1)
+			if(scelta == 4)
 				System.out.println("\n"+MESSAGGIO_FINE_TURNO);
 			
 			// Assegna il turno di gioco al prossimo giocatore
@@ -186,12 +191,15 @@ public class Gioco {
 			// Cotrolla se abbiamo raggiunto il massimo dei turni disponibili
 			tabellone.setTurniAttuali(tabellone.getTurniAttuali() + 1);
 			if (tabellone.getTurniAttuali() > 20) {
+				System.out.println(dichiaraVincitori());
+				System.out.println("\n\n");
 				inGame = false;
+				
 			}
 		  }
 			if(tabellone.getElencoGiocatori().size()==1){
 				System.out.println(UN_SOLO_GIOCATORE);
-				System.out.printf(BelleStringhe.incornicia(VINCITORE), tabellone.getElencoGiocatori().get(0).getNome());
+				System.out.println(BelleStringhe.incornicia(VINCITORE) + "\n\t" + tabellone.getElencoGiocatori().get(0).getNome());
 				inGame= false;
 			}
 			
@@ -294,6 +302,22 @@ public class Gioco {
 	}	
 	
 
+	public String dichiaraVincitori(){
+		StringBuilder visualizza = new StringBuilder();
+	
+		tabellone.classifica();
+		Vector<Giocatore> vincenti = tabellone.trovaVincitori();
+		if(vincenti.size() > 1)
+		   visualizza.append(BelleStringhe.incornicia(VINCITORI));
+		if(vincenti.size() ==1)
+		   visualizza.append(BelleStringhe.incornicia(VINCITORE));
+		for(int i=0; i<vincenti.size(); i++)
+			visualizza.append("\t" + vincenti.get(i).getNome());
+		
+		
+		
+		return visualizza.toString();
+	}
 
 	/**
 	 * metodo che si occupa di caricare una partita salvata precedenntemente e

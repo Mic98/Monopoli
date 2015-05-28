@@ -22,7 +22,7 @@ public class Giocatore implements Serializable {
 	private int capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
-	private boolean token; //Per sapere se è il suo turno
+	private boolean token; //Per sapere se e' il suo turno
 	
 
 
@@ -42,8 +42,8 @@ public class Giocatore implements Serializable {
 		return false;
 	}
 	
-	public boolean piuRicco(Giocatore altroGiocatore){
-		if(this.capitale > altroGiocatore.capitale)
+	public boolean piuPovero(Giocatore altroGiocatore){
+		if(this.capitale <= altroGiocatore.capitale)
 			return true;
 		
 		return false;
