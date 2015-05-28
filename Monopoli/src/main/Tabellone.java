@@ -17,7 +17,7 @@ import utilities.MyUtil;
  */
 public class Tabellone implements Serializable {
 
-	private static final String MESS_VUOTO = "\n La lista giocatori e' vuota \n\n";
+	private static final String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
 	private static final int BONUS_VIA = 500;
 	private static final String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500Û di bonus \n";
 	

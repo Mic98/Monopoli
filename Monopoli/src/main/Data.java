@@ -21,7 +21,7 @@ public class Data {
 
 	private static final String CASELLA_0 = "VIA";
 	private static final String CASELLA_1 = "VICOLO CORTO";
-	private static final String CASELLA_2 = "PROBABILITA";
+	private static final String CASELLA_2 = "PROBABILITA'";
 	private static final String CASELLA_3 = "VICOLO STRETTO";
 	private static final String CASELLA_4 = "TASSA PATRIMONIALE";
 	private static final String CASELLA_5 = "STAZIONE SUD";
@@ -31,7 +31,7 @@ public class Data {
 	private static final String CASELLA_9 = "VIALE VESUVIO";
 	private static final String CASELLA_10 = "PRIGIONE/TRANSITO";
 	private static final String CASELLA_11 = "VIA ACCADEMIA";
-	private static final String CASELLA_12 = "SOCIETA ELETTRICA";
+	private static final String CASELLA_12 = "SOCIETA' ELETTRICA";
 	private static final String CASELLA_13 = "CORSO ATENEO";
 	private static final String CASELLA_14 = "PIAZZA UNIVERSITA";
 	private static final String CASELLA_15 = "STAVIONE OVEST";
@@ -47,12 +47,12 @@ public class Data {
 	private static final String CASELLA_25 = "STAZIONE NORD";
 	private static final String CASELLA_26 = "VIALE COSTANTINO";
 	private static final String CASELLA_27 = "VIALE TRAIANO";
-	private static final String CASELLA_28 = "SOCIETA ACQUA POTABILE";
+	private static final String CASELLA_28 = "SOCIETA' ACQUA POTABILE";
 	private static final String CASELLA_29 = "PIAZZA GIULIO CESARE";
 	private static final String CASELLA_30 = "IN PRIGIONE!";
 	private static final String CASELLA_31 = "VIA ROMA";
 	private static final String CASELLA_32 = "CORSO IMPERO";
-	private static final String CASELLA_33 = "PROBABILITA";
+	private static final String CASELLA_33 = "PROBABILITA'";
 	private static final String CASELLA_34 = "LARGO AUGUSTO";
 	private static final String CASELLA_35 = "STAZIONE EST";
 	private static final String CASELLA_36 = "IMPREVISTI";
