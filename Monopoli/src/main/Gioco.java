@@ -18,15 +18,15 @@ import utilities.ServizioFile;
  */
 public class Gioco {
 
-	private static final String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
-	private static final String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
-	private static final String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
-	private static final String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita e' finita.\n";
-	private static final String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d euro alla banca \n\n";
-	private static final String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
-	private static final String VINCITORE = "VINCITORE";
-	private static final String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
-	private static final String VINCITORI = "VINCITORI";
+	private final static String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
+	private final static String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
+	private final static String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
+	private final static String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita e' finita.\n";
+	private final static String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d euro alla banca \n\n";
+	private final static String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
+	private final static String VINCITORE = "VINCITORE";
+	private final static String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
+	private final static String VINCITORI = "VINCITORI";
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = "\tTurno di: ";
@@ -43,7 +43,7 @@ public class Gioco {
 
 	// ----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
-	private static final String ERR_ESISTE_GIA = "Il nome inserito e' gia' esistente, inserirne un altro";
+	private final static String ERR_ESISTE_GIA = "Il nome inserito e' gia' esistente, inserirne un altro";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
 	private final static String ERRORE_POCHI_GIOCATORI = "ATTENZIONE!!! Minimo 2 giocatori!";
 	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
@@ -58,7 +58,8 @@ public class Gioco {
 	private final static String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
 
 
-	private static final File filePartita = new File(PARTITA_FILE);
+	private final static File filePartita = new File(PARTITA_FILE);
+	private final static int NUMERO_TURNI = 20;
 	
 	
 	
@@ -188,7 +189,7 @@ public class Gioco {
 
 			// Cotrolla se abbiamo raggiunto il massimo dei turni disponibili
 			tabellone.setTurniAttuali(tabellone.getTurniAttuali() + 1);
-			if (tabellone.getTurniAttuali() > 20) {
+			if (tabellone.getTurniAttuali() > NUMERO_TURNI) {
 				System.out.println(dichiaraVincitori());
 				System.out.println("\n\n");
 				inGame = false;
@@ -244,6 +245,7 @@ public class Gioco {
 			else{//se il giocatore e' in bancarotta esce dalla partita
 				System.out.println(IN_BANCA_ROTTA);
 				giocatoreAttuale.setToken(false);
+				giocatoreAttuale.setCapitale(0);
 				tabellone.getClassificaFinale().add(giocatoreAttuale);
 				tabellone.getElencoGiocatori().remove(giocatoreAttuale);
 				

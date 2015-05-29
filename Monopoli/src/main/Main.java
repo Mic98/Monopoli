@@ -25,7 +25,7 @@ public class Main {
 	private final static String[] VOCI_MENU_INIZIALE = { VOCE_INIZIALE01,
 			VOCE_INIZIALE02 };
 
-	private static final MyMenu menuIniziale = new MyMenu(TITOLO_INIZIALE,
+	private final static MyMenu menuIniziale = new MyMenu(TITOLO_INIZIALE,
 			VOCI_MENU_INIZIALE);
 	private static Gioco gioco;
 

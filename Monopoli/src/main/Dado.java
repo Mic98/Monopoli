@@ -12,11 +12,11 @@ public class Dado {
 	/**
 	 * Valore minimo del dado
 	 */
-	public static final int DADO_MIN = 1;
+	public final static int DADO_MIN = 1;
 	/**
 	 * Valore massimo del dado
 	 */
-	public static final int DADO_MAX = 6;
+	public final static int DADO_MAX = 6;
 
 	private int lancio1;
 	private int lancio2;

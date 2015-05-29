@@ -17,9 +17,9 @@ import utilities.MyUtil;
  */
 public class Tabellone implements Serializable {
 
-	private static final String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
-	private static final int BONUS_VIA = 500;
-	private static final String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500 euro di bonus \n";
+	private final static String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
+	private final static int BONUS_VIA = 500;
+	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500 euro di bonus \n";
 	
 	
 	private Vector<Casella> caselle;

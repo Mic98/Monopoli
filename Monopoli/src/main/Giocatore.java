@@ -4,6 +4,9 @@
 package main;
 
 import java.io.*;
+import java.util.Vector;
+
+import caselle.*;
 
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
@@ -17,12 +20,14 @@ public class Giocatore implements Serializable {
 	private final static int CAPITALE_DEFAULT = 5000;
 
 
+
 	private String nome;
 	private int posizione;
 	private int capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
 	private boolean token; //Per sapere se e' il suo turno
+	private Vector<Casella> proprieta;
 	
 
 
@@ -33,11 +38,16 @@ public class Giocatore implements Serializable {
 	 */
 	public Giocatore(String nome) {
 		this.nome = nome;
+		
 		posizione = POSIZIONE_DEFAULT;
 		capitale = CAPITALE_DEFAULT;
+		
 		numeroLanci = 0;
 		inPrigione = false;
 		token = false;
+		
+		proprieta = new Vector<Casella>();
+		
 	}
 
 	/**
