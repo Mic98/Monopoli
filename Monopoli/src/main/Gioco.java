@@ -62,21 +62,19 @@ public class Gioco {
 	
 	
 	
-
-	
-	
-	
-	
 	public static Tabellone tabellone;
 	public static Dado dado;
 
+	/**
+	 * Costruttore della classe Gioco
+	 */
 	public Gioco() {
 		tabellone = new Tabellone();
 		tabellone = Data.creaTabellone();
 	}
 
 	/**
-	 * metodo che si occupa di creare una nuova partita
+	 * Crea una nuova partita
 	 */
 	public void nuovaPartita() {
 		Vector<Giocatore> nuoviGiocatori = new Vector<Giocatore>();
@@ -207,7 +205,7 @@ public class Gioco {
 	}// fine metodo partita
 
 	/**
-	 * metodo per gestire il turno di un giocatore
+	 * Gestisce il turno di un giocatore
 	 * 
 	 * @param giocatoreAttuale
 	 *            il giocatore che puo' giocare in questo turno
@@ -256,7 +254,11 @@ public class Gioco {
 		
 	}// fine gestioneTurno
 	
-	
+	/**
+	 * Gestisce l'uscita del giocatore dalla prigione
+	 * 
+	 * @param giocatoreAttuale giocatore in prigione
+	 */
 	public void gestionePrigione(Giocatore giocatoreAttuale){
 		if (dado.sonoUguali()) { //Se sono uguali 
 			giocatoreAttuale.setInPrigione(false); //Esce di prigione
@@ -269,6 +271,11 @@ public class Gioco {
 		}
 	}
 
+	/**
+	 * Stampa la posizione attuale del giocatore
+	 * 
+	 * @param giocatoreAttuale giocatore di cui si vuole sapere la posizione
+	 */
 	public void stampaPosizione(Giocatore giocatoreAttuale){
 		//Aggiorna il giocatore sulla sua posizione attuale
 				System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
@@ -276,6 +283,12 @@ public class Gioco {
 							.get(giocatoreAttuale.getPosizione()).getNome());
 	}
 	
+	
+	/**
+	 * Metodo di controllo della posizione del giocatore dopo il tiro dei dadi
+	 * 
+	 * @param giocatoreAttuale giocatore che ha appena tirato il dado
+	 */
 	public void controlloDopoTiro(Giocatore giocatoreAttuale){
 		//Controlla dove si trova il giocatore
 		
@@ -301,7 +314,11 @@ public class Gioco {
 			
 	}	
 	
-
+    
+	/**
+	 * 
+	 * @return messaggio a schermo che dichiara i vincitori della partita
+	 */
 	public String dichiaraVincitori(){
 		StringBuilder visualizza = new StringBuilder();
 	
@@ -320,8 +337,8 @@ public class Gioco {
 	}
 
 	/**
-	 * metodo che si occupa di caricare una partita salvata precedenntemente e
-	 * riprenderla da dove interrotta
+	 * Carica una partita salvata precedentemente e
+	 * la riprende da dove interrotta
 	 */
 	public void riprendiPartita() {
 
@@ -342,7 +359,7 @@ public class Gioco {
 	}
 
 	/**
-	 * metodo per salvare una partita in corso
+	 * Salva la partita in corso
 	 */
 	public void salvaPartita() {
 		if (!tabellone.getElencoGiocatori().isEmpty()) {

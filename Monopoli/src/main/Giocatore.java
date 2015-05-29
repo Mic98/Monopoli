@@ -26,6 +26,11 @@ public class Giocatore implements Serializable {
 	
 
 
+	/**
+	 * Costruttore della classe Giocatore
+	 * 
+	 * @param nome nome del giocatore
+	 */
 	public Giocatore(String nome) {
 		this.nome = nome;
 		posizione = POSIZIONE_DEFAULT;
@@ -35,6 +40,10 @@ public class Giocatore implements Serializable {
 		token = false;
 	}
 
+	/**
+	 * 
+	 * @return true se il giocatore ha finito i soldi
+	 */
 	public boolean inBancaRotta(){
 		if(capitale<=0)
 			return true;
@@ -42,6 +51,11 @@ public class Giocatore implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param altroGiocatore giocatore da paragonare
+	 * @return true se il primo giocatore e' piu' povero del secondo
+	 */
 	public boolean piuPovero(Giocatore altroGiocatore){
 		if(this.capitale <= altroGiocatore.capitale)
 			return true;
@@ -49,6 +63,11 @@ public class Giocatore implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param altroGiocatore giocatore da paragonare
+	 * @return true se i due giocatori hanno lo stesso capitale
+	 */
 	public boolean riccoUguale(Giocatore altroGiocatore){
 		if(this.capitale == altroGiocatore.capitale)
 			return true;
@@ -104,6 +123,9 @@ public class Giocatore implements Serializable {
 		this.token = token;
 	}
 
+	/**
+	 * restituisce il nome del giocatore formattato
+	 */
 	public String toString() {
 		StringBuilder visualizza = new StringBuilder();
 

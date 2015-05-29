@@ -38,7 +38,7 @@ public class Tabellone implements Serializable {
 	}
 
 	/**
-	 * metodo che mescola l'ordine del vettore elencoGiocatori
+	 * Mescola l'ordine del vettore elencoGiocatori
 	 * 
 	 * @param plrs vettore contentente la lista dei giocatori
 	 */
@@ -48,7 +48,7 @@ public class Tabellone implements Serializable {
 	}
 	
 	/**
-	 * metodo che sposta il giocatore lungo il tabellone, verificando l'avvenuto passaggio dal via
+	 * Sposta il giocatore lungo il tabellone, verificando l'avvenuto passaggio dal via
 	 * 
 	 * @param g giocatore da spostare
 	 * @param step risultato dato dal tiro dei dadi
@@ -67,7 +67,7 @@ public class Tabellone implements Serializable {
 	}
 
 	/**
-	 * metodo che sposta il giocatore senza farlo passare dal via
+	 * Sposta il giocatore senza farlo passare dal via
 	 * 
 	 * @param g giocatore da spostare
 	 * @param casella destinazione del giocatore
@@ -82,6 +82,13 @@ public class Tabellone implements Serializable {
 		
 	}
 	
+	/**
+	 * Verifica che l'input dell'utente non sia gia' stato inserito
+	 *  
+	 * @param daControllare input dell'utente da controllare
+	 * @param nuoviGiocatori vettore di nomi gia“ inseriti
+	 * @return true se il nome e' gia' stato inserito
+	 */
 	public boolean esisteGia(String daControllare, Vector<Giocatore> nuoviGiocatori){
 		for(Giocatore g: nuoviGiocatori)
 		      if(g.getNome().equalsIgnoreCase(daControllare))
@@ -91,16 +98,23 @@ public class Tabellone implements Serializable {
 	}
 	
 	
+	/**
+	 * Mette in ordine di capitale i giocatori una volta finita la partita
+	 */
 	public void classifica(){
 		int i = elencoGiocatori.size();
 		while (i>0){
-			classificaFinale.addElement(ilPiuPovero());
-			elencoGiocatori.remove(ilPiuPovero());
+			classificaFinale.addElement(elencoGiocatori.get(ilPiuPovero()));
+			elencoGiocatori.remove(elencoGiocatori.get(ilPiuPovero()));
 			
 			i--;
 		}	
 	}
 	
+	/**
+	 * 
+	 * @return il vettore dei giocatori vincenti
+	 */
 	public Vector<Giocatore> trovaVincitori(){
 		Vector<Giocatore> vincenti = new Vector <Giocatore>();
 		
@@ -113,17 +127,22 @@ public class Tabellone implements Serializable {
 		return vincenti;
 	}
 	
-	public Giocatore ilPiuPovero(){
-		Giocatore tmp = null;
+	/**
+	 * Restituisce la posizione del giocatore con meno capitale nel vettore elencoGiocatori
+	 * 
+	 * @return posizione del giocatore piu' povero
+	 */
+	public int ilPiuPovero(){
+		int posizione = 0;
 		
 		for(int i=0; i<elencoGiocatori.size();i++)
 			for(int j=0; j<elencoGiocatori.size();j++)
 				if(elencoGiocatori.get(i).piuPovero(elencoGiocatori.get(j)))
-					tmp = elencoGiocatori.get(i);
+					posizione = i;
 		
 		
 		
-			return tmp;
+			return posizione;
 				
 			
 	}
@@ -159,6 +178,9 @@ public class Tabellone implements Serializable {
 
 
 
+	/**
+	 * restituisce informazioni essenziali di tutti i giocatori in partita
+	 */
 	public String toString() {
 		StringBuilder visualizza = new StringBuilder();
 

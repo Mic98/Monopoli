@@ -81,6 +81,10 @@ public class Data {
 		return PRIGIONE;
 	}
 	
+	/**
+	 * inizializza il tabellone inserendo tutte le caselle in ordine
+	 * @return tabellone completo
+	 */
 	public static Tabellone creaTabellone(){
 		
 		Tabellone temporaneo = new Tabellone();

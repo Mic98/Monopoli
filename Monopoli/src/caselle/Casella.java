@@ -18,13 +18,14 @@ public class Casella implements Serializable {
 	private String nome;
 	private int numero;
 	private int tipo;
+	
 	/**
 	 * Costruttore della classe Casella
 	 * 
 	 * @param nome
 	 *            Il nome della casella
 	 * @param numero
-	 *            Il numero della casella
+	 *            La posizione della casella
 	 */
 	public Casella(String nome, int numero) {
 		this.nome = nome;
@@ -42,7 +43,7 @@ public class Casella implements Serializable {
 
 	/**
 	 * 
-	 * @return il numero della casella
+	 * @return la posizione della casella
 	 */
 	public int getNumero() {
 		return numero;
