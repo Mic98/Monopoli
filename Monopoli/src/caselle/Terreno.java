@@ -7,18 +7,27 @@ package caselle;
  * @author Carlo
  *
  */
-public class Terreno extends Casella{
+public class Terreno extends Acquistabile{
 	
-	private int prezzo;
 	private String colore;
+	private boolean acquistabile; 
 
-	public Terreno(String nome, int numero, int prezzo, String colore) {
-		super(nome, numero);
-		super.setTipo(TERRENI);
-		this.prezzo = prezzo;
+	/**
+	 * Costruttore della classe Terreno
+	 * 
+	 * @param nome nome del terreno
+	 * @param numero posizione del terreno sul tabellone
+	 * @param prezzo prezzo del terreno
+	 * @param colore colore della proprieta'
+	 */
+	public Terreno(String nome, int numero, int valore, String colore) {
+		super(nome, numero, valore);
+		super.setTipo(ACQUISTABILE);
 		this.colore = colore;
+		acquistabile = true;
 	}
-
+	
+	
 	
 	
 	public String getColore() {
@@ -29,13 +38,15 @@ public class Terreno extends Casella{
 		this.colore = colore;
 	}
 
-	public int getPrezzo() {
-		return prezzo;
+	public boolean isAcquistabile() {
+		return acquistabile;
 	}
 
-	public void setPrezzo(int prezzo) {
-		this.prezzo = prezzo;
+	public void setAcquistabile(boolean acquistabile) {
+		this.acquistabile = acquistabile;
 	}
+	
+	
 	
 	
 	

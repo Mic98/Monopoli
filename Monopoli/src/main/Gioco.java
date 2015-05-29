@@ -22,11 +22,17 @@ public class Gioco {
 	private final static String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private final static String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
 	private final static String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita e' finita.\n";
-	private final static String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %d euro alla banca \n\n";
+	private final static String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %.2f euro alla banca \n\n";
 	private final static String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
 	private final static String VINCITORE = "VINCITORE";
 	private final static String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
 	private final static String VINCITORI = "VINCITORI";
+	
+	private final static String ACQUISTATO = "\nComplimenti! Hai acquistato %s al costo di %.2f euro\n\n";
+	private static final String NON_ACQUISTATO = "\nSpiacente! Non sei riuscito a comprare %s perche' non possiedi sufficiente capitale\n\n";
+	private static final String TERRITORIO_NEMICO = "\nTi trovi sul territorio di %s e gli devi un totale di %.2f euro";
+	private final static String CAPITALE_INSUFFICIENTE = "Non hai sufficiente capitale per pagare l'affitto a %s per questo tutti i tuoi soldi rimasti saranno dati a lui";
+
 
 	private final static String TITOLO_TURNO01 = "Turno n: ";
 	private final static String TITOLO_TURNO02 = "\tTurno di: ";
@@ -60,6 +66,9 @@ public class Gioco {
 
 	private final static File filePartita = new File(PARTITA_FILE);
 	private final static int NUMERO_TURNI = 20;
+	
+	
+	
 	
 	
 	
@@ -298,7 +307,7 @@ public class Gioco {
 			switch (casellaAttuale.getTipo()) {
 				case Casella.TASSE:
 					Tassa t = (Tassa) casellaAttuale;
-					giocatoreAttuale.setCapitale(giocatoreAttuale.getCapitale() - t.getMalus());
+					giocatoreAttuale.prelevaCapitale(t.getMalus());
 					System.out.printf(CASELLA_TASSA, t.getNome(), t.getMalus());
 				break;
 				
@@ -308,7 +317,63 @@ public class Gioco {
 					giocatoreAttuale.setInPrigione(true);
 				break;
 				
-	
+				case Casella.ACQUISTABILE:
+                    Acquistabile acquistabile = (Acquistabile) casellaAttuale;
+                    if(acquistabile.isAcquistabile()){
+                        if(giocatoreAttuale.puoPermetterselo(acquistabile.getValore())){
+                          System.out.printf(ACQUISTATO, acquistabile.getNome(), acquistabile.getValore());	 
+                          giocatoreAttuale.prelevaCapitale(acquistabile.getValore());
+				          acquistabile.setAcquistabile(false);
+                          giocatoreAttuale.aggiungiProprieta(acquistabile);
+                       }
+                     else
+                    	 System.out.printf(NON_ACQUISTATO, acquistabile.getNome() );
+                    }
+                     else{
+                    	 Giocatore proprietario = acquistabile.trovaProprietario(tabellone.getElencoGiocatori());
+                    	 System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), acquistabile.getCosto());
+                    	 
+                    	 if(giocatoreAttuale.puoPermetterselo(acquistabile.getCosto())){
+                    	    proprietario.aggiungiCapitale(acquistabile.getCosto());
+                    	    giocatoreAttuale.prelevaCapitale(acquistabile.getCosto());
+                    	 }
+                    	 else{
+                    		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
+                    		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
+                    		 giocatoreAttuale.setCapitale(0);
+                    	 }
+                    	 
+                     }
+				       
+				break;
+                    
+				case Casella.SOCIETA:
+					Societa societa = (Societa) casellaAttuale;
+					if(societa.isAcquistabile()){
+                        if(giocatoreAttuale.puoPermetterselo(societa.getValore())){
+                          System.out.printf(ACQUISTATO, societa.getNome(), societa.getValore());
+                          giocatoreAttuale.prelevaCapitale(societa.getValore());
+				          societa.setAcquistabile(false);
+                          giocatoreAttuale.aggiungiProprieta(societa);
+                         }
+                        else
+                    	 System.out.printf(NON_ACQUISTATO,societa.getNome() );	
+					}
+					else{
+						Giocatore proprietario = societa.trovaProprietario(tabellone.getElencoGiocatori());
+                   	    System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), societa.getCosto());
+
+						if(giocatoreAttuale.puoPermetterselo(societa.getCosto(dado))){
+	                    	 proprietario.aggiungiCapitale(societa.getCosto(dado));
+	                    	 giocatoreAttuale.prelevaCapitale(societa.getCosto(dado));
+	                    	 }
+	                    	 else{
+	                    		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
+	                    		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
+	                    		 giocatoreAttuale.setCapitale(0);
+	                    	 }
+					}
+                    
 				default:
 				break;
 			}

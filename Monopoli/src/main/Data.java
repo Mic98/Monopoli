@@ -26,6 +26,7 @@ public class Data {
 	private final static String VERDE = "verde";
 	private final static String VIOLA_SCURO = "viola scuro";
 	
+	
 	private final static int prezzoVicoloCorto = 60;
 	private final static int prezzoVicoloStretto = 60;
 	private final static int prezzoBastioniGranSasso = 100;
@@ -120,6 +121,7 @@ public class Data {
 		return PRIGIONE;
 	}
 	
+	
 	/**
 	 * inizializza il tabellone inserendo tutte le caselle in ordine
 	 * @return tabellone completo
@@ -133,7 +135,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Casella(CASELLA_2, 2));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_3, 3, prezzoVicoloStretto, VIOLA));
 		temporaneo.aggiungiCasella(new Tassa(CASELLA_4, 4, MALUS_PATRIMONIALE));
-		temporaneo.aggiungiCasella(new Stazione(CASELLA_5, 5, valoreStazioneSud));
+		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_5, 5, valoreStazioneSud));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_6, 6, prezzoBastioniGranSasso, AZZURRO));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_7, 7));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_8, 8, prezzoVialeMonterosa, AZZURRO));
@@ -144,7 +146,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Societa(CASELLA_12, 12, valoreSocietaElettrica));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_13, 13, prezzoCorsoAteneo, ARANCIONE));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_14, 14, prezzoPiazzaUniversita, ARANCIONE));
-		temporaneo.aggiungiCasella(new Stazione(CASELLA_15, 15, valoreStazioneOvest));
+		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_15, 15, valoreStazioneOvest));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_16, 16, prezzoViaVerdi , MARRONE));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_17, 17));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_18, 18, prezzoCorsoRaffaello , MARRONE));
@@ -155,7 +157,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Casella(CASELLA_22, 22));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_23, 23, prezzoCorsoMagellano , ROSSO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_24, 24, prezzoLargoColombo , ROSSO));
-		temporaneo.aggiungiCasella(new Stazione(CASELLA_25, 25, valoreStazioneNord));
+		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_25, 25, valoreStazioneNord));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_26, 26, prezzoVialeCostantino , GIALLO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_27, 27, prezzoVialeTraiano , GIALLO));
 		temporaneo.aggiungiCasella(new Societa(CASELLA_28, 28, valoreSocietaAcquaPotabile));
@@ -166,7 +168,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_32, 32, prezzoCorsoImpero, VERDE));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_33, 33));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_34, 34, prezzoLargoAugusto, VERDE));
-		temporaneo.aggiungiCasella(new Stazione(CASELLA_35, 35, valoreStazioneEst));
+		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_35, 35, valoreStazioneEst));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_36, 36));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_37, 37, prezzoVialeDeiGiardini, VIOLA_SCURO));
 		temporaneo.aggiungiCasella(new Tassa(CASELLA_38, 38, MALUS_LUSSO));

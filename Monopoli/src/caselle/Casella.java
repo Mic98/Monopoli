@@ -14,7 +14,8 @@ public class Casella implements Serializable {
 	public static final int NEUTRA = 0,
 							TASSE = 1,
 							VAI_IN_PRIGIONE = 2, //Casella 30
-	                        TERRENI = 3;
+			                ACQUISTABILE = 3,
+	                        SOCIETA = 4;		
 
 	private String nome;
 	private int numero;

@@ -2,7 +2,7 @@ package caselle;
 
 public class Tassa extends Casella{
 	
-	private int malus;
+	private double malus;
 	
 	/**
 	 * Costruttore della classe Tassa
@@ -11,13 +11,13 @@ public class Tassa extends Casella{
 	 * @param numero posizione della casella
 	 * @param malus costo della tassa
 	 */
-	public Tassa (String nome, int numero, int malus){
+	public Tassa (String nome, int numero, double malus){
 		super(nome, numero);
 		super.setTipo(Casella.TASSE);
 		this.malus = malus;
 	}
 
-	public int getMalus() {
+	public double getMalus() {
 		return malus;
 	}
 }

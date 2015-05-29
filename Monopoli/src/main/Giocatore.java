@@ -23,11 +23,11 @@ public class Giocatore implements Serializable {
 
 	private String nome;
 	private int posizione;
-	private int capitale;
+	private double capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
 	private boolean token; //Per sapere se e' il suo turno
-	private Vector<Casella> proprieta;
+	private Vector<Acquistabile> proprieta;
 	
 
 
@@ -46,8 +46,20 @@ public class Giocatore implements Serializable {
 		inPrigione = false;
 		token = false;
 		
-		proprieta = new Vector<Casella>();
+		proprieta = new Vector<Acquistabile>();
 		
+	}
+	
+	public void aggiungiProprieta(Acquistabile casella) {
+		proprieta.add(casella);
+	}
+
+	public void prelevaCapitale (double spesa){
+		capitale =  capitale - spesa;
+	}
+	
+	public void aggiungiCapitale(double guadagno){
+		capitale = capitale + guadagno;
 	}
 
 	/**
@@ -84,6 +96,13 @@ public class Giocatore implements Serializable {
 		
 		return false;
 	}
+	
+	public boolean puoPermetterselo(double costoDaSostenere){
+		if(this.capitale <= costoDaSostenere)
+			return false;
+		
+		return true;
+	}
 
 	public String getNome() {
 		return nome;
@@ -101,11 +120,11 @@ public class Giocatore implements Serializable {
 		this.posizione = posizione;
 	}
 	
-	public int getCapitale(){
+	public double getCapitale(){
 		return capitale;
 	}
 	
-	public void setCapitale(int capitale){
+	public void setCapitale(double capitale){
 		this.capitale = capitale;
 	}
 
@@ -143,5 +162,14 @@ public class Giocatore implements Serializable {
 
 		return visualizza.toString();
 	}
+
+	public boolean possiede(Acquistabile acquistabile) {
+		for(int i = 0; i<proprieta.size(); i++)
+			if(proprieta.get(i).getNome().equalsIgnoreCase(acquistabile.getNome()))
+				return true;
+		
+		return false;
+	}
+
 
 }

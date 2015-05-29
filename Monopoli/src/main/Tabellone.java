@@ -18,9 +18,9 @@ import utilities.MyUtil;
 public class Tabellone implements Serializable {
 
 	private final static String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
-	private final static int BONUS_VIA = 500;
-	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai 500 euro di bonus \n";
-	
+	private final static double BONUS_VIA = 500;
+	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus \n ";
+
 	
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
@@ -58,8 +58,8 @@ public class Tabellone implements Serializable {
 
 		if (dest >= 40){
 			dest = dest - 40;
-			System.out.println(MESSAGGIO_VIA);
-			g.setCapitale(g.getCapitale() + BONUS_VIA);
+			System.out.printf(MESSAGGIO_VIA, BONUS_VIA);
+			g.aggiungiCapitale(BONUS_VIA);
 		}
 
 		g.setPosizione(dest);
@@ -190,7 +190,7 @@ public class Tabellone implements Serializable {
 			visualizza.append(BelleStringhe.incornicia("SITUAZIONE ATTUALE DI GIOCO"));
 			for (Giocatore g : elencoGiocatori){
 				visualizza.append(String.format(g.toString()));
-				visualizza.append("\n\t Posizione: "+ caselle.get(g.getPosizione()).getNome()+"%n");
+				visualizza.append("\n\t Posizione: "+ caselle.get(g.getPosizione()).getNome()+"\n");
 				visualizza.append("\n\t Capitale: " + g.getCapitale() + " euro\n");
 			}
 
