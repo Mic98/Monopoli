@@ -24,6 +24,7 @@ public class Data {
 	public final static String ROSSO = "rosso";
 	public final static String GIALLO = "giallo";
 	public final static String VERDE = "verde";
+	public final static String VIOLA_SCURO = "viola scuro";
 	
 	
 	private final static int prezzoVicoloCorto = 60;
@@ -169,9 +170,9 @@ public class Data {
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_34, 34, prezzoLargoAugusto, VERDE));
 		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_35, 35, valoreStazioneEst));
 		temporaneo.aggiungiCasella(new Casella(CASELLA_36, 36));
-		temporaneo.aggiungiCasella(new Terreno(CASELLA_37, 37, prezzoVialeDeiGiardini, VIOLA));
+		temporaneo.aggiungiCasella(new Terreno(CASELLA_37, 37, prezzoVialeDeiGiardini, VIOLA_SCURO));
 		temporaneo.aggiungiCasella(new Tassa(CASELLA_38, 38, MALUS_LUSSO));
-		temporaneo.aggiungiCasella(new Terreno(CASELLA_39, 39, prezzoParcoDellaVittoria, VIOLA));
+		temporaneo.aggiungiCasella(new Terreno(CASELLA_39, 39, prezzoParcoDellaVittoria, VIOLA_SCURO));
 		
 		
 		return temporaneo;

@@ -112,8 +112,9 @@ public class Giocatore implements Serializable {
 					contatore++;
 			}
 			
-		if(colore.equalsIgnoreCase(Data.VIOLA) && contatore == 2)
-			return true;
+		if(colore.equalsIgnoreCase(Data.VIOLA) || colore.equalsIgnoreCase(Data.VIOLA_SCURO))
+			if(contatore==2)
+			    return true;
 		else
 			if(contatore==3)
 				return true;
