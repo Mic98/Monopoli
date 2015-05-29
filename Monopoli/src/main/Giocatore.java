@@ -103,6 +103,24 @@ public class Giocatore implements Serializable {
 		
 		return true;
 	}
+	
+	public boolean possiedeTutte(String colore){
+		int contatore = 0;
+			for(int i=0; i<proprieta.size(); i++){
+				Terreno terreno = (Terreno) proprieta.get(i);
+				if(colore.equalsIgnoreCase(terreno.getColore()))
+					contatore++;
+			}
+			
+		if(colore.equalsIgnoreCase(Data.VIOLA) && contatore == 2)
+			return true;
+		else
+			if(contatore==3)
+				return true;
+		
+		return false;
+			
+	}
 
 	public String getNome() {
 		return nome;
