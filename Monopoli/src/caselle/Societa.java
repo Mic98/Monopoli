@@ -24,12 +24,22 @@ public class Societa extends Acquistabile {
 	}
 
 	
+	/**
+	 * 
+	 * @param dado i dadi lanciati dal giocatore
+	 * @return il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore e non le possiede entrambe
+	 */
 	public double getCosto(Dado dado){
 		
 		
 		return MOLTIPLICATORE * dado.risultato();
 	}
 	
+	/**
+	 * 
+	 * @param dado i dadi lanciati dal giocatore
+	 * @return il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore e non le possiede entrambe
+	 */
 	public double costoDoppio(Dado dado){
 		
 		
