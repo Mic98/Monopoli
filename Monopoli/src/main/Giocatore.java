@@ -104,7 +104,7 @@ public class Giocatore implements Serializable {
 		return true;
 	}
 	
-	public boolean possiedeTutte(String colore){
+	public boolean possiedeTuttiTerreni(String colore){
 		int contatore = 0;
 			for(int i=0; i<proprieta.size(); i++){
 				Terreno terreno = (Terreno) proprieta.get(i);
@@ -121,6 +121,20 @@ public class Giocatore implements Serializable {
 		
 		return false;
 			
+	}
+	
+	public boolean possiedeTutteSocieta(){
+		int contatore = 0;
+		
+		for(int i = 0; i<proprieta.size(); i++)
+		    if(proprieta.get(i) instanceof Societa)
+				   contatore++;
+		   
+	    if(contatore==2)
+	    	return true;
+	    
+	    return false;
+			   
 	}
 
 	public String getNome() {

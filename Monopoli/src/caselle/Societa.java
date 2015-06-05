@@ -6,6 +6,7 @@ public class Societa extends Acquistabile {
 
 
 	private static final double MOLTIPLICATORE = 4;
+	private static final double MOLTIPLICATORE_DOPPIO = 10;
 	private boolean acquistabile;
 	
 
@@ -27,6 +28,12 @@ public class Societa extends Acquistabile {
 		
 		
 		return MOLTIPLICATORE * dado.risultato();
+	}
+	
+	public double costoDoppio(Dado dado){
+		
+		
+		return MOLTIPLICATORE_DOPPIO * dado.risultato();
 	}
 	
 	public boolean isAcquistabile() {

@@ -30,7 +30,7 @@ public class Gioco {
 	
 	private final static String ACQUISTATO = "\nComplimenti! Hai acquistato %s al costo di %.2f euro\n\n";
 	private static final String NON_ACQUISTATO = "\nSpiacente! Non sei riuscito a comprare %s perche' non possiedi sufficiente capitale\n\n";
-	private static final String TERRITORIO_NEMICO = "\nTi trovi sul territorio di %s e gli devi un totale di %.2f euro";
+	private static final String TERRITORIO_NEMICO = "\nTi trovi sul territorio di %s e gli devi un totale di %.2f euro\n\n";
 	private final static String CAPITALE_INSUFFICIENTE = "Non hai sufficiente capitale per pagare l'affitto a %s per questo tutti i tuoi soldi rimasti saranno dati a lui";
 
 
@@ -186,6 +186,10 @@ public class Gioco {
 					break;
 
 				}
+				
+				menuGioco.setTitolo(TITOLO_TURNO01
+					+ tabellone.getTurniAttuali() + TITOLO_TURNO02
+					+ giocatoreAttuale.getNome() + TITOLO_TURNO03 + giocatoreAttuale.getCapitale() + " euro");
 			} while (!passa || giocatoreAttuale.hasToken());
 
 			if(scelta == 4)
@@ -326,16 +330,26 @@ public class Gioco {
 				          acquistabile.setAcquistabile(false);
                           giocatoreAttuale.aggiungiProprieta(acquistabile);
                        }
-                     else
+                        else
                     	 System.out.printf(NON_ACQUISTATO, acquistabile.getNome() );
                     }
-                     else{
+                    else{
+                    	 double prezzoDaPagare = 0;
                     	 Giocatore proprietario = acquistabile.trovaProprietario(tabellone.getElencoGiocatori());
-                    	 System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), acquistabile.getCosto());
                     	 
-                    	 if(giocatoreAttuale.puoPermetterselo(acquistabile.getCosto())){
-                    	    proprietario.aggiungiCapitale(acquistabile.getCosto());
-                    	    giocatoreAttuale.prelevaCapitale(acquistabile.getCosto());
+                    	 if(acquistabile instanceof Terreno){
+                    		 Terreno terreno = (Terreno) acquistabile;
+                    	 if(proprietario.possiedeTuttiTerreni(terreno.getColore()))
+                    		 prezzoDaPagare = 2* terreno.getCosto();
+                    	 }
+                    	 else
+                    		 prezzoDaPagare = acquistabile.getCosto();
+                    	 
+                    	 System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
+                    	 
+                    	 if(giocatoreAttuale.puoPermetterselo(prezzoDaPagare)){
+                    	    proprietario.aggiungiCapitale(prezzoDaPagare);
+                    	    giocatoreAttuale.prelevaCapitale(prezzoDaPagare);
                     	 }
                     	 else{
                     		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
@@ -360,12 +374,19 @@ public class Gioco {
                     	 System.out.printf(NON_ACQUISTATO,societa.getNome() );	
 					}
 					else{
+						double prezzoDaPagare;
 						Giocatore proprietario = societa.trovaProprietario(tabellone.getElencoGiocatori());
-                   	    System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), societa.getCosto());
+						
+						if(proprietario.possiedeTutteSocieta())
+							prezzoDaPagare = societa.costoDoppio(dado);
+						else
+							prezzoDaPagare = societa.getCosto(dado);
+						
+                   	    System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
 
-						if(giocatoreAttuale.puoPermetterselo(societa.getCosto(dado))){
-	                    	 proprietario.aggiungiCapitale(societa.getCosto(dado));
-	                    	 giocatoreAttuale.prelevaCapitale(societa.getCosto(dado));
+						if(giocatoreAttuale.puoPermetterselo(prezzoDaPagare)){
+	                    	 proprietario.aggiungiCapitale(prezzoDaPagare);
+	                    	 giocatoreAttuale.prelevaCapitale(prezzoDaPagare);
 	                    	 }
 	                    	 else{
 	                    		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());

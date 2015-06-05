@@ -12,9 +12,9 @@ public class MyMenu implements Serializable {
 	private String titolo;
 	private int i;
 
-	public MyMenu(String _titolo, String[] _vociMenu) {
-		titolo = _titolo;
-		vociMenu = _vociMenu;
+	public MyMenu(String titolo, String[] vociMenu) {
+		this.titolo = titolo;
+		this.vociMenu = vociMenu;
 	}
 
 	public int scegli() {
@@ -34,5 +34,9 @@ public class MyMenu implements Serializable {
 		System.out.println(" ");
 		System.out.println(VOCE_USCITA);
 		System.out.println(" ");
+	}
+	
+	public void setTitolo(String titolo){
+		this.titolo = titolo;
 	}
 }
