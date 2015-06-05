@@ -97,6 +97,11 @@ public class Giocatore implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param costoDaSostenere spesa da sostenere
+	 * @return true se il giocatore puo' sostenere la spesa
+	 */
 	public boolean puoPermetterselo(double costoDaSostenere){
 		if(this.capitale <= costoDaSostenere)
 			return false;
@@ -104,6 +109,11 @@ public class Giocatore implements Serializable {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param colore colore della casella su cui l'avversario che deve pagare si trova
+	 * @return true se il proprietario possiede tutti i terreni di un dato colore
+	 */
 	public boolean possiedeTuttiTerreni(String colore){
 		int contatore = 0;
 			for(int i=0; i<proprieta.size(); i++){
@@ -123,6 +133,10 @@ public class Giocatore implements Serializable {
 			
 	}
 	
+	/**
+	 * 
+	 * @return true se il giocatore possiede entrambe le societa'
+	 */
 	public boolean possiedeTutteSocieta(){
 		int contatore = 0;
 		

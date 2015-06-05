@@ -27,7 +27,11 @@ public class Acquistabile extends Casella {
 	}
 
 
-
+   /**
+    * 
+    * @param giocatori il vettore dei giocatori in partita
+    * @return il proprietario della casella
+    */
    public Giocatore trovaProprietario(Vector <Giocatore> giocatori){
 	   Giocatore proprietario = null;
 	   
@@ -51,6 +55,10 @@ public class Acquistabile extends Casella {
 		this.valore = valore;
 	}
 	
+	/**
+	 * 
+	 * @return il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
+	 */
 	public double getCosto(){
 		return valore * DIECI_PER_CENTO;
 	}
