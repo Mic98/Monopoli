@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Vector;
 import java.io.*;
 
+import carte.Mazzo;
 import caselle.*;
 import utilities.BelleStringhe;
 import utilities.MyUtil;
@@ -25,6 +26,8 @@ public class Tabellone implements Serializable {
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
 	private Vector<Giocatore> classificaFinale;
+	private Mazzo probabilita = new Mazzo();
+	private Mazzo imprevisti = new Mazzo();
 	private int turnoGiocatore;
 	private int turniAttuali; 
 
@@ -33,9 +36,12 @@ public class Tabellone implements Serializable {
 		caselle = new Vector<Casella>();
 		elencoGiocatori = new Vector<Giocatore>();
 		classificaFinale = new Vector<Giocatore>();
+		probabilita = Data.creaProbabilita();
+		imprevisti = Data.creaImprevisti();
 		turniAttuali = 1;
 		turnoGiocatore = 0;
 	}
+
 
 	/**
 	 * Mescola l'ordine del vettore elencoGiocatori
@@ -146,6 +152,14 @@ public class Tabellone implements Serializable {
 
 	public Vector<Casella> getCaselle() {
 		return caselle;
+	}
+	
+	public Mazzo getProbabilita() {
+		return probabilita;
+	}
+
+	public Mazzo getImprevisti() {
+		return imprevisti;
 	}
 
 

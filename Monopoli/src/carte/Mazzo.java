@@ -2,6 +2,8 @@ package carte;
 
 import java.util.Vector;
 
+import main.Giocatore;
+
 public class Mazzo {
 	
 	Vector <Carta> carte;
@@ -13,6 +15,13 @@ public class Mazzo {
 	public void aggiungiCarta(Carta carta) {
 		carte.add(carta);
 		
+	}
+	
+	public void pescaCarta(Giocatore giocatoreAttuale){
+		Carta pescata = carte.get(0);
+		pescata.effetto(giocatoreAttuale);
+		carte.remove(0);
+		carte.add(pescata);
 	}
 	
 	public  Vector<Carta> getCarte(){

@@ -15,7 +15,7 @@ public abstract class Carta {
 	
 	
 	public Carta(String descrizione){
-		this.setDescrizione(descrizione);
+		this.descrizione = descrizione;
 	}
 
 	
@@ -26,10 +26,6 @@ public abstract class Carta {
 		return descrizione;
 	}
 
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
 }
 
 

@@ -11,8 +11,13 @@ public class VaiInPrigione extends Carta {
 
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-          giocatoreAttuale.setInPrigione(true);	
-          giocatoreAttuale.setPosizione(Data.PRIGIONE);
+		System.out.println();
+		System.out.println(getDescrizione());
+		System.out.println();
+		
+        giocatoreAttuale.setInPrigione(true);	
+        giocatoreAttuale.setToken(false);
+        giocatoreAttuale.setPosizione(Data.PRIGIONE);
 	}
 	
 	

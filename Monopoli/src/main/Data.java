@@ -162,12 +162,12 @@ public class Data {
 		
 		temporaneo.aggiungiCasella(new Casella(CASELLA_0, 0));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_1, 1, prezzoVicoloCorto, VIOLA));
-		temporaneo.aggiungiCasella(new Casella(CASELLA_2, 2));
+		temporaneo.aggiungiCasella(new Probabilita(CASELLA_2, 2));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_3, 3, prezzoVicoloStretto, VIOLA));
 		temporaneo.aggiungiCasella(new Tassa(CASELLA_4, 4, MALUS_PATRIMONIALE));
 		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_5, 5, valoreStazioneSud));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_6, 6, prezzoBastioniGranSasso, AZZURRO));
-		temporaneo.aggiungiCasella(new Casella(CASELLA_7, 7));
+		temporaneo.aggiungiCasella(new Imprevisti(CASELLA_7, 7));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_8, 8, prezzoVialeMonterosa, AZZURRO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_9, 9, prezzoVialeVesuvio, AZZURRO));
 		
@@ -178,13 +178,13 @@ public class Data {
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_14, 14, prezzoPiazzaUniversita, ARANCIONE));
 		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_15, 15, valoreStazioneOvest));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_16, 16, prezzoViaVerdi , MARRONE));
-		temporaneo.aggiungiCasella(new Casella(CASELLA_17, 17));
+		temporaneo.aggiungiCasella(new Probabilita(CASELLA_17, 17));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_18, 18, prezzoCorsoRaffaello , MARRONE));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_19, 19, prezzoPiazzaDante , MARRONE));
 		
 		temporaneo.aggiungiCasella(new Casella(CASELLA_20, 20));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_21, 21, prezzoViaMarcoPolo , ROSSO));
-		temporaneo.aggiungiCasella(new Casella(CASELLA_22, 22));
+		temporaneo.aggiungiCasella(new Imprevisti(CASELLA_22, 22));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_23, 23, prezzoCorsoMagellano , ROSSO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_24, 24, prezzoLargoColombo , ROSSO));
 		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_25, 25, valoreStazioneNord));
@@ -196,10 +196,10 @@ public class Data {
 		temporaneo.aggiungiCasella(new InPrigione(CASELLA_30, 30));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_31, 31, prezzoViaRoma, VERDE));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_32, 32, prezzoCorsoImpero, VERDE));
-		temporaneo.aggiungiCasella(new Casella(CASELLA_33, 33));
+		temporaneo.aggiungiCasella(new Probabilita(CASELLA_33, 33));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_34, 34, prezzoLargoAugusto, VERDE));
 		temporaneo.aggiungiCasella(new Acquistabile(CASELLA_35, 35, valoreStazioneEst));
-		temporaneo.aggiungiCasella(new Casella(CASELLA_36, 36));
+		temporaneo.aggiungiCasella(new Imprevisti(CASELLA_36, 36));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_37, 37, prezzoVialeDeiGiardini, VIOLA_SCURO));
 		temporaneo.aggiungiCasella(new Tassa(CASELLA_38, 38, MALUS_LUSSO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_39, 39, prezzoParcoDellaVittoria, VIOLA_SCURO));

@@ -15,7 +15,10 @@ public class Casella implements Serializable {
 							TASSE = 1,
 							VAI_IN_PRIGIONE = 2, //Casella 30
 			                ACQUISTABILE = 3,
-	                        SOCIETA = 4;		
+	                        SOCIETA = 4,
+	                        PROBABILITA = 5,
+	                        IMPREVISTI = 6;
+	        
 
 	private String nome;
 	private int numero;

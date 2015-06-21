@@ -89,7 +89,6 @@ public class Gioco {
 	 */
 	public void nuovaPartita() {
 		Vector<Giocatore> nuoviGiocatori = new Vector<Giocatore>();
-		tabellone.setTurniAttuali(0);
 		boolean ok = false;
 
 		while (!ok) {
@@ -412,6 +411,15 @@ public class Gioco {
 						}
 					}
 					break;
+					
+				case Casella.PROBABILITA:
+				     tabellone.getProbabilita().pescaCarta(giocatoreAttuale);
+				     break;
+				     
+				     
+				case Casella.IMPREVISTI:
+					 tabellone.getImprevisti().pescaCarta(giocatoreAttuale);
+					 break;
                     
 				default:
 				break;

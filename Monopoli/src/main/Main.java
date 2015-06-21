@@ -41,6 +41,7 @@ public class Main {
 			case 1:
 				gioco.nuovaPartita();
 				scelta = finePartita();
+				Gioco.tabellone.setTurniAttuali(1);
 				break;
 			case 2:
 				gioco.riprendiPartita();

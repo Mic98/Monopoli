@@ -12,9 +12,13 @@ public class Compleanno extends Carta {
 		this.regalo = regalo;
 	}
 	
-	
+
 	@Override
 	public void effetto(Giocatore giocatoreAttuale){
+		System.out.println();
+		System.out.println(getDescrizione());
+		System.out.println();
+		
 		for(Giocatore giocatore: Gioco.tabellone.getElencoGiocatori()){
 			if(!giocatore.getNome().equalsIgnoreCase(giocatoreAttuale.getNome()))
 			  if(giocatore.puoPermetterselo(regalo)){
