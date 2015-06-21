@@ -238,7 +238,7 @@ public class Gioco {
 		
 		//Se il giocatore non e' in prigione
 		if (!giocatoreAttuale.isInPrigione()) {
-			tabellone.muoviGiocatore(giocatoreAttuale, dado.risultato()); //Muove il giocatore
+			giocatoreAttuale.muoviGiocatore(dado.risultato()); //Muove il giocatore
 			controlloDopoTiro(giocatoreAttuale);
             
 			if(!giocatoreAttuale.inBancaRotta()){
@@ -253,7 +253,7 @@ public class Gioco {
 				giocatoreAttuale.setToken(true);
 				if (giocatoreAttuale.getNumeroLanci() >= 3) { //Se ha tirato per 3 volte di seguito doppio
 					System.out.println(MESSAGGIO_TROPPI_LANCI); //Lo avvisa
-					tabellone.teleportGiocatore(giocatoreAttuale, Data.getPrigione()); // AH-AH-AH (finisce in prigione)
+					giocatoreAttuale.setPosizione(Data.PRIGIONE); // AH-AH-AH (finisce in prigione)
 					giocatoreAttuale.setInPrigione(true); 
 					giocatoreAttuale.setNumeroLanci(0);
 					giocatoreAttuale.setToken(false);
@@ -325,7 +325,7 @@ public class Gioco {
 				
 				
 				case Casella.VAI_IN_PRIGIONE: 
-					tabellone.teleportGiocatore(giocatoreAttuale, Data.getPrigione());
+					giocatoreAttuale.setPosizione(Data.PRIGIONE);
 					System.out.println(MESSAGGIO_IN_PRIGIONE);
 					giocatoreAttuale.setInPrigione(true);
 				break;

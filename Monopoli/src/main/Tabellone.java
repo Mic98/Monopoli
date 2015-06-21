@@ -19,8 +19,7 @@ public class Tabellone implements Serializable {
 
 	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
 	private final static String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
-	private final static double BONUS_VIA = 500;
-	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus \n ";
+	
 
 	
 	private Vector<Casella> caselle;
@@ -48,34 +47,7 @@ public class Tabellone implements Serializable {
 		Collections.shuffle(plrs);
 	}
 	
-	/**
-	 * Sposta il giocatore lungo il tabellone, verificando l'avvenuto passaggio dal via
-	 * 
-	 * @param g giocatore da spostare
-	 * @param step risultato dato dal tiro dei dadi
-	 */
-	public void muoviGiocatore(Giocatore g, int step) {
-		int dest = g.getPosizione() + step;
 
-		if (dest >= 40){
-			dest = dest - 40;
-			System.out.printf(MESSAGGIO_VIA, BONUS_VIA);
-			g.aggiungiCapitale(BONUS_VIA);
-		}
-
-		g.setPosizione(dest);
-
-	}
-
-	/**
-	 * Sposta il giocatore senza farlo passare dal via
-	 * 
-	 * @param g giocatore da spostare
-	 * @param casella destinazione del giocatore
-	 */
-	public void teleportGiocatore(Giocatore g, int casella) {
-		g.setPosizione(casella);
-	}
 	
 
 	public void aggiungiCasella(Casella c) {

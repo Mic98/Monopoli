@@ -16,9 +16,7 @@ import caselle.*;
 public class Giocatore implements Serializable {
 
 	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
-	
-	private final static int POSIZIONE_DEFAULT = 0;
-	private final static int CAPITALE_DEFAULT = 5000;
+	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus \n ";
 
 
 
@@ -40,8 +38,8 @@ public class Giocatore implements Serializable {
 	public Giocatore(String nome) {
 		this.nome = nome;
 		
-		posizione = POSIZIONE_DEFAULT;
-		capitale = CAPITALE_DEFAULT;
+		posizione = Data.POSIZIONE_DEFAULT;
+		capitale = Data.CAPITALE_DEFAULT;
 		
 		numeroLanci = 0;
 		inPrigione = false;
@@ -50,6 +48,26 @@ public class Giocatore implements Serializable {
 		proprieta = new Vector<Acquistabile>();
 		
 	}
+	
+	/**
+	 * Sposta il giocatore lungo il tabellone, verificando l'avvenuto passaggio dal via
+	 * 
+	 * @param g giocatore da spostare
+	 * @param step risultato dato dal tiro dei dadi
+	 */
+	public void muoviGiocatore(int step) {
+		int dest = getPosizione() + step;
+
+		if (dest >= 40){
+			dest = dest - 40;
+			System.out.printf(MESSAGGIO_VIA, Data.BONUS_VIA);
+			aggiungiCapitale(Data.BONUS_VIA);
+		}
+
+		setPosizione(dest);
+
+	}
+
 	
 	public void aggiungiProprieta(Acquistabile casella) {
 		proprieta.add(casella);
