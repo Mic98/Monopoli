@@ -16,6 +16,7 @@ import caselle.*;
 public class Giocatore implements Serializable {
 
 	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
+	
 	private final static int POSIZIONE_DEFAULT = 0;
 	private final static int CAPITALE_DEFAULT = 5000;
 
@@ -117,14 +118,17 @@ public class Giocatore implements Serializable {
 	public boolean possiedeTuttiTerreni(String colore){
 		int contatore = 0;
 			for(int i=0; i<proprieta.size(); i++){
+				if(proprieta.get(i) instanceof Terreno){
 				Terreno terreno = (Terreno) proprieta.get(i);
 				if(colore.equalsIgnoreCase(terreno.getColore()))
 					contatore++;
+				}
 			}
 			
-		if(colore.equalsIgnoreCase(Data.VIOLA) || colore.equalsIgnoreCase(Data.VIOLA_SCURO))
+		if(colore.equalsIgnoreCase(Data.VIOLA) || colore.equalsIgnoreCase(Data.VIOLA_SCURO)){
 			if(contatore==2)
 			    return true;
+		}
 		else
 			if(contatore==3)
 				return true;
@@ -199,23 +203,33 @@ public class Giocatore implements Serializable {
 		this.token = token;
 	}
 
-	/**
-	 * restituisce il nome del giocatore formattato
-	 */
-	public String toString() {
-		StringBuilder visualizza = new StringBuilder();
-
-		visualizza.append(String.format(GIOCATORE, getNome()));
-
-		return visualizza.toString();
-	}
-
 	public boolean possiede(Acquistabile acquistabile) {
 		for(int i = 0; i<proprieta.size(); i++)
 			if(proprieta.get(i).getNome().equalsIgnoreCase(acquistabile.getNome()))
 				return true;
 		
 		return false;
+	}
+	
+	
+	/**
+	 * restituisce il nome del giocatore e l'elenco delle sue proprieta'
+	 */
+	public String toString() {
+		
+		StringBuilder visualizza = new StringBuilder();
+		visualizza.append(String.format(GIOCATORE, getNome()));
+		visualizza.append("\n");
+		
+		for(int i=0; i<proprieta.size(); i++){
+			if((i+1)%4 == 0)
+			    visualizza.append("\n\n");	
+			
+			visualizza.append("\t" + proprieta.get(i).getNumero() + "  " + proprieta.get(i).getNome() + "\t");
+		}
+		
+
+		return visualizza.toString();
 	}
 
 

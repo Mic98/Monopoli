@@ -27,17 +27,18 @@ public class Main {
 
 	private final static MyMenu menuIniziale = new MyMenu(TITOLO_INIZIALE,
 			VOCI_MENU_INIZIALE);
-	private static Gioco gioco;
+	
+	
+	private static Gioco gioco = new Gioco();
 
 	public static void main(String[] args) {
 		int scelta;
-
+        
 		do {
 			scelta = menuIniziale.scegli();
 
 			switch (scelta) {
 			case 1:
-				gioco = new Gioco();
 				gioco.nuovaPartita();
 				scelta = finePartita();
 				break;
@@ -63,5 +64,6 @@ public class Main {
 		// Metodo che gestisce la fine di una partita
 		return MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
 	}
+	
 
 }

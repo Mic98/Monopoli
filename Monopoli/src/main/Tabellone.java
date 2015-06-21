@@ -17,6 +17,7 @@ import utilities.MyUtil;
  */
 public class Tabellone implements Serializable {
 
+	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
 	private final static String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
 	private final static double BONUS_VIA = 500;
 	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus \n ";
@@ -171,7 +172,6 @@ public class Tabellone implements Serializable {
 		return classificaFinale;
 	}
 
-
 	public Vector<Casella> getCaselle() {
 		return caselle;
 	}
@@ -188,10 +188,10 @@ public class Tabellone implements Serializable {
 			visualizza.append(String.format(MESS_VUOTO));
 		else
 			visualizza.append(BelleStringhe.incornicia("SITUAZIONE ATTUALE DI GIOCO"));
-			for (Giocatore g : elencoGiocatori){
-				visualizza.append(String.format(g.toString()));
-				visualizza.append("\n\t Posizione: "+ caselle.get(g.getPosizione()).getNome()+"\n");
-				visualizza.append("\n\t Capitale: " + g.getCapitale() + " euro\n");
+			for (Giocatore giocatore : elencoGiocatori){
+				visualizza.append(String.format(GIOCATORE, giocatore.getNome()));
+				visualizza.append("\n\t Posizione: "+ caselle.get(giocatore.getPosizione()).getNome()+"\n");
+				visualizza.append("\n\t Capitale: " + giocatore.getCapitale() + " euro\n");
 			}
 
 		return visualizza.toString();

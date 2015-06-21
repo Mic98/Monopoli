@@ -40,12 +40,13 @@ public class Gioco {
 	private final static String VOCE_TURNO01 = "Lancio dadi";
 	private final static String LANCIO_DOPPIO = "Hai fatto un lancio con due numeri uguali, hai diritto ad un altro tiro ";
 	private final static String USCITO_DI_PRIGIONE = "Hai tirato doppio, sei uscito di prigione e puoi lanciare ancora";
-	private static final String MESSAGGIO_IN_PRIGIONE = "\nSei finito nella casella \"IN PRIGIONE!\" per questo motivo verrai spostato in prigione";
-	private final static String VOCE_TURNO02 = "Salva partita";
-	private final static String VOCE_TURNO03 = "Mostra situazione partita";
+	private final static String MESSAGGIO_IN_PRIGIONE = "\nSei finito nella casella \"IN PRIGIONE!\" per questo motivo verrai spostato in prigione";
+	private final static String VOCE_TURNO02 = "Visualizza le tue proprieta'";
+	private final static String VOCE_TURNO03 = "Visualizza situazione partita";
 	private final static String VOCE_TURNO04 = "Passa il turno";
+	private final static String VOCE_TURNO05 = "Salva partita";
 	private final static String[] VOCI_MENU_GIOCO = { VOCE_TURNO01,
-			VOCE_TURNO02, VOCE_TURNO03, VOCE_TURNO04 };
+			VOCE_TURNO02, VOCE_TURNO03, VOCE_TURNO04, VOCE_TURNO05 };
 
 	// ----------NUOVA PARTITA--------------------
 	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
@@ -55,31 +56,31 @@ public class Gioco {
 	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
 
 	// ----------SALVATAGGIO E CARICAMENTI DATI-------------------
-	private final static String PARTITA_FILE = "partita.dat";
+	private final static String PARTITA_FILE = "Partita.dat";
 	private final static String MESS_NO_CAST = "ATTENZIONE! problemi con il cast";
-	private final static String FILE_CARICATI = "I file sono stati caricati con successo";
-	private final static String FILE_SALVATI = "I file sono stati salvati";
-	private final static String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
-	private final static String NESSUNA_PARTITA_SALVATA = "Non c'e' nessuna partita preesistente";
+	private final static String FILE_CARICATI = "\nI file sono stati caricati con successo";
+	private final static String FILE_SALVATI = "\nI file sono stati salvati";
+	private final static String NESSUNA_PARTITA_SALVATA = "\nNon c'e' nessuna partita preesistente";
 	private final static String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
+	private final static String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
 
-
+		
 	private final static File filePartita = new File(PARTITA_FILE);
+
+	public static Tabellone tabellone = new Tabellone();
+	public static Dado dado;
+
 	private final static int NUMERO_TURNI = 20;
 	
 	
 	
 	
 	
-	
-	public static Tabellone tabellone;
-	public static Dado dado;
 
 	/**
 	 * Costruttore della classe Gioco
 	 */
 	public Gioco() {
-		tabellone = new Tabellone();
 		tabellone = Data.creaTabellone();
 	}
 
@@ -157,15 +158,10 @@ public class Gioco {
 						
 					break;
 
-				case 2:
-					salvaPartita();
-					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){ 
-						giocatoreAttuale.setToken(false);
-						passa = true;
-						inGame = false;
-						
-					}
+				case 2: 
+					System.out.printf(giocatoreAttuale.toString());
 					break;
+								
 
 				case 3:
 					System.out.printf(tabellone.toString());
@@ -178,6 +174,17 @@ public class Gioco {
 						passa = true;
 						
 					break;
+					
+				case 5:
+					salvaPartita();
+					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){ 
+						giocatoreAttuale.setToken(false);
+						passa = true;
+						inGame = false;
+						
+					}
+					break;
+					
 					
 				case 0:
 					giocatoreAttuale.setToken(false);
@@ -315,11 +322,13 @@ public class Gioco {
 					System.out.printf(CASELLA_TASSA, t.getNome(), t.getMalus());
 				break;
 				
+				
 				case Casella.VAI_IN_PRIGIONE: 
 					tabellone.teleportGiocatore(giocatoreAttuale, Data.getPrigione());
 					System.out.println(MESSAGGIO_IN_PRIGIONE);
 					giocatoreAttuale.setInPrigione(true);
 				break;
+				
 				
 				case Casella.ACQUISTABILE:
                     Acquistabile acquistabile = (Acquistabile) casellaAttuale;
@@ -334,15 +343,19 @@ public class Gioco {
                     	 System.out.printf(NON_ACQUISTATO, acquistabile.getNome() );
                     }
                     else{
-                    	 double prezzoDaPagare = 0;
+                    	
+                    	 double prezzoDaPagare;
                     	 Giocatore proprietario = acquistabile.trovaProprietario(tabellone.getElencoGiocatori());
                     	 
+                    if(!giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
                     	 if(acquistabile instanceof Terreno){
                     		 Terreno terreno = (Terreno) acquistabile;
                     	 if(proprietario.possiedeTuttiTerreni(terreno.getColore()))
                     		 prezzoDaPagare = 2* terreno.getCosto();
-                    	 }
                     	 else
+                    		 prezzoDaPagare = terreno.getCosto();
+                    	 }
+                    	 else 
                     		 prezzoDaPagare = acquistabile.getCosto();
                     	 
                     	 System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
@@ -355,12 +368,13 @@ public class Gioco {
                     		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
                     		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
                     		 giocatoreAttuale.setCapitale(0);
-                    	 }
-                    	 
-                     }
+                    	 } 
+                      }
+                    }
 				       
 				break;
                     
+				
 				case Casella.SOCIETA:
 					Societa societa = (Societa) casellaAttuale;
 					if(societa.isAcquistabile()){
@@ -377,6 +391,7 @@ public class Gioco {
 						double prezzoDaPagare;
 						Giocatore proprietario = societa.trovaProprietario(tabellone.getElencoGiocatori());
 						
+						if(giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
 						if(proprietario.possiedeTutteSocieta())
 							prezzoDaPagare = societa.costoDoppio(dado);
 						else
@@ -393,7 +408,9 @@ public class Gioco {
 	                    		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
 	                    		 giocatoreAttuale.setCapitale(0);
 	                    	 }
+						}
 					}
+					break;
                     
 				default:
 				break;
@@ -423,29 +440,32 @@ public class Gioco {
 		
 		return visualizza.toString();
 	}
-
+	
 	/**
 	 * Carica una partita salvata precedentemente e
 	 * la riprende da dove interrotta
 	 */
 	public void riprendiPartita() {
-
 		if (ServizioFile.esistenza(filePartita))
 			try {
-				tabellone = (Tabellone) ServizioFile
-						.caricaSingoloOggetto(filePartita);
-			} catch (ClassCastException e) {
+				tabellone = (Tabellone) ServizioFile.caricaSingoloOggetto(filePartita);
+			}
+		    catch (ClassCastException e) {
 				System.out.println(MESS_NO_CAST);
 			}
-		if (!tabellone.getElencoGiocatori().isEmpty()) {
+		
+		if (!tabellone.getElencoGiocatori().isEmpty() && !tabellone.getCaselle().isEmpty()){	
+			
 			System.out.println(FILE_CARICATI);
 			dado = new Dado();
 			partita();
-		} else
+		
+		} 
+		else
 			System.out.println(NESSUNA_PARTITA_SALVATA);
-
+		
 	}
-
+	
 	/**
 	 * Salva la partita in corso
 	 */
