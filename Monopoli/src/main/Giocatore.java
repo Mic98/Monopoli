@@ -16,7 +16,7 @@ import caselle.*;
 public class Giocatore implements Serializable {
 
 	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
-	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus \n ";
+	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus\n";
 
 
 
@@ -25,7 +25,7 @@ public class Giocatore implements Serializable {
 	private double capitale;
 	private int numeroLanci;
 	private boolean inPrigione;
-	private boolean token; //Per sapere se e' il suo turno
+	private boolean token; 
 	private Vector<Acquistabile> proprieta;
 	
 
@@ -243,7 +243,7 @@ public class Giocatore implements Serializable {
 			if((i+1)%4 == 0)
 			    visualizza.append("\n\n");	
 			
-			visualizza.append("\t" + proprieta.get(i).getNumero() + "  " + proprieta.get(i).getNome() + "\t");
+			visualizza.append("\t\t" + proprieta.get(i).getNumero() + "  " + proprieta.get(i).getNome() + "\t\t");
 		}
 		
 

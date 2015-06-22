@@ -18,7 +18,7 @@ public class Data {
 
 	
 	
-	
+	public final static int NUMERO_TURNI = 20;
 	public final static int POSIZIONE_DEFAULT = 0;
 	public final static int CAPITALE_DEFAULT = 5000;
 	public final static double BONUS_VIA = 500;
@@ -204,6 +204,8 @@ public class Data {
 		temporaneo.aggiungiCasella(new Tassa(CASELLA_38, 38, MALUS_LUSSO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_39, 39, prezzoParcoDellaVittoria, VIOLA_SCURO));
 		
+		temporaneo.mescolaImprevisti(creaImprevisti());
+		temporaneo.mescolaProbabilita(creaProbabilita());
 		
 		return temporaneo;
 	}

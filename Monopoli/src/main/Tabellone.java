@@ -26,8 +26,8 @@ public class Tabellone implements Serializable {
 	private Vector<Casella> caselle;
 	private Vector<Giocatore> elencoGiocatori;
 	private Vector<Giocatore> classificaFinale;
-	private Mazzo probabilita = new Mazzo();
-	private Mazzo imprevisti = new Mazzo();
+	private Mazzo probabilita;
+	public  Mazzo imprevisti;
 	private int turnoGiocatore;
 	private int turniAttuali; 
 
@@ -36,8 +36,8 @@ public class Tabellone implements Serializable {
 		caselle = new Vector<Casella>();
 		elencoGiocatori = new Vector<Giocatore>();
 		classificaFinale = new Vector<Giocatore>();
-		probabilita = Data.creaProbabilita();
-		imprevisti = Data.creaImprevisti();
+		probabilita = new Mazzo();
+		imprevisti = new Mazzo();
 		turniAttuali = 1;
 		turnoGiocatore = 0;
 	}
@@ -119,12 +119,10 @@ public class Tabellone implements Serializable {
 				if(elencoGiocatori.get(i).piuPovero(elencoGiocatori.get(j)))
 					posizione = i;
 		
-		
-		
-			return posizione;
-				
-			
+			return posizione;		
 	}
+	
+	
 	
 	public int getTurnoGiocatore() {
 		return turnoGiocatore;
@@ -160,6 +158,15 @@ public class Tabellone implements Serializable {
 
 	public Mazzo getImprevisti() {
 		return imprevisti;
+	}
+	
+	public void mescolaProbabilita(Mazzo probabilita) {
+		this.probabilita = probabilita;
+	}
+
+
+	public void mescolaImprevisti(Mazzo imprevisti) {
+		this.imprevisti = imprevisti;
 	}
 
 

@@ -5,7 +5,7 @@ import main.Giocatore;
 
 public class VaiA extends Carta{
 	
-	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus \n ";
+	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus\n";
 
 	private int destinazione;
 	

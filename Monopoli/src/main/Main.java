@@ -41,7 +41,6 @@ public class Main {
 			case 1:
 				gioco.nuovaPartita();
 				scelta = finePartita();
-				Gioco.tabellone.setTurniAttuali(1);
 				break;
 			case 2:
 				gioco.riprendiPartita();
@@ -62,8 +61,13 @@ public class Main {
 	 * @return 1 se il giocatore sceglie di fare un'altra partita 0 altrimenti
 	 */
 	private static int finePartita() {
-		// Metodo che gestisce la fine di una partita
-		return MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
+		int scelta = MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
+		
+		if(scelta == 1)
+			Gioco.tabellone.setTurniAttuali(1);
+			
+			
+		return scelta;
 	}
 	
 

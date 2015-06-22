@@ -48,7 +48,7 @@ public class ServizioFile {
 			uscita.writeObject(daSalvare);
 
 		} catch (IOException excScrittura) {
-			System.out.println(MSG_NO_SCRITTURA + f.getName());
+			System.out.println(MSG_NO_SCRITTURA + f.getName() + " " + excScrittura.getMessage());
 		} finally {
 			if (uscita != null) {
 				try {

@@ -6,6 +6,7 @@ package main;
 import java.io.File;
 import java.util.Vector;
 
+import carte.*;
 import caselle.*;
 import utilities.BelleStringhe;
 import utilities.MyMenu;
@@ -59,7 +60,7 @@ public class Gioco {
 	private final static String PARTITA_FILE = "Partita.dat";
 	private final static String MESS_NO_CAST = "ATTENZIONE! problemi con il cast";
 	private final static String FILE_CARICATI = "\nI file sono stati caricati con successo";
-	private final static String FILE_SALVATI = "\nI file sono stati salvati";
+	private final static String FILE_SALVATI = "I file sono stati salvati\n\n";
 	private final static String NESSUNA_PARTITA_SALVATA = "\nNon c'e' nessuna partita preesistente";
 	private final static String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
 	private final static String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
@@ -70,7 +71,7 @@ public class Gioco {
 	public static Tabellone tabellone = new Tabellone();
 	public static Dado dado;
 
-	private final static int NUMERO_TURNI = 20;
+	
 	
 	
 	
@@ -209,7 +210,7 @@ public class Gioco {
 
 			// Cotrolla se abbiamo raggiunto il massimo dei turni disponibili
 			tabellone.setTurniAttuali(tabellone.getTurniAttuali() + 1);
-			if (tabellone.getTurniAttuali() > NUMERO_TURNI) {
+			if (tabellone.getTurniAttuali() > Data.NUMERO_TURNI) {
 				System.out.println(dichiaraVincitori());
 				System.out.println("\n\n");
 				inGame = false;
@@ -219,6 +220,8 @@ public class Gioco {
 			if(tabellone.getElencoGiocatori().size()==1){
 				System.out.println(UN_SOLO_GIOCATORE);
 				System.out.println(BelleStringhe.incornicia(VINCITORE) + "\n\t" + tabellone.getElencoGiocatori().get(0).getNome());
+				tabellone.getClassificaFinale().add(tabellone.getElencoGiocatori().get(0));
+				tabellone.getElencoGiocatori().remove(0);
 				inGame= false;
 			}
 			
@@ -391,7 +394,7 @@ public class Gioco {
 						double prezzoDaPagare;
 						Giocatore proprietario = societa.trovaProprietario(tabellone.getElencoGiocatori());
 						
-						if(giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
+						if(!giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
 						if(proprietario.possiedeTutteSocieta())
 							prezzoDaPagare = societa.costoDoppio(dado);
 						else
@@ -449,6 +452,7 @@ public class Gioco {
 		
 		return visualizza.toString();
 	}
+	
 	
 	/**
 	 * Carica una partita salvata precedentemente e

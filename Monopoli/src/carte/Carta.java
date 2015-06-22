@@ -3,13 +3,15 @@
  */
 package carte;
 
+import java.io.Serializable;
+
 import main.Giocatore;
 
 /**
  * @author Daniele BarattieriCarlo Giannini Alessandro Grazioli
  *
  */
-public abstract class Carta {
+public abstract class Carta implements Serializable {
 	
 	private String descrizione;
 	

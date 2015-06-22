@@ -1,10 +1,11 @@
 package carte;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import main.Giocatore;
 
-public class Mazzo {
+public class Mazzo implements Serializable {
 	
 	Vector <Carta> carte;
 	
