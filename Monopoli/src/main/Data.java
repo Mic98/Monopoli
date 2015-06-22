@@ -21,8 +21,9 @@ public class Data {
 	public final static int NUMERO_TURNI = 20;
 	public final static int POSIZIONE_DEFAULT = 0;
 	public final static int CAPITALE_DEFAULT = 5000;
-	public final static double BONUS_VIA = 500;
 	public final static int PRIGIONE = 10;
+	public final static double BONUS_VIA = 500;
+	public final static double TASSA_PRIGIONE = 50;
 	
 	//-------------------BONUS/MALUS PROBABILITA'/IMPREVISTI---------------
 	private final static double MALUS_PATRIMONIALE = 250;
@@ -47,38 +48,38 @@ public class Data {
 	public final static String VIOLA_SCURO = "viola scuro";
 	
 	//-------------------VALORI PROPRIETA'----------------------
-	private final static int prezzoVicoloCorto = 60;
-	private final static int prezzoVicoloStretto = 60;
-	private final static int prezzoBastioniGranSasso = 100;
-	private final static int prezzoVialeMonterosa = 100;
-	private final static int prezzoVialeVesuvio = 120;
-	private final static int prezzoViaAccademia = 140;
-	private final static int prezzoCorsoAteneo = 140;
-	private final static int prezzoPiazzaUniversita = 160;
-	private final static int prezzoViaVerdi = 180;
-	private final static int prezzoCorsoRaffaello = 180;
-	private final static int prezzoPiazzaDante = 200;
-	private final static int prezzoViaMarcoPolo = 220;
-	private final static int prezzoCorsoMagellano = 220;
-	private final static int prezzoLargoColombo = 240;
-	private final static int prezzoVialeCostantino = 260;
-	private final static int prezzoVialeTraiano = 260;
-	private final static int prezzoPiazzaGiulioCesare = 280;
-	private final static int prezzoViaRoma = 300;
-	private final static int prezzoCorsoImpero = 300;
-	private final static int prezzoLargoAugusto = 320;
-	private final static int prezzoVialeDeiGiardini = 350;
-	private final static int prezzoParcoDellaVittoria = 400;
+	private final static double prezzoVicoloCorto = 60;
+	private final static double prezzoVicoloStretto = 60;
+	private final static double prezzoBastioniGranSasso = 100;
+	private final static double prezzoVialeMonterosa = 100;
+	private final static double prezzoVialeVesuvio = 120;
+	private final static double prezzoViaAccademia = 140;
+	private final static double prezzoCorsoAteneo = 140;
+	private final static double prezzoPiazzaUniversita = 160;
+	private final static double prezzoViaVerdi = 180;
+	private final static double prezzoCorsoRaffaello = 180;
+	private final static double prezzoPiazzaDante = 200;
+	private final static double prezzoViaMarcoPolo = 220;
+	private final static double prezzoCorsoMagellano = 220;
+	private final static double prezzoLargoColombo = 240;
+	private final static double prezzoVialeCostantino = 260;
+	private final static double prezzoVialeTraiano = 260;
+	private final static double prezzoPiazzaGiulioCesare = 280;
+	private final static double prezzoViaRoma = 300;
+	private final static double prezzoCorsoImpero = 300;
+	private final static double prezzoLargoAugusto = 320;
+	private final static double prezzoVialeDeiGiardini = 350;
+	private final static double prezzoParcoDellaVittoria = 400;
 	
 	//-------------------VALORI SOCIETA'---------------------
-	private final static int valoreSocietaElettrica = 150;
-	private final static int valoreSocietaAcquaPotabile = 150;
+	private final static double valoreSocietaElettrica = 150;
+	private final static double valoreSocietaAcquaPotabile = 150;
 	
 	//-------------------VALORI STAZIONI----------------------
-	private final static int valoreStazioneNord = 20;
-	private final static int valoreStazioneSud = 20;
-	private final static int valoreStazioneEst = 20;
-	private final static int valoreStazioneOvest = 20;
+	private final static double valoreStazioneNord = 20;
+	private final static double valoreStazioneSud = 20;
+	private final static double valoreStazioneEst = 20;
+	private final static double valoreStazioneOvest = 20;
 
 	//----------------------NOMI CASELLE---------------------------
 	private final static String CASELLA_0 = "VIA";

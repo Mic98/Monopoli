@@ -22,7 +22,7 @@ public class Societa extends Acquistabile {
 	 * @param numero Posizione della societa' sul tabellone
 	 * @param valore Valore della societa'
      */
-	public Societa(String nome, int numero, int valore) {
+	public Societa(String nome, int numero, double valore) {
 		super(nome, numero, valore);
 		super.setTipo(SOCIETA);
 		acquistabile = true;

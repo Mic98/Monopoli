@@ -22,7 +22,7 @@ public class Acquistabile extends Casella {
 	 * @param numero Posizione della stazione sul tabellone
 	 * @param valore Valore della stazione
 	 */
-	public Acquistabile(String nome, int numero, int valore) {
+	public Acquistabile(String nome, int numero, double valore) {
 		super(nome, numero);
 		super.setTipo(ACQUISTABILE);
 		this.valore = valore;

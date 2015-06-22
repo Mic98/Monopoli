@@ -6,6 +6,7 @@ package main;
 import java.io.*;
 import java.util.Vector;
 
+import utilities.BelleStringhe;
 import caselle.*;
 
 /**
@@ -190,7 +191,6 @@ public class Giocatore implements Serializable {
 	public void sfratta(){
 		for(Acquistabile casella: proprieta){
 			casella.setAcquistabile(true);
-			proprieta.remove(casella);
 		}
 	}
 
@@ -266,10 +266,10 @@ public class Giocatore implements Serializable {
 		visualizza.append("\n");
 		
 		for(int i=0; i<proprieta.size(); i++){
-			if((i+1)%4 == 0)
+		    if((i+1)%4 == 0)
 			    visualizza.append("\n\n");	
 			
-			visualizza.append("\t\t" + proprieta.get(i).getNumero() + "  " + proprieta.get(i).getNome() + "\t\t");
+			visualizza.append(String.format(BelleStringhe.incolonna(("\t\t" + proprieta.get(i).getNumero() + "  " + proprieta.get(i).getNome() + "\t\t"),35)));
 		}
 		
 

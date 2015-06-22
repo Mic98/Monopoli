@@ -20,7 +20,7 @@ public class Terreno extends Acquistabile{
 	 * @param prezzo Prezzo del terreno
 	 * @param colore Colore della proprieta'
 	 */
-	public Terreno(String nome, int numero, int valore, String colore) {
+	public Terreno(String nome, int numero, double valore, String colore) {
 		super(nome, numero, valore);
 		super.setTipo(ACQUISTABILE);
 		this.colore = colore;

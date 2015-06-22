@@ -28,6 +28,7 @@ public class Gioco {
 	private final static String VINCITORE = "VINCITORE";
 	private final static String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
 	private final static String VINCITORI = "VINCITORI";
+	private final static String MESSAGGIO_TASSA_PRIGIONE = "\nPrima di lanciare i dadi dovrai pagare una tassa di %.2f euro\n";
 	
 	private final static String ACQUISTATO = "\nComplimenti! Hai acquistato %s al costo di %.2f euro\n\n";
 	private static final String NON_ACQUISTATO = "\nSpiacente! Non sei riuscito a comprare %s perche' non possiedi sufficiente capitale\n\n";
@@ -124,8 +125,6 @@ public class Gioco {
 	 */
 	public void partita() {
 		boolean inGame = true;
-		
-		
 		
 		while (inGame && tabellone.getElencoGiocatori().size()>1) {
 			// Seleziona il giocatore attuale per una migliore gestione
@@ -283,17 +282,34 @@ public class Gioco {
 	 * @param giocatoreAttuale Giocatore in prigione
 	 */
 	public void gestionePrigione(Giocatore giocatoreAttuale){
-		if (dado.sonoUguali()) { //Se sono uguali 
+		System.out.printf(MESSAGGIO_TASSA_PRIGIONE, Data.TASSA_PRIGIONE);
+		
+		if(giocatoreAttuale.puoPermetterselo(Data.TASSA_PRIGIONE)){
+			giocatoreAttuale.prelevaCapitale(Data.TASSA_PRIGIONE);
+		if (dado.sonoUguali()) { //Se sono uguali
 			giocatoreAttuale.setInPrigione(false); //Esce di prigione
 			giocatoreAttuale.setToken(true); //E ha a disposizione un altro lancio
 			System.out.println(USCITO_DI_PRIGIONE);
+			giocatoreAttuale.setNumeroLanci(0);
 		}	
 		else{
 			System.out.println(RIMANI_IN_PRIGIONE);
 			giocatoreAttuale.setToken(false);
+			giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1);
+		}
+	   }
+		else{//se il giocatore e' in bancarotta esce dalla partita
+			System.out.println(IN_BANCA_ROTTA);
+			giocatoreAttuale.setToken(false);
+			giocatoreAttuale.setCapitale(0);
+			giocatoreAttuale.sfratta();
+			tabellone.getClassificaFinale().add(giocatoreAttuale);
+			tabellone.getElencoGiocatori().remove(giocatoreAttuale);
+			
 		}
 	}
 
+	
 	/**
 	 * Stampa la posizione attuale del giocatore
 	 * 
