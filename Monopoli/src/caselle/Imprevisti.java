@@ -4,7 +4,7 @@ public class Imprevisti extends Casella{
 	
 	
 	/**
-	 * 
+	 * Costruttore della classe Imprevisti
 	 * @param nome Il nome della casella
 	 * @param numero La posizione della casella
 	 */

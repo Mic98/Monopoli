@@ -9,6 +9,9 @@ public class Mazzo implements Serializable {
 	
 	Vector <Carta> carte;
 	
+	/**
+	 * Costruttore della classe Mazzo
+	 */
 	public Mazzo(){
 		carte = new Vector<Carta>();
 	}
@@ -18,6 +21,10 @@ public class Mazzo implements Serializable {
 		
 	}
 	
+	/**
+	 * Questo metodo si occupa di estrarre la prima carta dal mazzo e di reinserirla nel fondo del mazzo
+	 * @param giocatoreAttuale Il giocatore che ha pescato la carta
+	 */
 	public void pescaCarta(Giocatore giocatoreAttuale){
 		Carta pescata = carte.get(0);
 		pescata.effetto(giocatoreAttuale);

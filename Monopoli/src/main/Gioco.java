@@ -74,9 +74,6 @@ public class Gioco {
 	
 	
 	
-	
-	
-	
 
 	/**
 	 * Costruttore della classe Gioco
@@ -269,6 +266,7 @@ public class Gioco {
 				System.out.println(IN_BANCA_ROTTA);
 				giocatoreAttuale.setToken(false);
 				giocatoreAttuale.setCapitale(0);
+				giocatoreAttuale.sfratta();
 				tabellone.getClassificaFinale().add(giocatoreAttuale);
 				tabellone.getElencoGiocatori().remove(giocatoreAttuale);
 				

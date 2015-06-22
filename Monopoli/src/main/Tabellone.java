@@ -53,7 +53,6 @@ public class Tabellone implements Serializable {
 		Collections.shuffle(plrs);
 	}
 	
-
 	
 
 	public void aggiungiCasella(Casella c) {

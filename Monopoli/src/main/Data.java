@@ -153,7 +153,7 @@ public class Data {
 	
 	
 	/**
-	 * inizializza il tabellone inserendo tutte le caselle in ordine
+	 * Inizializza il tabellone inserendo tutte le caselle in ordine
 	 * @return tabellone completo
 	 */
 	public static Tabellone creaTabellone(){
@@ -210,6 +210,10 @@ public class Data {
 		return temporaneo;
 	}
 	
+	/**
+	 * 
+	 * @return Il mazzo degli imprevisti mescolato
+	 */
 	public static Mazzo creaImprevisti(){
 		
 		Mazzo temporaneo = new Mazzo();
@@ -228,8 +232,12 @@ public class Data {
 		return temporaneo;
 	}
 	
+	/**
+	 * 
+	 * @return Il mazzo delle probabilita' gia' mescolato
+	 */
 	public static Mazzo creaProbabilita(){
-Mazzo temporaneo = new Mazzo();
+        Mazzo temporaneo = new Mazzo();
 		
 		temporaneo.aggiungiCarta(new VaiNoVia(PROBABILITA_01, 1));
 		temporaneo.aggiungiCarta(new RitiraCredito(PROBABILITA_02, CEDOLE_AZIONI));

@@ -172,6 +172,16 @@ public class Giocatore implements Serializable {
 	    return false;
 			   
 	}
+	
+	/**
+	 * Mette di nuovo in vendita le proprieta' di un giocatore finito in bancarotta 
+	 */
+	public void sfratta(){
+		for(Acquistabile casella: proprieta){
+			casella.setAcquistabile(true);
+			proprieta.remove(casella);
+		}
+	}
 
 	public String getNome() {
 		return nome;
