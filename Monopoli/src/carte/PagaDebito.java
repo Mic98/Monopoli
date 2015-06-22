@@ -2,6 +2,11 @@ package carte;
 
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class PagaDebito extends Carta{
 	
 	private double daPagare;

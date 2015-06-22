@@ -46,7 +46,7 @@ public class Tabellone implements Serializable {
 	/**
 	 * Mescola l'ordine del vettore elencoGiocatori
 	 * 
-	 * @param plrs vettore contentente la lista dei giocatori
+	 * @param plrs Vettore contentente la lista dei giocatori
 	 */
 	public void mescolaGiocatori(Vector<Giocatore> plrs) {
 		elencoGiocatori = plrs;
@@ -63,8 +63,8 @@ public class Tabellone implements Serializable {
 	/**
 	 * Verifica che l'input dell'utente non sia gia' stato inserito
 	 *  
-	 * @param daControllare input dell'utente da controllare
-	 * @param nuoviGiocatori vettore di nomi gia“ inseriti
+	 * @param daControllare Input dell'utente da controllare
+	 * @param nuoviGiocatori Vettore di nomi gia' inseriti
 	 * @return true se il nome e' gia' stato inserito
 	 */
 	public boolean esisteGia(String daControllare, Vector<Giocatore> nuoviGiocatori){
@@ -91,7 +91,7 @@ public class Tabellone implements Serializable {
 	
 	/**
 	 * 
-	 * @return il vettore dei giocatori vincenti
+	 * @return Il vettore dei giocatori vincenti
 	 */
 	public Vector<Giocatore> trovaVincitori(){
 		Vector<Giocatore> vincenti = new Vector <Giocatore>();
@@ -108,7 +108,7 @@ public class Tabellone implements Serializable {
 	/**
 	 * Restituisce la posizione del giocatore con meno capitale nel vettore elencoGiocatori
 	 * 
-	 * @return posizione del giocatore piu' povero
+	 * @return La posizione nel vettore del giocatore piu' povero
 	 */
 	public int ilPiuPovero(){
 		int posizione = 0;

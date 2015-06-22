@@ -3,6 +3,11 @@ package carte;
 import main.Data;
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class VaiInPrigione extends Carta {
 	
 	/**

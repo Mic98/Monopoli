@@ -229,7 +229,7 @@ public class Gioco {
 	 * Gestisce il turno di un giocatore
 	 * 
 	 * @param giocatoreAttuale
-	 *            il giocatore che puo' giocare in questo turno
+	 *            Il giocatore che puo' giocare in questo turno
 	 */
 	public void gestioneTurno(Giocatore giocatoreAttuale) {
 		
@@ -278,9 +278,9 @@ public class Gioco {
 	}// fine gestioneTurno
 	
 	/**
-	 * Gestisce l'uscita del giocatore dalla prigione
+	 * Gestisce la permanenza e l'uscita del giocatore nella prigione
 	 * 
-	 * @param giocatoreAttuale giocatore in prigione
+	 * @param giocatoreAttuale Giocatore in prigione
 	 */
 	public void gestionePrigione(Giocatore giocatoreAttuale){
 		if (dado.sonoUguali()) { //Se sono uguali 
@@ -297,7 +297,7 @@ public class Gioco {
 	/**
 	 * Stampa la posizione attuale del giocatore
 	 * 
-	 * @param giocatoreAttuale giocatore di cui si vuole sapere la posizione
+	 * @param giocatoreAttuale Giocatore di cui si vuole sapere la posizione
 	 */
 	public void stampaPosizione(Giocatore giocatoreAttuale){
 		//Aggiorna il giocatore sulla sua posizione attuale
@@ -310,7 +310,7 @@ public class Gioco {
 	/**
 	 * Metodo di controllo della posizione del giocatore dopo il tiro dei dadi
 	 * 
-	 * @param giocatoreAttuale giocatore che ha appena tirato il dado
+	 * @param giocatoreAttuale Giocatore che ha appena tirato il dado
 	 */
 	public void controlloDopoTiro(Giocatore giocatoreAttuale){
 		//Controlla dove si trova il giocatore
@@ -432,7 +432,7 @@ public class Gioco {
     
 	/**
 	 * 
-	 * @return messaggio a schermo che dichiara i vincitori della partita
+	 * @return Messaggio a schermo contenente l'elenco dei vincitori della partita
 	 */
 	public String dichiaraVincitori(){
 		StringBuilder visualizza = new StringBuilder();

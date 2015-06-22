@@ -5,6 +5,11 @@ import java.util.Vector;
 
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class Mazzo implements Serializable {
 	
 	Vector <Carta> carte;
@@ -35,5 +40,5 @@ public class Mazzo implements Serializable {
 	public  Vector<Carta> getCarte(){
 		return carte;
 	}
-
+	
 }

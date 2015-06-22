@@ -1,5 +1,10 @@
 package caselle;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class Tassa extends Casella{
 	
 	private double malus;

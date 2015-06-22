@@ -4,7 +4,7 @@
 package caselle;
 
 /**
- * @author Carlo
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 public class InPrigione extends Casella {
@@ -12,8 +12,8 @@ public class InPrigione extends Casella {
 	/**
 	 * Costruttore della classe InPrigione
 	 * 
-	 * @param nome nome della casella
-	 * @param numero posizione della casella
+	 * @param nome Nome della casella
+	 * @param numero Posizione della casella sul tabellone
 	 */
 	public InPrigione(String nome, int numero) {
 		super(nome, numero);

@@ -11,6 +11,7 @@ import java.io.*;
  */
 public class Casella implements Serializable {
 	
+	
 	public static final int NEUTRA = 0,
 							TASSE = 1,
 							VAI_IN_PRIGIONE = 2, //Casella 30
@@ -38,18 +39,11 @@ public class Casella implements Serializable {
 		tipo = 0;
 	}
 
-	/**
-	 * 
-	 * @return nome della casella
-	 */
+
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * 
-	 * @return la posizione della casella
-	 */
 	public int getNumero() {
 		return numero;
 	}

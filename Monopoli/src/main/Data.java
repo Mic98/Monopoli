@@ -17,13 +17,14 @@ import caselle.*;
 public class Data {
 
 	
-	
+	//------------------IMPOSTAZIONI DI DEFAULT-------------------
 	public final static int NUMERO_TURNI = 20;
 	public final static int POSIZIONE_DEFAULT = 0;
 	public final static int CAPITALE_DEFAULT = 5000;
 	public final static double BONUS_VIA = 500;
 	public final static int PRIGIONE = 10;
 	
+	//-------------------BONUS/MALUS PROBABILITA'/IMPREVISTI---------------
 	private final static double MALUS_PATRIMONIALE = 250;
 	private final static double MALUS_LUSSO = 10;
 	private final static double BENEFICIENZA = 50;
@@ -35,7 +36,7 @@ public class Data {
 	private final static double CEDOLE_AZIONI = 60;
 	private final static double PREMIO_ASSICURAZIONE = 125;
 	
-	
+	//---------------------COLORI CASELLE---------------------------
 	public final static String VIOLA = "viola";
 	public final static String AZZURRO = "azzurro";
 	public final static String ARANCIONE = "arancione";
@@ -45,7 +46,7 @@ public class Data {
 	public final static String VERDE = "verde";
 	public final static String VIOLA_SCURO = "viola scuro";
 	
-	
+	//-------------------VALORI PROPRIETA'----------------------
 	private final static int prezzoVicoloCorto = 60;
 	private final static int prezzoVicoloStretto = 60;
 	private final static int prezzoBastioniGranSasso = 100;
@@ -69,14 +70,17 @@ public class Data {
 	private final static int prezzoVialeDeiGiardini = 350;
 	private final static int prezzoParcoDellaVittoria = 400;
 	
+	//-------------------VALORI SOCIETA'---------------------
 	private final static int valoreSocietaElettrica = 150;
 	private final static int valoreSocietaAcquaPotabile = 150;
 	
+	//-------------------VALORI STAZIONI----------------------
 	private final static int valoreStazioneNord = 20;
 	private final static int valoreStazioneSud = 20;
 	private final static int valoreStazioneEst = 20;
 	private final static int valoreStazioneOvest = 20;
 
+	//----------------------NOMI CASELLE---------------------------
 	private final static String CASELLA_0 = "VIA";
 	private final static String CASELLA_1 = "VICOLO CORTO";
 	private final static String CASELLA_2 = "PROBABILITA'";
@@ -128,6 +132,7 @@ public class Data {
 			CASELLA_33, CASELLA_34, CASELLA_35, CASELLA_36, CASELLA_37,
 			CASELLA_38, CASELLA_39 };
 	
+	//----------------------IMPREVISTI-----------------------------
 	private final static String IMPREVISTI_01 ="Andate sino a Largo Colombo: se passate dal ÒVIA!Ó, ritirate 500 euro dalla banca.";
 	private final static String IMPREVISTI_02 ="Andate in prigione direttamente, senza passare dal \"VIA!\".";
 	private final static String IMPREVISTI_03 ="Fate tre passi indietro.";
@@ -137,6 +142,7 @@ public class Data {
 	private final static String IMPREVISTI_07 ="La banca vi paga gli interessi del vostro conto corrente: ritirate 125 euro.";
 	private final static String IMPREVISTI_08 ="Andate avanti sino al \"VIA!\" e ritirate 500 euro dalla banca.";
 
+	//----------------------PROBABILITA'----------------------------
 	private final static String PROBABILITA_01 = "Ritornate al Vicolo Corto.";
 	private final static String PROBABILITA_02 = "E' maturata la cedola delle vostre azioni: ritirate 60 euro dalla banca.";
 	private final static String PROBABILITA_03 = "Scade il vostro premio di assicurazione: pagate 125 euro in banca.";

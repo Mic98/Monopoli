@@ -1,9 +1,13 @@
 package caselle;
 
 import java.util.Vector;
-
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class Acquistabile extends Casella {
 
 	
@@ -14,9 +18,9 @@ public class Acquistabile extends Casella {
 	/**
 	 * Costruttore della classe Acquistabile
 	 * 
-	 * @param nome nome della stazione
-	 * @param numero posizione della stazione sul tabellone
-	 * @param valore valore della stazione
+	 * @param nome Nome della stazione
+	 * @param numero Posizione della stazione sul tabellone
+	 * @param valore Valore della stazione
 	 */
 	public Acquistabile(String nome, int numero, int valore) {
 		super(nome, numero);
@@ -29,8 +33,8 @@ public class Acquistabile extends Casella {
 
    /**
     * 
-    * @param giocatori il vettore dei giocatori in partita
-    * @return il proprietario della casella
+    * @param giocatori Il vettore dei giocatori in partita
+    * @return Il proprietario della casella
     */
    public Giocatore trovaProprietario(Vector <Giocatore> giocatori){
 	   Giocatore proprietario = null;
@@ -45,7 +49,6 @@ public class Acquistabile extends Casella {
 	   return proprietario;
    }
    
-   //public double
 
 	public double getValore() {
 		return valore;
@@ -57,7 +60,7 @@ public class Acquistabile extends Casella {
 	
 	/**
 	 * 
-	 * @return il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
+	 * @return Il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
 	 */
 	public double getCosto(){
 		return valore * DIECI_PER_CENTO;

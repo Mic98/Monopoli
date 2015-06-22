@@ -68,15 +68,26 @@ public class Giocatore implements Serializable {
 
 	}
 
-	
+	/**
+	 * Aggiunge una proprieta' al vettore di giocatore
+	 * @param casella La casella da aggiungere al vettore
+	 */
 	public void aggiungiProprieta(Acquistabile casella) {
 		proprieta.add(casella);
 	}
 
+	/**
+	 * Sottrae dal capitale del giocatore la spesa specificata
+	 * @param spesa Spesa da sostenere
+	 */
 	public void prelevaCapitale (double spesa){
 		capitale =  capitale - spesa;
 	}
 	
+	/**
+	 * Aggiunge al capitale del giocatore il guadagno specificato
+	 * @param guadagno Guadagno del giocatore
+	 */
 	public void aggiungiCapitale(double guadagno){
 		capitale = capitale + guadagno;
 	}
@@ -94,7 +105,7 @@ public class Giocatore implements Serializable {
 	
 	/**
 	 * 
-	 * @param altroGiocatore giocatore da paragonare
+	 * @param altroGiocatore Giocatore da confrontare
 	 * @return true se il primo giocatore e' piu' povero del secondo
 	 */
 	public boolean piuPovero(Giocatore altroGiocatore){
@@ -106,7 +117,7 @@ public class Giocatore implements Serializable {
 	
 	/**
 	 * 
-	 * @param altroGiocatore giocatore da paragonare
+	 * @param altroGiocatore Giocatore da confrontare
 	 * @return true se i due giocatori hanno lo stesso capitale
 	 */
 	public boolean riccoUguale(Giocatore altroGiocatore){
@@ -118,7 +129,7 @@ public class Giocatore implements Serializable {
 	
 	/**
 	 * 
-	 * @param costoDaSostenere spesa da sostenere
+	 * @param costoDaSostenere Spesa da sostenere
 	 * @return true se il giocatore puo' sostenere la spesa
 	 */
 	public boolean puoPermetterselo(double costoDaSostenere){
@@ -130,7 +141,7 @@ public class Giocatore implements Serializable {
 	
 	/**
 	 * 
-	 * @param colore colore della casella su cui l'avversario che deve pagare si trova
+	 * @param colore Colore della casella su cui l'avversario che deve pagare si trova
 	 * @return true se il proprietario possiede tutti i terreni di un dato colore
 	 */
 	public boolean possiedeTuttiTerreni(String colore){
@@ -187,7 +198,7 @@ public class Giocatore implements Serializable {
 		return nome;
 	}
 
-	public void setName(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -231,6 +242,11 @@ public class Giocatore implements Serializable {
 		this.token = token;
 	}
 
+	/**
+	 * @param acquistabile La casella di cui si deve trovare il proprietario
+	 * @return true se il giocatore possiede il territorio
+	 */
+	
 	public boolean possiede(Acquistabile acquistabile) {
 		for(int i = 0; i<proprieta.size(); i++)
 			if(proprieta.get(i).getNome().equalsIgnoreCase(acquistabile.getNome()))

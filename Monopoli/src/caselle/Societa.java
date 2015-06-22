@@ -2,6 +2,11 @@ package caselle;
 
 import main.Dado;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class Societa extends Acquistabile {
 
 
@@ -13,9 +18,9 @@ public class Societa extends Acquistabile {
     /** 
      * Costruttore della classe Societa'
 	 * 
-	 * @param nome nome della societa'
-	 * @param numero posizione della societa' sul tabellone
-	 * @param valore valore della societa'
+	 * @param nome Nome della societa'
+	 * @param numero Posizione della societa' sul tabellone
+	 * @param valore Valore della societa'
      */
 	public Societa(String nome, int numero, int valore) {
 		super(nome, numero, valore);
@@ -26,8 +31,9 @@ public class Societa extends Acquistabile {
 	
 	/**
 	 * 
-	 * @param dado i dadi lanciati dal giocatore
-	 * @return il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore e non le possiede entrambe
+	 * @param dado I dadi lanciati dal giocatore
+	 * @return Il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore
+	 *         e non le possiede entrambe
 	 */
 	public double getCosto(Dado dado){
 		
@@ -37,8 +43,9 @@ public class Societa extends Acquistabile {
 	
 	/**
 	 * 
-	 * @param dado i dadi lanciati dal giocatore
-	 * @return il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore e non le possiede entrambe
+	 * @param dado I dadi lanciati dal giocatore
+	 * @return Il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore 
+	 *         e le possiede entrambe
 	 */
 	public double costoDoppio(Dado dado){
 		

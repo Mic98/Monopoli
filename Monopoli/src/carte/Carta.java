@@ -8,7 +8,7 @@ import java.io.Serializable;
 import main.Giocatore;
 
 /**
- * @author Daniele BarattieriCarlo Giannini Alessandro Grazioli
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 public abstract class Carta implements Serializable {

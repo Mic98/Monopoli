@@ -4,7 +4,7 @@
 package caselle;
 
 /**
- * @author Carlo
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 public class Terreno extends Acquistabile{
@@ -15,10 +15,10 @@ public class Terreno extends Acquistabile{
 	/**
 	 * Costruttore della classe Terreno
 	 * 
-	 * @param nome nome del terreno
-	 * @param numero posizione del terreno sul tabellone
-	 * @param prezzo prezzo del terreno
-	 * @param colore colore della proprieta'
+	 * @param nome Nome del terreno
+	 * @param numero Posizione del terreno sul tabellone
+	 * @param prezzo Prezzo del terreno
+	 * @param colore Colore della proprieta'
 	 */
 	public Terreno(String nome, int numero, int valore, String colore) {
 		super(nome, numero, valore);
@@ -45,12 +45,5 @@ public class Terreno extends Acquistabile{
 	public void setAcquistabile(boolean acquistabile) {
 		this.acquistabile = acquistabile;
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

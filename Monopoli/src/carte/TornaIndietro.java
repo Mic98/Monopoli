@@ -2,6 +2,11 @@ package carte;
 
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class TornaIndietro extends Carta {
 	
 	private int passiIndietro;
@@ -17,7 +22,7 @@ public class TornaIndietro extends Carta {
 	}
 
 	/**
-	 * sposta il giocatore indietro dei numeri di passi riportati sulla carta
+	 * Sposta il giocatore indietro dei numeri di passi riportati sulla carta
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {

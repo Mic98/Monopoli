@@ -3,6 +3,11 @@ package carte;
 import main.Data;
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class VaiA extends Carta{
 	
 	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus\n";
@@ -14,6 +19,9 @@ public class VaiA extends Carta{
 	    this.destinazione = destinazione;	
 	}
 
+	/**
+	 * Sposta il giocatore contando dell'eventualita' del passaggio dal "VIA!"
+	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
 		System.out.println();

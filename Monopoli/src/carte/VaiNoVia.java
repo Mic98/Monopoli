@@ -2,6 +2,11 @@ package carte;
 
 import main.Giocatore;
 
+/**
+ * 
+ * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
+ *
+ */
 public class VaiNoVia extends Carta {
 	
 	private int destinazione;
