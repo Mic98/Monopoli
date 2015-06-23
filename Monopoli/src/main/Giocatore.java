@@ -193,6 +193,20 @@ public class Giocatore implements Serializable {
 			casella.setAcquistabile(true);
 		}
 	}
+	
+	/**
+	 * @param acquistabile La casella di cui si deve trovare il proprietario
+	 * @return true se il giocatore possiede il territorio
+	 */
+	
+	public boolean possiede(Acquistabile casella) {
+		for(int i = 0; i<proprieta.size(); i++)
+			if(proprieta.get(i).getNome().equalsIgnoreCase(casella.getNome()))
+				return true;
+		
+		return false;
+	}
+	
 
 	public String getNome() {
 		return nome;
@@ -242,19 +256,6 @@ public class Giocatore implements Serializable {
 		this.token = token;
 	}
 
-	/**
-	 * @param acquistabile La casella di cui si deve trovare il proprietario
-	 * @return true se il giocatore possiede il territorio
-	 */
-	
-	public boolean possiede(Acquistabile acquistabile) {
-		for(int i = 0; i<proprieta.size(); i++)
-			if(proprieta.get(i).getNome().equalsIgnoreCase(acquistabile.getNome()))
-				return true;
-		
-		return false;
-	}
-	
 	
 	/**
 	 * restituisce il nome del giocatore e l'elenco delle sue proprieta'

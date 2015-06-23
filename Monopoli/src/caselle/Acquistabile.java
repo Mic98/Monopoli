@@ -49,6 +49,13 @@ public class Acquistabile extends Casella {
 	   return proprietario;
    }
    
+	/**
+	 * 
+	 * @return Il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
+	 */
+	public double getCosto(){
+		return valore * DIECI_PER_CENTO;
+	}
 
 	public double getValore() {
 		return valore;
@@ -56,14 +63,6 @@ public class Acquistabile extends Casella {
 
 	public void setPrezzo(double valore) {
 		this.valore = valore;
-	}
-	
-	/**
-	 * 
-	 * @return Il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
-	 */
-	public double getCosto(){
-		return valore * DIECI_PER_CENTO;
 	}
 
 	public boolean isAcquistabile() {
