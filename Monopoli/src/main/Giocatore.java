@@ -192,6 +192,8 @@ public class Giocatore implements Serializable {
 		for(Acquistabile casella: proprieta){
 			casella.setAcquistabile(true);
 		}
+		
+		proprieta.removeAllElements();
 	}
 	
 	/**

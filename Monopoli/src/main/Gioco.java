@@ -453,7 +453,6 @@ public class Gioco {
 	public String dichiaraVincitori(){
 		StringBuilder visualizza = new StringBuilder();
 	
-		tabellone.classifica();
 		Vector<Giocatore> vincenti = tabellone.trovaVincitori();
 		if(vincenti.size() > 1)
 		   visualizza.append(BelleStringhe.incornicia(VINCITORI));

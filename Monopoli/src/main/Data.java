@@ -134,7 +134,7 @@ public class Data {
 			CASELLA_38, CASELLA_39 };
 	
 	//----------------------IMPREVISTI-----------------------------
-	private final static String IMPREVISTI_01 ="Andate sino a Largo Colombo: se passate dal ÒVIA!Ó, ritirate 500 euro dalla banca.";
+	private final static String IMPREVISTI_01 ="Andate sino a Largo Colombo: se passate dal \"VIA!\", ritirate 500 euro dalla banca.";
 	private final static String IMPREVISTI_02 ="Andate in prigione direttamente, senza passare dal \"VIA!\".";
 	private final static String IMPREVISTI_03 ="Fate tre passi indietro.";
 	private final static String IMPREVISTI_04 ="Andate sino a Via Accademia: se passate dal \"VIA!\n, ritirate 500 euro dalla banca.";

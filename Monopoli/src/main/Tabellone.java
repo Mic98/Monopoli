@@ -79,7 +79,7 @@ public class Tabellone implements Serializable {
 	/**
 	 * Mette in ordine di capitale i giocatori una volta finita la partita
 	 */
-	public void classifica(){
+	private void classifica(){
 		int i = elencoGiocatori.size();
 		while (i>0){
 			classificaFinale.addElement(elencoGiocatori.get(ilPiuPovero()));
@@ -94,6 +94,7 @@ public class Tabellone implements Serializable {
 	 * @return Il vettore dei giocatori vincenti
 	 */
 	public Vector<Giocatore> trovaVincitori(){
+		classifica();
 		Vector<Giocatore> vincenti = new Vector <Giocatore>();
 		
 		for(int i=classificaFinale.size(); i>0; i--){
@@ -110,7 +111,7 @@ public class Tabellone implements Serializable {
 	 * 
 	 * @return La posizione nel vettore del giocatore piu' povero
 	 */
-	public int ilPiuPovero(){
+	private int ilPiuPovero(){
 		int posizione = 0;
 		
 		for(int i=0; i<elencoGiocatori.size();i++)

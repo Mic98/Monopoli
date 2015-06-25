@@ -64,7 +64,7 @@ public class Main {
 		int scelta = MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
 		
 		if(scelta == 1)
-			Gioco.tabellone.setTurniAttuali(1);
+			gioco = new Gioco();
 			
 			
 		return scelta;
