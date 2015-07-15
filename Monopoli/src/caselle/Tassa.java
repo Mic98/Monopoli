@@ -1,11 +1,15 @@
 package caselle;
 
+import main.Giocatore;
+
 /**
  * 
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
 public class Tassa extends Casella{
+	
+	private final static String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %.2f euro alla banca \n\n";
 	
 	private double malus;
 	
@@ -24,5 +28,15 @@ public class Tassa extends Casella{
 
 	public double getMalus() {
 		return malus;
+	}
+
+	/**
+	 * Gestisce l'arrivo del giocatore su una casella di tipo TASSA
+	 */
+	@Override
+	public void effetto(Giocatore giocatoreAttuale) {
+		giocatoreAttuale.prelevaCapitale(this.getMalus());
+		System.out.printf(CASELLA_TASSA, this.getNome(), this.getMalus());
+		
 	}
 }

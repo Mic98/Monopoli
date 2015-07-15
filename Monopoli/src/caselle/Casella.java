@@ -5,11 +5,13 @@ package caselle;
 
 import java.io.*;
 
+import main.Giocatore;
+
 /**
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class Casella implements Serializable {
+public abstract class Casella implements Serializable {
 	
 	
 	public static final int NEUTRA = 0,
@@ -36,8 +38,9 @@ public class Casella implements Serializable {
 	public Casella(String nome, int numero) {
 		this.nome = nome;
 		this.numero = numero;
-		tipo = 0;
 	}
+	
+	public abstract void effetto(Giocatore giocatoreAttuale);
 
 
 	public String getNome() {

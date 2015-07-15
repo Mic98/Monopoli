@@ -224,6 +224,9 @@ public class Gioco {
 		
 	}// fine metodo partita
 
+	
+	
+	
 	/**
 	 * Gestisce il turno di un giocatore
 	 * 
@@ -237,7 +240,8 @@ public class Gioco {
 		//Se il giocatore non e' in prigione
 		if (!giocatoreAttuale.isInPrigione()) {
 			giocatoreAttuale.muoviGiocatore(dado.risultato()); //Muove il giocatore
-			controlloDopoTiro(giocatoreAttuale);
+			Casella casellaAttuale = tabellone.getCaselle().get(giocatoreAttuale.getPosizione());
+			casellaAttuale.effetto(giocatoreAttuale);
             
 			if(!giocatoreAttuale.inBancaRotta()){
 				//esegue di nuovo il controllo sulla prigione perche' dopo il tiro dei dadi potrebbe essere in prigione
@@ -246,9 +250,9 @@ public class Gioco {
 					giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
 					giocatoreAttuale.setToken(false);
 			} else {
-				giocatoreAttuale.setNumeroLanci(giocatoreAttuale
-						.getNumeroLanci() + 1); //Se invece ha tirato doppi, aumenta il contatore
+				giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1); //Se invece ha tirato doppi, aumenta il contatore
 				giocatoreAttuale.setToken(true);
+				
 				if (giocatoreAttuale.getNumeroLanci() >= 3) { //Se ha tirato per 3 volte di seguito doppio
 					System.out.println(MESSAGGIO_TROPPI_LANCI); //Lo avvisa
 					giocatoreAttuale.setPosizione(Data.PRIGIONE); // AH-AH-AH (finisce in prigione)
@@ -262,12 +266,7 @@ public class Gioco {
 			  }
 			}
 			else{//se il giocatore e' in bancarotta esce dalla partita
-				System.out.println(IN_BANCA_ROTTA);
-				giocatoreAttuale.setToken(false);
-				giocatoreAttuale.setCapitale(0);
-				giocatoreAttuale.sfratta();
-				tabellone.getClassificaFinale().add(giocatoreAttuale);
-				tabellone.getElencoGiocatori().remove(giocatoreAttuale);
+				gestioneBancaRotta(giocatoreAttuale);
 				
 			}
 		} else { //Se e' in prigione
@@ -299,16 +298,24 @@ public class Gioco {
 		}
 	   }
 		else{//se il giocatore e' in bancarotta esce dalla partita
-			System.out.println(IN_BANCA_ROTTA);
-			giocatoreAttuale.setToken(false);
-			giocatoreAttuale.setCapitale(0);
-			giocatoreAttuale.sfratta();
-			tabellone.getClassificaFinale().add(giocatoreAttuale);
-			tabellone.getElencoGiocatori().remove(giocatoreAttuale);
+			gestioneBancaRotta(giocatoreAttuale);
 			
 		}
 	}
 
+	
+	/**
+	 * Gestisce l'uscita del giocatore dalla partita a causa di banca rotta
+	 * @param giocatoreAttuale il giocatore perdente
+	 */
+	public void gestioneBancaRotta(Giocatore giocatoreAttuale){
+		System.out.println(IN_BANCA_ROTTA);
+		giocatoreAttuale.setToken(false);
+		giocatoreAttuale.setCapitale(0);
+		giocatoreAttuale.sfratta();
+		tabellone.getClassificaFinale().add(giocatoreAttuale);
+		tabellone.getElencoGiocatori().remove(giocatoreAttuale);
+	}
 	
 	/**
 	 * Stampa la posizione attuale del giocatore
@@ -323,127 +330,6 @@ public class Gioco {
 	}
 	
 	
-	/**
-	 * Metodo di controllo della posizione del giocatore dopo il tiro dei dadi
-	 * 
-	 * @param giocatoreAttuale Giocatore che ha appena tirato il dado
-	 */
-	public void controlloDopoTiro(Giocatore giocatoreAttuale){
-		//Controlla dove si trova il giocatore
-		
-			Casella casellaAttuale = tabellone.getCaselle().get(giocatoreAttuale.getPosizione());
-			switch (casellaAttuale.getTipo()) {
-				case Casella.TASSE:
-					Tassa t = (Tassa) casellaAttuale;
-					giocatoreAttuale.prelevaCapitale(t.getMalus());
-					System.out.printf(CASELLA_TASSA, t.getNome(), t.getMalus());
-				break;
-				
-				
-				case Casella.VAI_IN_PRIGIONE: 
-					giocatoreAttuale.setPosizione(Data.PRIGIONE);
-					System.out.println(MESSAGGIO_IN_PRIGIONE);
-					giocatoreAttuale.setInPrigione(true);
-				break;
-				
-				
-				case Casella.ACQUISTABILE:
-                    Acquistabile acquistabile = (Acquistabile) casellaAttuale;
-                    if(acquistabile.isAcquistabile()){
-                        if(giocatoreAttuale.puoPermetterselo(acquistabile.getValore())){
-                          System.out.printf(ACQUISTATO, acquistabile.getNome(), acquistabile.getValore());	 
-                          giocatoreAttuale.prelevaCapitale(acquistabile.getValore());
-				          acquistabile.setAcquistabile(false);
-                          giocatoreAttuale.aggiungiProprieta(acquistabile);
-                       }
-                        else
-                    	 System.out.printf(NON_ACQUISTATO, acquistabile.getNome() );
-                    }
-                    else{
-                    	
-                    	 double prezzoDaPagare;
-                    	 Giocatore proprietario = acquistabile.trovaProprietario(tabellone.getElencoGiocatori());
-                    	 
-                    if(!giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
-                    	 if(acquistabile instanceof Terreno){
-                    		 Terreno terreno = (Terreno) acquistabile;
-                    	 if(proprietario.possiedeTuttiTerreni(terreno.getColore()))
-                    		 prezzoDaPagare = 2* terreno.getCosto();
-                    	 else
-                    		 prezzoDaPagare = terreno.getCosto();
-                    	 }
-                    	 else 
-                    		 prezzoDaPagare = acquistabile.getCosto();
-                    	 
-                    	 System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
-                    	 
-                    	 if(giocatoreAttuale.puoPermetterselo(prezzoDaPagare)){
-                    	    proprietario.aggiungiCapitale(prezzoDaPagare);
-                    	    giocatoreAttuale.prelevaCapitale(prezzoDaPagare);
-                    	 }
-                    	 else{
-                    		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
-                    		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
-                    		 giocatoreAttuale.setCapitale(0);
-                    	 } 
-                      }
-                    }
-				       
-				break;
-                    
-				
-				case Casella.SOCIETA:
-					Societa societa = (Societa) casellaAttuale;
-					if(societa.isAcquistabile()){
-                        if(giocatoreAttuale.puoPermetterselo(societa.getValore())){
-                          System.out.printf(ACQUISTATO, societa.getNome(), societa.getValore());
-                          giocatoreAttuale.prelevaCapitale(societa.getValore());
-				          societa.setAcquistabile(false);
-                          giocatoreAttuale.aggiungiProprieta(societa);
-                         }
-                        else
-                    	 System.out.printf(NON_ACQUISTATO,societa.getNome() );	
-					}
-					else{
-						double prezzoDaPagare;
-						Giocatore proprietario = societa.trovaProprietario(tabellone.getElencoGiocatori());
-						
-						if(!giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
-						if(proprietario.possiedeTutteSocieta())
-							prezzoDaPagare = societa.costoDoppio(dado);
-						else
-							prezzoDaPagare = societa.getCosto(dado);
-						
-                   	    System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
-
-						if(giocatoreAttuale.puoPermetterselo(prezzoDaPagare)){
-	                    	 proprietario.aggiungiCapitale(prezzoDaPagare);
-	                    	 giocatoreAttuale.prelevaCapitale(prezzoDaPagare);
-	                    	 }
-	                    	 else{
-	                    		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
-	                    		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
-	                    		 giocatoreAttuale.setCapitale(0);
-	                    	 }
-						}
-					}
-					break;
-					
-				case Casella.PROBABILITA:
-				     tabellone.getProbabilita().pescaCarta(giocatoreAttuale);
-				     break;
-				     
-				     
-				case Casella.IMPREVISTI:
-					 tabellone.getImprevisti().pescaCarta(giocatoreAttuale);
-					 break;
-                    
-				default:
-				break;
-			}
-			
-			
-	}	
 	
     
 	/**

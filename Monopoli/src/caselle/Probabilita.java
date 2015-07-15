@@ -1,5 +1,8 @@
 package caselle;
 
+import main.Giocatore;
+import main.Gioco;
+
 /**
  * 
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
@@ -15,6 +18,12 @@ public class Probabilita extends Casella{
 	public Probabilita(String nome, int numero) {
 		super(nome, numero);
 		super.setTipo(PROBABILITA);
+		
+	}
+
+	@Override
+	public void effetto(Giocatore giocatoreAttuale) {
+		Gioco.tabellone.getProbabilita().pescaCarta(giocatoreAttuale);
 		
 	}
 

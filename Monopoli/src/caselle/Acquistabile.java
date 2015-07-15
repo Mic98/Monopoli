@@ -1,14 +1,16 @@
 package caselle;
 
 import java.util.Vector;
+
 import main.Giocatore;
+import main.Gioco;
 
 /**
  * 
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class Acquistabile extends Casella {
+public abstract class Acquistabile extends Casella {
 
 	
 	private static final double DIECI_PER_CENTO = 0.1;
@@ -44,8 +46,6 @@ public class Acquistabile extends Casella {
 			   proprietario = giocatori.get(i);
 	   }
 	   
-	   
-	   
 	   return proprietario;
    }
    
@@ -72,6 +72,10 @@ public class Acquistabile extends Casella {
 	public void setAcquistabile(boolean acquistabile) {
 		this.acquistabile = acquistabile;
 	}
+
+
+	@Override
+	public abstract void effetto(Giocatore giocatoreAttuale);
 	
 	
 	
