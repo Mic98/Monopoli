@@ -23,7 +23,6 @@ public class Gioco {
 	private final static String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
 	private final static String MESSAGGIO_POSIZIONE = "Il tuo lancio ha dato come risultato: %d \nOra sei nella casella n: %d %s\n";
 	private final static String IN_BANCA_ROTTA = "\n\nHai finito i soldi! Sei in bancarotta, la tua partita e' finita.\n";
-	private final static String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
 	private final static String VINCITORE = "VINCITORE";
 	private final static String RIMANI_IN_PRIGIONE = "Il tuo tiro non ha avuto esito positivo rimani in prigione";
 	private final static String VINCITORI = "VINCITORI";
@@ -245,34 +244,37 @@ public class Gioco {
 		
 	}// fine gestioneTurno
 	
+	
 	/**
 	 * Le azioni da eseguire nel caso il tiro dei dadi abbia dato due risultati diversi
 	 * @param giocatoreAttuale Il giocatore che ha tirato il dado
 	 */
 	public void gestioneDadiDiversi(Giocatore giocatoreAttuale){
 		stampaPosizione(giocatoreAttuale);
-		giocatoreAttuale.setNumeroLanci(0); //Se non ha tirato doppio, resetta il contatore
+		giocatoreAttuale.setNumeroLanci(0); 
 		giocatoreAttuale.setToken(false);
 	}
+	
 	
 	/**
 	 * Le azioni da eseguire nel caso il tiro dei dadi abbia dato due risultati uguali
 	 * @param giocatoreAttuale
 	 */
 	public void gestioneTiroDoppio(Giocatore giocatoreAttuale){
-		giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1); //Se invece ha tirato doppio, aumenta il contatore
+		giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1);
 		giocatoreAttuale.setToken(true);
 		
-		if (giocatoreAttuale.getNumeroLanci() >= 3) { //Se ha tirato per 3 volte di seguito doppio
-			System.out.println(MESSAGGIO_TROPPI_LANCI); //Lo avvisa
+		if (giocatoreAttuale.getNumeroLanci() >= 3) { 
+			System.out.println(MESSAGGIO_TROPPI_LANCI); 
 			giocatoreAttuale.vaiInPrigione();
 			}
-		else { //Se ha tirato doppio, ma non e' ancora finito in prigione, lo avvisa di avere a disposizione un altro lancio
+		else { 
 			System.out.println(LANCIO_DOPPIO);
 			stampaPosizione(giocatoreAttuale);
 		}
 		
 	}
+	
 	
 	/**
 	 * Gestisce la permanenza e l'uscita del giocatore nella prigione
@@ -321,7 +323,6 @@ public class Gioco {
 					giocatoreAttuale.getPosizione(), tabellone.getCaselle()
 							.get(giocatoreAttuale.getPosizione()).getNome());
 	}
-	
 	
 	
     
