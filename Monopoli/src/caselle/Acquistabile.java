@@ -26,7 +26,6 @@ public abstract class Acquistabile extends Casella {
 	 */
 	public Acquistabile(String nome, int numero, double valore) {
 		super(nome, numero);
-		super.setTipo(ACQUISTABILE);
 		this.valore = valore;
 		acquistabile = true;
 	

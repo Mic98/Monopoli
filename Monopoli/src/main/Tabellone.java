@@ -20,6 +20,8 @@ public class Tabellone implements Serializable {
 
 	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
 	private final static String MESS_VUOTO = "\nLa lista giocatori e' vuota \n\n";
+	private final static String UN_SOLO_GIOCATORE = "\n\nE' rimasto un solo giocatore in partita\n";
+	private final static String VINCITORE = "VINCITORE";
 	
 
 	
@@ -50,11 +52,25 @@ public class Tabellone implements Serializable {
 	 */
 	public void mescolaGiocatori(Vector<Giocatore> plrs) {
 		elencoGiocatori = plrs;
-		Collections.shuffle(plrs);
+		Collections.shuffle(elencoGiocatori);
 	}
 	
-	
+	/**
+	 * Assegna il turno al giocatore successivo
+	 */
+	public void incrementaTurnoGiocatore(){
+		this.setTurnoGiocatore(getTurnoGiocatore() + 1);;
+		if (this.getTurnoGiocatore() > this.getElencoGiocatori().size() - 1)
+			this.setTurnoGiocatore(0);
+	}
 
+	public void unGiocatoreRimasto(){
+		System.out.println(UN_SOLO_GIOCATORE);
+		System.out.println(BelleStringhe.incornicia(VINCITORE) + "\n\t" + this.getElencoGiocatori().get(0).getNome());
+		this.getClassificaFinale().add(this.getElencoGiocatori().get(0));
+		this.getElencoGiocatori().remove(0);
+	}
+	
 	public void aggiungiCasella(Casella c) {
 		caselle.add(c);
 		

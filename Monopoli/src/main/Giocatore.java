@@ -68,7 +68,37 @@ public class Giocatore implements Serializable {
 		setPosizione(dest);
 
 	}
+	
+	/**
+	 * Manda il giocatore in prigione
+	 */
+    public void vaiInPrigione(){
+    	this.setPosizione(Data.PRIGIONE);
+		this.setInPrigione(true);
+		this.setToken(false);
+		this.setNumeroLanci(0);
+    }
+	
+    /**
+     * Controlla lo stato del giocatore dopo il lancio dei dadi
+     * @param risultatoLancio Risultato del tiro dei dadi
+     */
+    public void controlloFineTiro(int risultatoLancio){
+    	this.muoviGiocatore(risultatoLancio); //Muove il giocatore
+		Casella casellaAttuale = Gioco.tabellone.getCaselle().get(this.getPosizione());
+		casellaAttuale.effetto(this);
+    }
+    
+	/**
+	 * Libera il giocatore dalla prigione
+	 */
+	public void esceDiPrigione(){
+		this.setInPrigione(false); //Esce di prigione
+		this.setToken(true); //E ha a disposizione un altro lancio
+	    this.setNumeroLanci(0);
+	}
 
+	
 	/**
 	 * Aggiunge una proprieta' al vettore di giocatore
 	 * @param casella La casella da aggiungere al vettore
@@ -155,6 +185,9 @@ public class Giocatore implements Serializable {
 				}
 			}
 			
+		if(colore.equalsIgnoreCase(Data.NERO))
+			return false;
+					
 		if(colore.equalsIgnoreCase(Data.VIOLA) || colore.equalsIgnoreCase(Data.ROSA)){
 			if(contatore==2)
 			    return true;
@@ -185,10 +218,16 @@ public class Giocatore implements Serializable {
 			   
 	}
 	
+	public void finitoCapitale(){
+		this.setToken(false);
+		this.setCapitale(0);
+		sfratta();
+	}
+	
 	/**
 	 * Mette di nuovo in vendita le proprieta' di un giocatore finito in bancarotta 
 	 */
-	public void sfratta(){
+	private void sfratta(){
 		for(Acquistabile casella: proprieta){
 			casella.setAcquistabile(true);
 		}

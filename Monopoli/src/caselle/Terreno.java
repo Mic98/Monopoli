@@ -32,7 +32,6 @@ public class Terreno extends Acquistabile{
 	 */
 	public Terreno(String nome, int numero, double valore, String colore) {
 		super(nome, numero, valore);
-		super.setTipo(ACQUISTABILE);
 		this.colore = colore;
 		acquistabile = true;
 	}

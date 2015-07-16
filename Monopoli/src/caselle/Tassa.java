@@ -22,7 +22,6 @@ public class Tassa extends Casella{
 	 */
 	public Tassa (String nome, int numero, double malus){
 		super(nome, numero);
-		super.setTipo(Casella.TASSE);
 		this.malus = malus;
 	}
 
@@ -31,7 +30,7 @@ public class Tassa extends Casella{
 	}
 
 	/**
-	 * Gestisce l'arrivo del giocatore su una casella di tipo TASSA
+	 * Gestisce il passaggio di un giocatore su una casella di tipo Tassa
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {

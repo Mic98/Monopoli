@@ -14,18 +14,10 @@ import main.Giocatore;
 public abstract class Casella implements Serializable {
 	
 	
-	public static final int NEUTRA = 0,
-							TASSE = 1,
-							VAI_IN_PRIGIONE = 2, //Casella 30
-			                ACQUISTABILE = 3,
-	                        SOCIETA = 4,
-	                        PROBABILITA = 5,
-	                        IMPREVISTI = 6;
 	        
 
 	private String nome;
 	private int numero;
-	private int tipo;
 	
 	/**
 	 * Costruttore della classe Casella
@@ -51,11 +43,4 @@ public abstract class Casella implements Serializable {
 		return numero;
 	}
 
-	public int getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
-	}
 }

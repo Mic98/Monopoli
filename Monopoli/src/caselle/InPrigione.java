@@ -22,17 +22,15 @@ public class InPrigione extends Casella {
 	 */
 	public InPrigione(String nome, int numero) {
 		super(nome, numero);
-		super.setTipo(Casella.VAI_IN_PRIGIONE);
 	}
 
 	/**
-	 * Gestisce l'arrivo del giocatore su una casella di tipo InPrigione
+	 * Gestisce il passaggio di un giocatore su una casella di tipo InPrigione
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		giocatoreAttuale.setPosizione(Data.PRIGIONE);
+		giocatoreAttuale.vaiInPrigione();
 		System.out.println(MESSAGGIO_IN_PRIGIONE);
-		giocatoreAttuale.setInPrigione(true);
 		
 	}
 

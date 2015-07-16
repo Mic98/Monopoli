@@ -31,7 +31,6 @@ public class Societa extends Acquistabile {
      */
 	public Societa(String nome, int numero, double valore) {
 		super(nome, numero, valore);
-		super.setTipo(SOCIETA);
 		acquistabile = true;
 	}
 
@@ -70,7 +69,7 @@ public class Societa extends Acquistabile {
 
 
 	/**
-	 * Gestisce l'arrivo del giocatore su una casella di tipo Societa'
+	 * Gestisce il passaggio di un giocatore su una casella di tipo Societa'
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {

@@ -27,9 +27,7 @@ public class VaiInPrigione extends Carta {
 		System.out.println(getDescrizione());
 		System.out.println();
 		
-        giocatoreAttuale.setInPrigione(true);	
-        giocatoreAttuale.setToken(false);
-        giocatoreAttuale.setPosizione(Data.PRIGIONE);
+        giocatoreAttuale.vaiInPrigione();
 	}
 	
 	

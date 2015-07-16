@@ -17,10 +17,12 @@ public class Probabilita extends Casella{
 	 */
 	public Probabilita(String nome, int numero) {
 		super(nome, numero);
-		super.setTipo(PROBABILITA);
 		
 	}
 
+	/**
+	 * Gestisce il passaggio di un giocatore su una casella di tipo Probabilita'
+	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
 		Gioco.tabellone.getProbabilita().pescaCarta(giocatoreAttuale);

@@ -18,9 +18,11 @@ public class Imprevisti extends Casella{
 	 */
 	public Imprevisti(String nome, int numero){
 		super(nome, numero);
-		super.setTipo(IMPREVISTI);
 	}
 
+	/**
+	 * Gestisce il passaggio di un giocatore su una casella di tipo Imprevisto
+	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
 		Gioco.tabellone.getImprevisti().pescaCarta(giocatoreAttuale);
