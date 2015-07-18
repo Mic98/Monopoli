@@ -3,6 +3,8 @@
  */
 package caselle;
 
+import java.util.Vector;
+
 import main.Data;
 import main.Giocatore;
 import main.Gioco;
@@ -14,12 +16,10 @@ import main.Gioco;
 public class Terreno extends Acquistabile{
 	
 	
-	private final static String ACQUISTATO = "\nComplimenti! Hai acquistato %s al costo di %.2f euro\n\n";
-	private static final String NON_ACQUISTATO = "\nSpiacente! Non sei riuscito a comprare %s perche' non possiedi sufficiente capitale\n\n";
-	private static final String TERRITORIO_NEMICO = "\nTi trovi sul territorio di %s e gli devi un totale di %.2f euro\n\n";
-	private final static String CAPITALE_INSUFFICIENTE = "Non hai sufficiente capitale per pagare l'affitto a %s per questo tutti i tuoi soldi rimasti saranno dati a lui";
 	
-	private String colore;
+	private static final double DIECI_PER_CENTO = 0.1;
+	
+	
 	private boolean acquistabile; 
 
 	/**
@@ -31,73 +31,79 @@ public class Terreno extends Acquistabile{
 	 * @param colore Colore della proprieta'
 	 */
 	public Terreno(String nome, int numero, double valore, String colore) {
-		super(nome, numero, valore);
-		this.colore = colore;
+		super(nome, numero, valore, colore);
 		acquistabile = true;
 	}
 	
+	/**
+	 * @return Il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
+	 */
+	@Override
+	public double getCosto(){
+		return getValore() * DIECI_PER_CENTO;
+	}
+	
+	/**
+	 *Il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella Terreno di un'altro giocatore 
+	 * e quest'ultimo possiede tutti i terreni dello stesso colore
+	 */
+	@Override
+	public double getCostoDoppio() {
+	
+		return 2 * this.getCosto();
+	}
 	
 	
+	/**
+	 * @return true se il giocatore possiede tutti i terreni dello stesso colore
+	 */
+	@Override
+	public boolean possiedeTutti(Giocatore proprietario, Acquistabile casella) {
+		int contatore = 0;
+		Vector<Acquistabile> proprieta = proprietario.getProprieta();
+		
+		for(int i=0; i<proprieta.size(); i++)
+			if(casella.getColore().equalsIgnoreCase(proprieta.get(i).getColore()))
+				contatore++;
+			
+		
+		
+	if(casella.getColore().equalsIgnoreCase(Data.NERO))
+		    return false;
+				
+	if(casella.getColore().equalsIgnoreCase(Data.VIOLA) || this.getColore().equalsIgnoreCase(Data.ROSA)){
+		if(contatore==2)
+		    return true;
+	}
+	else
+		if(contatore==3)
+			return true;
 	
-	public String getColore() {
-		return colore;
+	return false;
 	}
-
-	public void setColore(String colore) {
-		this.colore = colore;
-	}
-
-	public boolean isAcquistabile() {
-		return acquistabile;
-	}
-
-	public void setAcquistabile(boolean acquistabile) {
-		this.acquistabile = acquistabile;
-	}
-
-
-
-
+	
+	
 	/**
 	 * Gestisce il passaggio di un giocatore su una casella di tipo Terreno
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
 		
-        if(this.isAcquistabile()){
-            if(giocatoreAttuale.puoPermetterselo(this.getValore())){
-              System.out.printf(ACQUISTATO, this.getNome(), this.getValore());	 
-              giocatoreAttuale.prelevaCapitale(this.getValore());
-	          this.setAcquistabile(false);
-              giocatoreAttuale.aggiungiProprieta(this);
-           }
-            else
-        	 System.out.printf(NON_ACQUISTATO, this.getNome() );
-        }
+        if(this.isAcquistabile())
+            giocatoreAttuale.acquistaProprieta(this);
+        
         else{
-        	
-        	 double prezzoDaPagare;
-        	 Giocatore proprietario = this.trovaProprietario(Gioco.tabellone.getElencoGiocatori());
-        	 
-        if(!giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){       
-        		 prezzoDaPagare = this.getCosto();
-        		 
-        		 if(proprietario.possiedeTuttiTerreni(this.getColore()))
-            		 prezzoDaPagare = 2* this.getCosto();
-        	 
-        	 System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
-        	 
-        	 if(giocatoreAttuale.puoPermetterselo(prezzoDaPagare)){
-        	    proprietario.aggiungiCapitale(prezzoDaPagare);
-        	    giocatoreAttuale.prelevaCapitale(prezzoDaPagare);
-        	 }
-        	 else{
-        		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
-        		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
-        		 giocatoreAttuale.setCapitale(0);
-        	 } 
+        	Giocatore proprietario = this.trovaProprietario(Gioco.tabellone.getElencoGiocatori());
+            double prezzoDaPagare = checkCosto(giocatoreAttuale, proprietario);
+             
+        	giocatoreAttuale.transazione(proprietario, prezzoDaPagare);
           }
         }
-	}
+	
+	
+	
+
+
+
 
 }

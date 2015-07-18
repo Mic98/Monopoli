@@ -28,9 +28,7 @@ public class RitiraCredito extends Carta {
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		System.out.println();
-		System.out.println(getDescrizione());
-		System.out.println();
+		stampaDescrizione();
 		
 		giocatoreAttuale.aggiungiCapitale(daRitirare);
 		

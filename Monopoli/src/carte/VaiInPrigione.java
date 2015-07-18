@@ -23,9 +23,7 @@ public class VaiInPrigione extends Carta {
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		System.out.println();
-		System.out.println(getDescrizione());
-		System.out.println();
+		stampaDescrizione();
 		
         giocatoreAttuale.vaiInPrigione();
 	}

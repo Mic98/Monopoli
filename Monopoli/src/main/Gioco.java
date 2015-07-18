@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.io.File;
@@ -43,11 +40,11 @@ public class Gioco {
 			VOCE_TURNO02, VOCE_TURNO03, VOCE_TURNO04, VOCE_TURNO05 };
 
 	// ----------NUOVA PARTITA--------------------
-	private final static String RICHIESTA_NOME_GIOCATORE = "Nome giocatore: ";
-	private final static String ERR_ESISTE_GIA = "Il nome inserito e' gia' esistente, inserirne un altro";
+	private final static String RICHIESTA_NOME_GIOCATORE = "\n\nNome giocatore: ";
+	private final static String ERR_ESISTE_GIA = "Il nome inserito e' gia' esistente, inserirne un altro\n";
 	private final static String FINE_INSERIMENTO_GIOCATORI = "Ci sono altri giocatori?";
-	private final static String ERRORE_POCHI_GIOCATORI = "ATTENZIONE!!! Minimo 2 giocatori!";
-	private final static String ERRORE_TROPPI_GIOCATORI = "ATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
+	private final static String ERRORE_POCHI_GIOCATORI = "\nATTENZIONE!!! Minimo 2 giocatori!";
+	private final static String ERRORE_TROPPI_GIOCATORI = "\nATTENZIONE!!! Massimo 6 giocatori! La partita inziera'";
 
 	// ----------SALVATAGGIO E CARICAMENTI DATI-------------------
 	private final static String PARTITA_FILE = "Partita.dat";
@@ -85,9 +82,9 @@ public class Gioco {
 		while (!ok) {
 			String nome;
 			do{
-			nome = MyUtil.riceviString("\n\n"+RICHIESTA_NOME_GIOCATORE);
+			nome = MyUtil.riceviString(RICHIESTA_NOME_GIOCATORE);
 			if(tabellone.esisteGia(nome, nuoviGiocatori))
-				System.out.printf(ERR_ESISTE_GIA + "%n");
+				System.out.printf(ERR_ESISTE_GIA);
 			}
 			while(tabellone.esisteGia(nome,nuoviGiocatori));
 			
@@ -107,7 +104,7 @@ public class Gioco {
 
 		}
 
-		tabellone.mescolaGiocatori(nuoviGiocatori);
+		tabellone.mescolaGiocatori(nuoviGiocatori);		
 		dado = new Dado();
 		partita();
 	}
@@ -116,7 +113,7 @@ public class Gioco {
 	/**
 	 * Metodo di gioco. Qui e' presente il ciclo infinito del gioco
 	 */
-	public void partita() {
+	private void partita() {
 		boolean inGame = true;
 		
 		while (inGame && tabellone.getElencoGiocatori().size()>1) {
@@ -220,7 +217,7 @@ public class Gioco {
 	 * @param giocatoreAttuale
 	 *            Il giocatore che puo' giocare in questo turno
 	 */
-	public void gestioneTurno(Giocatore giocatoreAttuale) {
+	private void gestioneTurno(Giocatore giocatoreAttuale) {
 		
 		dado.lancioDadi();
 		
@@ -232,10 +229,10 @@ public class Gioco {
 			if (!dado.sonoUguali() || giocatoreAttuale.isInPrigione()) 
 				gestioneDadiDiversi(giocatoreAttuale);
 			else 
-				gestioneTiroDoppio(giocatoreAttuale);	  
+				gestioneDadiUguali(giocatoreAttuale);	  
 		  }	
 		
-		} else  //Se e' in prigione
+		} else 
 			gestionePrigione(giocatoreAttuale);
 		
 		if(giocatoreAttuale.inBancaRotta())
@@ -249,7 +246,7 @@ public class Gioco {
 	 * Le azioni da eseguire nel caso il tiro dei dadi abbia dato due risultati diversi
 	 * @param giocatoreAttuale Il giocatore che ha tirato il dado
 	 */
-	public void gestioneDadiDiversi(Giocatore giocatoreAttuale){
+	private void gestioneDadiDiversi(Giocatore giocatoreAttuale){
 		stampaPosizione(giocatoreAttuale);
 		giocatoreAttuale.setNumeroLanci(0); 
 		giocatoreAttuale.setToken(false);
@@ -260,7 +257,7 @@ public class Gioco {
 	 * Le azioni da eseguire nel caso il tiro dei dadi abbia dato due risultati uguali
 	 * @param giocatoreAttuale
 	 */
-	public void gestioneTiroDoppio(Giocatore giocatoreAttuale){
+	private void gestioneDadiUguali(Giocatore giocatoreAttuale){
 		giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1);
 		giocatoreAttuale.setToken(true);
 		
@@ -281,7 +278,7 @@ public class Gioco {
 	 * 
 	 * @param giocatoreAttuale Giocatore in prigione
 	 */
-	public void gestionePrigione(Giocatore giocatoreAttuale){
+	private void gestionePrigione(Giocatore giocatoreAttuale){
 		System.out.printf(MESSAGGIO_TASSA_PRIGIONE, Data.TASSA_PRIGIONE);
 		
 		if(giocatoreAttuale.puoPermetterselo(Data.TASSA_PRIGIONE)){
@@ -297,6 +294,8 @@ public class Gioco {
 			giocatoreAttuale.setNumeroLanci(giocatoreAttuale.getNumeroLanci() + 1);
 		}
 	   }
+		else
+			giocatoreAttuale.finitoCapitale();
 			
 	}
 
@@ -305,9 +304,9 @@ public class Gioco {
 	 * Gestisce l'uscita del giocatore dalla partita a causa di banca rotta
 	 * @param giocatoreAttuale il giocatore perdente
 	 */
-	public void gestioneBancaRotta(Giocatore giocatoreAttuale){
+	private void gestioneBancaRotta(Giocatore giocatoreAttuale){
 		System.out.println(IN_BANCA_ROTTA);
-		giocatoreAttuale.finitoCapitale();
+
 		tabellone.getClassificaFinale().add(giocatoreAttuale);
 		tabellone.getElencoGiocatori().remove(giocatoreAttuale);
 	}
@@ -317,7 +316,7 @@ public class Gioco {
 	 * 
 	 * @param giocatoreAttuale Giocatore di cui si vuole sapere la posizione
 	 */
-	public void stampaPosizione(Giocatore giocatoreAttuale){
+	private void stampaPosizione(Giocatore giocatoreAttuale){
 		//Aggiorna il giocatore sulla sua posizione attuale
 				System.out.printf(MESSAGGIO_POSIZIONE, dado.risultato(),
 					giocatoreAttuale.getPosizione(), tabellone.getCaselle()
@@ -330,7 +329,7 @@ public class Gioco {
 	 * 
 	 * @return Messaggio a schermo contenente l'elenco dei vincitori della partita
 	 */
-	public String dichiaraVincitori(){
+	private String dichiaraVincitori(){
 		StringBuilder visualizza = new StringBuilder();
 	
 		Vector<Giocatore> vincenti = tabellone.trovaVincitori();
@@ -339,7 +338,7 @@ public class Gioco {
 		if(vincenti.size() ==1)
 		   visualizza.append(BelleStringhe.incornicia(VINCITORE));
 		for(int i=0; i<vincenti.size(); i++)
-			visualizza.append("\t" + vincenti.get(i).getNome());
+			visualizza.append("\n\t" + vincenti.get(i).getNome() + "\n\n");
 		
 		
 		
@@ -375,7 +374,7 @@ public class Gioco {
 	/**
 	 * Salva la partita in corso
 	 */
-	public void salvaPartita() {
+	private void salvaPartita() {
 		if (!tabellone.getElencoGiocatori().isEmpty()) {
 			ServizioFile.salvaSingoloOggetto(filePartita, tabellone);
 			System.out.println(FILE_SALVATI);

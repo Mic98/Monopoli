@@ -13,9 +13,9 @@ import main.Gioco;
 public abstract class Acquistabile extends Casella {
 
 	
-	private static final double DIECI_PER_CENTO = 0.1;
 	private double valore;
 	private boolean acquistabile;
+	private String colore;
 	
 	/**
 	 * Costruttore della classe Acquistabile
@@ -24,9 +24,10 @@ public abstract class Acquistabile extends Casella {
 	 * @param numero Posizione della stazione sul tabellone
 	 * @param valore Valore della stazione
 	 */
-	public Acquistabile(String nome, int numero, double valore) {
+	public Acquistabile(String nome, int numero, double valore, String colore) {
 		super(nome, numero);
 		this.valore = valore;
+		this.colore = colore;
 		acquistabile = true;
 	
 	}
@@ -48,14 +49,34 @@ public abstract class Acquistabile extends Casella {
 	   return proprietario;
    }
    
-	/**
-	 * 
-	 * @return Il prezzo da pagare se un giocatore finisce su una stazione o su un terreno avversario
-	 */
-	public double getCosto(){
-		return valore * DIECI_PER_CENTO;
-	}
+   /**
+    * 
+    * @param giocatoreAttuale Il giocatore che deve pagare
+    * @param proprietario Il proprietario del terreno 
+    * @return L'importo dovuto
+    */
+   public double checkCosto(Giocatore giocatoreAttuale, Giocatore proprietario){
+	   double prezzoDaPagare = 0;
+	        	 
+  		 if(possiedeTutti(proprietario,this))
+      		 prezzoDaPagare = this.getCostoDoppio();
+  		 else
+  			 prezzoDaPagare = this.getCosto();
+   
+	   
+	   return prezzoDaPagare;
+   }
+   
 
+	@Override
+	public abstract void effetto(Giocatore giocatoreAttuale);
+	
+	public abstract double getCosto();
+	
+	public abstract double getCostoDoppio();
+
+	public abstract boolean possiedeTutti(Giocatore propietario, Acquistabile casella);
+	
 	public double getValore() {
 		return valore;
 	}
@@ -71,10 +92,16 @@ public abstract class Acquistabile extends Casella {
 	public void setAcquistabile(boolean acquistabile) {
 		this.acquistabile = acquistabile;
 	}
+	
+	public String getColore() {
+		return colore;
+	}
+
+	public void setColore(String colore) {
+		this.colore = colore;
+	}
 
 
-	@Override
-	public abstract void effetto(Giocatore giocatoreAttuale);
 	
 	
 	

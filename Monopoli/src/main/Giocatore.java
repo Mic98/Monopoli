@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.io.*;
@@ -16,8 +13,12 @@ import caselle.*;
 
 public class Giocatore implements Serializable {
 
-	private final static String GIOCATORE = "%n%n GIOCATORE: %s %n";
+	private final static String GIOCATORE = "\n\n GIOCATORE: %s \n";
 	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus\n";
+	private final static String ACQUISTATO = "\nComplimenti! Hai acquistato %s al costo di %.2f euro\n\n";
+	private final static String NON_ACQUISTATO = "\nSpiacente! Non sei riuscito a comprare %s perche' non possiedi sufficiente capitale\n\n";
+	private final static String TERRITORIO_NEMICO = "\nTi trovi sul territorio di %s e gli devi un totale di %.2f euro\n\n";
+	private final static String CAPITALE_INSUFFICIENTE = "Non hai sufficiente denaro per pagare l'affitto a %s. Tutti i tuoi soldi rimasti saranno dati al proprietario della societa'";
 
 
 
@@ -103,8 +104,48 @@ public class Giocatore implements Serializable {
 	 * Aggiunge una proprieta' al vettore di giocatore
 	 * @param casella La casella da aggiungere al vettore
 	 */
-	public void aggiungiProprieta(Acquistabile casella) {
+	private void aggiungiProprieta(Acquistabile casella) {
 		proprieta.add(casella);
+	}
+	
+	/**
+	 * Gestisce l'acquisto di una casella
+	 * @param casella Terreno o Societa' da acquistare
+	 */
+	public void acquistaProprieta(Acquistabile casella){
+		
+		 if(casella.isAcquistabile()){
+	            if(this.puoPermetterselo(casella.getValore())){
+	              System.out.printf(ACQUISTATO, casella.getNome(), casella.getValore());	 
+	              this.prelevaCapitale(casella.getValore());
+	              casella.setAcquistabile(false);
+	              this.aggiungiProprieta(casella);
+	           }
+		 }
+	            else
+	        	 System.out.printf(NON_ACQUISTATO, casella.getNome() );
+	}
+	
+	/**
+	 * Gestisce una transazione tra il proprietario di un terreno e il giocatore che ci è capitato sopra
+	 * @param proprietario Il proprietario del terreno
+	 * @param prezzoDaPagare L'importo dovuto
+	 */
+	public void transazione(Giocatore proprietario, double prezzoDaPagare){
+		
+	    if(!(this.getNome().equalsIgnoreCase(proprietario.getNome()))){
+	       System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
+	    	
+		   if(this.puoPermetterselo(prezzoDaPagare)){
+       	      proprietario.aggiungiCapitale(prezzoDaPagare);
+       	      this.prelevaCapitale(prezzoDaPagare);
+       	     }
+       	   else{
+       		  System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
+       		  proprietario.aggiungiCapitale(this.getCapitale());
+       		  this.finitoCapitale();
+       	     }
+	     }
 	}
 
 	/**
@@ -164,64 +205,16 @@ public class Giocatore implements Serializable {
 	 * @return true se il giocatore puo' sostenere la spesa
 	 */
 	public boolean puoPermetterselo(double costoDaSostenere){
-		if(this.capitale <= costoDaSostenere)
+		if(this.capitale < costoDaSostenere)
 			return false;
 		
 		return true;
 	}
 	
-	/**
-	 * 
-	 * @param colore Colore della casella su cui l'avversario che deve pagare si trova
-	 * @return true se il proprietario possiede tutti i terreni di un dato colore
-	 */
-	public boolean possiedeTuttiTerreni(String colore){
-		int contatore = 0;
-			for(int i=0; i<proprieta.size(); i++){
-				if(proprieta.get(i) instanceof Terreno){
-				Terreno terreno = (Terreno) proprieta.get(i);
-				if(colore.equalsIgnoreCase(terreno.getColore()))
-					contatore++;
-				}
-			}
-			
-		if(colore.equalsIgnoreCase(Data.NERO))
-			return false;
-					
-		if(colore.equalsIgnoreCase(Data.VIOLA) || colore.equalsIgnoreCase(Data.ROSA)){
-			if(contatore==2)
-			    return true;
-		}
-		else
-			if(contatore==3)
-				return true;
-		
-		return false;
-			
-	}
-	
-	/**
-	 * 
-	 * @return true se il giocatore possiede entrambe le societa'
-	 */
-	public boolean possiedeTutteSocieta(){
-		int contatore = 0;
-		
-		for(int i = 0; i<proprieta.size(); i++)
-		    if(proprieta.get(i) instanceof Societa)
-				   contatore++;
-		   
-	    if(contatore==2)
-	    	return true;
-	    
-	    return false;
-			   
-	}
-	
 	public void finitoCapitale(){
 		this.setToken(false);
 		this.setCapitale(0);
-		sfratta();
+		this.sfratta();
 	}
 	
 	/**
@@ -295,6 +288,10 @@ public class Giocatore implements Serializable {
 
 	public void setToken(boolean token) {
 		this.token = token;
+	}
+	
+	public Vector<Acquistabile> getProprieta(){
+		return proprieta;
 	}
 
 	

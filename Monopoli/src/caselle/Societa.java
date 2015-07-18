@@ -1,5 +1,7 @@
 package caselle;
 
+import java.util.Vector;
+
 import main.Dado;
 import main.Giocatore;
 import main.Gioco;
@@ -11,11 +13,6 @@ import main.Gioco;
  */
 public class Societa extends Acquistabile {
 
-	private final static String ACQUISTATO = "\nComplimenti! Hai acquistato %s al costo di %.2f euro\n\n";
-	private static final String NON_ACQUISTATO = "\nSpiacente! Non sei riuscito a comprare %s perche' non possiedi sufficiente capitale\n\n";
-	private static final String TERRITORIO_NEMICO = "\nTi trovi sul territorio di %s e gli devi un totale di %.2f euro\n\n";
-	private final static String CAPITALE_INSUFFICIENTE = "Non hai sufficiente capitale per pagare l'affitto a %s per questo tutti i tuoi soldi rimasti saranno dati a lui";
-	
 
 	private static final double MOLTIPLICATORE = 4;
 	private static final double MOLTIPLICATORE_DOPPIO = 10;
@@ -29,8 +26,8 @@ public class Societa extends Acquistabile {
 	 * @param numero Posizione della societa' sul tabellone
 	 * @param valore Valore della societa'
      */
-	public Societa(String nome, int numero, double valore) {
-		super(nome, numero, valore);
+	public Societa(String nome, int numero, double valore, String colore) {
+		super(nome, numero, valore, colore);
 		acquistabile = true;
 	}
 
@@ -41,31 +38,42 @@ public class Societa extends Acquistabile {
 	 * @return Il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore
 	 *         e non le possiede entrambe
 	 */
-	public double getCosto(Dado dado){
+	@Override
+	public double getCosto(){
 		
 		
-		return MOLTIPLICATORE * dado.risultato();
+		return MOLTIPLICATORE * Gioco.dado.risultato();
+	}
+	
+	
+	/**
+	 * Il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore 
+	 * e quest'ultimo le possiede entrambe
+	 */
+	@Override
+	public double getCostoDoppio() {
+		
+		return MOLTIPLICATORE_DOPPIO * Gioco.dado.risultato();
 	}
 	
 	/**
-	 * 
-	 * @param dado I dadi lanciati dal giocatore
-	 * @return Il prezzo da pagare se un giocatore dopo il tiro dei dadi finisce su una casella societa' di un'altro giocatore 
-	 *         e le possiede entrambe
+	 * @return true se il giocatore possiede tutte le societa'
 	 */
-	public double costoDoppio(Dado dado){
+	@Override
+	public boolean possiedeTutti(Giocatore giocatoreAttuale, Acquistabile casella) {
+		int contatore = 0;
+		Vector<Acquistabile> proprieta = giocatoreAttuale.getProprieta();
 		
+		for(int i=0; i<proprieta.size(); i++)
+			if(casella.getColore().equalsIgnoreCase(proprieta.get(i).getColore()))
+				contatore++;
 		
-		return MOLTIPLICATORE_DOPPIO * dado.risultato();
+		if(contatore==2)
+			return true;
+		
+		return false;
 	}
 	
-	public boolean isAcquistabile() {
-		return acquistabile;
-	}
-
-	public void setAcquistabile(boolean acquistabile) {
-		this.acquistabile = acquistabile;
-	}
 
 
 	/**
@@ -73,41 +81,20 @@ public class Societa extends Acquistabile {
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		if(this.isAcquistabile()){
-            if(giocatoreAttuale.puoPermetterselo(this.getValore())){
-              System.out.printf(ACQUISTATO, this.getNome(), this.getValore());
-              giocatoreAttuale.prelevaCapitale(this.getValore());
-	          this.setAcquistabile(false);
-              giocatoreAttuale.aggiungiProprieta(this);
-             }
-            else
-        	 System.out.printf(NON_ACQUISTATO,this.getNome() );	
-		}
+		
+		if(this.isAcquistabile())
+            giocatoreAttuale.acquistaProprieta(this);
+		
 		else{
-			double prezzoDaPagare;
 			Giocatore proprietario = this.trovaProprietario(Gioco.tabellone.getElencoGiocatori());
+			double prezzoDaPagare = checkCosto(giocatoreAttuale, proprietario);
 			
-			if(!giocatoreAttuale.getNome().equalsIgnoreCase(proprietario.getNome())){
-			if(proprietario.possiedeTutteSocieta())
-				prezzoDaPagare = this.costoDoppio(Gioco.dado);
-			else
-				prezzoDaPagare = this.getCosto(Gioco.dado);
-			
-       	    System.out.printf(TERRITORIO_NEMICO, proprietario.getNome(), prezzoDaPagare);
-
-			if(giocatoreAttuale.puoPermetterselo(prezzoDaPagare)){
-            	 proprietario.aggiungiCapitale(prezzoDaPagare);
-            	 giocatoreAttuale.prelevaCapitale(prezzoDaPagare);
-            	 }
-            	 else{
-            		 System.out.printf(CAPITALE_INSUFFICIENTE, proprietario.getNome());
-            		 proprietario.aggiungiCapitale(giocatoreAttuale.getCapitale());
-            		 giocatoreAttuale.setCapitale(0);
-            	 }
+       	    giocatoreAttuale.transazione(proprietario, prezzoDaPagare);
 			}
 		}
 		
-	}
+
+
 
 	
 	

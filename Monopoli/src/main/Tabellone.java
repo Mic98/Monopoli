@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.util.Collections;
@@ -33,6 +30,9 @@ public class Tabellone implements Serializable {
 	private int turnoGiocatore;
 	private int turniAttuali; 
 
+	/**
+	 * Costruttore della classe Tabellone
+	 */
 	public Tabellone() {
 	
 		caselle = new Vector<Casella>();
@@ -64,9 +64,12 @@ public class Tabellone implements Serializable {
 			this.setTurnoGiocatore(0);
 	}
 
+	/**
+	 * Dichiara il nome del giocatore vincente nel caso ne sia rimasto solo uno in gioco
+	 */
 	public void unGiocatoreRimasto(){
 		System.out.println(UN_SOLO_GIOCATORE);
-		System.out.println(BelleStringhe.incornicia(VINCITORE) + "\n\t" + this.getElencoGiocatori().get(0).getNome());
+		System.out.println(BelleStringhe.incornicia(VINCITORE) + "\n\t" + this.getElencoGiocatori().get(0).getNome() + "\n\n");
 		this.getClassificaFinale().add(this.getElencoGiocatori().get(0));
 		this.getElencoGiocatori().remove(0);
 	}
@@ -77,7 +80,7 @@ public class Tabellone implements Serializable {
 	}
 	
 	/**
-	 * Verifica che l'input dell'utente non sia gia' stato inserito
+	 * Verifica che il nome inserito dall'utente non esista giˆ
 	 *  
 	 * @param daControllare Input dell'utente da controllare
 	 * @param nuoviGiocatori Vettore di nomi gia' inseriti
@@ -188,7 +191,7 @@ public class Tabellone implements Serializable {
 
 
 	/**
-	 * restituisce informazioni essenziali di tutti i giocatori in partita
+	 * Restituisce informazioni essenziali di tutti i giocatori in partita
 	 */
 	public String toString() {
 		StringBuilder visualizza = new StringBuilder();

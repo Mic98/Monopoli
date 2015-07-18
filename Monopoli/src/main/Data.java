@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.util.Collections;
@@ -19,8 +16,8 @@ public class Data {
 	
 	//------------------IMPOSTAZIONI DI DEFAULT-------------------
 	public final static int NUMERO_TURNI = 20;
-	public final static int POSIZIONE_DEFAULT = 0;
-	public final static int CAPITALE_DEFAULT = 5000;
+	public final static int POSIZIONE_DEFAULT = 10;
+	public final static int CAPITALE_DEFAULT = 100;
 	public final static int PRIGIONE = 10;
 	public final static double BONUS_VIA = 500;
 	public final static double TASSA_PRIGIONE = 50;
@@ -47,6 +44,7 @@ public class Data {
 	public final static String VERDE = "verde";
 	public final static String VIOLA= "viola";
 	public final static String NERO = "nero";
+	public final static String BIANCO = "bianco";
 	
 	//-------------------VALORI PROPRIETA'----------------------
 	private final static double prezzoVicoloCorto = 60;
@@ -136,9 +134,9 @@ public class Data {
 	
 	//----------------------IMPREVISTI-----------------------------
 	private final static String IMPREVISTI_01 ="Andate sino a Largo Colombo: se passate dal \"VIA!\", ritirate 500 euro dalla banca.";
-	private final static String IMPREVISTI_02 ="Andate in prigione direttamente, senza passare dal \"VIA!\".";
+	private final static String IMPREVISTI_02 ="Andate in prigione direttamente, senza passare dal \"VIA!\"";
 	private final static String IMPREVISTI_03 ="Fate tre passi indietro.";
-	private final static String IMPREVISTI_04 ="Andate sino a Via Accademia: se passate dal \"VIA!\n, ritirate 500 euro dalla banca.";
+	private final static String IMPREVISTI_04 ="Andate sino a Via Accademia: se passate dal \"VIA!\", ritirate 500 euro dalla banca.";
 	private final static String IMPREVISTI_05 ="Versate in banca 50 euro per beneficienza.";
 	private final static String IMPREVISTI_06 ="Maturano le cedole delle vostre cartelle di rendita: ritirate 375 euro dalla banca.";
 	private final static String IMPREVISTI_07 ="La banca vi paga gli interessi del vostro conto corrente: ritirate 125 euro.";
@@ -181,7 +179,7 @@ public class Data {
 		
 		temporaneo.aggiungiCasella(new Neutra(CASELLA_10, 10));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_11, 11, prezzoViaAccademia, ARANCIONE));
-		temporaneo.aggiungiCasella(new Societa(CASELLA_12, 12, valoreSocietaElettrica));
+		temporaneo.aggiungiCasella(new Societa(CASELLA_12, 12, valoreSocietaElettrica, BIANCO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_13, 13, prezzoCorsoAteneo, ARANCIONE));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_14, 14, prezzoPiazzaUniversita, ARANCIONE));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_15, 15, valoreStazioneOvest, NERO));
@@ -198,7 +196,7 @@ public class Data {
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_25, 25, valoreStazioneNord, NERO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_26, 26, prezzoVialeCostantino , GIALLO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_27, 27, prezzoVialeTraiano , GIALLO));
-		temporaneo.aggiungiCasella(new Societa(CASELLA_28, 28, valoreSocietaAcquaPotabile));
+		temporaneo.aggiungiCasella(new Societa(CASELLA_28, 28, valoreSocietaAcquaPotabile, BIANCO));
 		temporaneo.aggiungiCasella(new Terreno(CASELLA_29, 29, prezzoPiazzaGiulioCesare , GIALLO));
 		
 		temporaneo.aggiungiCasella(new InPrigione(CASELLA_30, 30));
@@ -252,7 +250,7 @@ public class Data {
 		temporaneo.aggiungiCarta(new PagaDebito(PROBABILITA_03, PREMIO_ASSICURAZIONE));
 		temporaneo.aggiungiCarta(new VaiA(PROBABILITA_04, 0));
 		temporaneo.aggiungiCarta(new RitiraCredito(PROBABILITA_05, CREDITORI));
-		temporaneo.aggiungiCarta(new RitiraCredito(PROBABILITA_06, CAUSA));
+		temporaneo.aggiungiCarta(new PagaDebito(PROBABILITA_06, CAUSA));
 		temporaneo.aggiungiCarta(new VaiInPrigione(PROBABILITA_07));
 		temporaneo.aggiungiCarta(new Compleanno(PROBABILITA_08, REGALO));
 		

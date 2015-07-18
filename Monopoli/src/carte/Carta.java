@@ -30,6 +30,11 @@ public abstract class Carta implements Serializable {
 	 */
 	public abstract void effetto(Giocatore giocatoreAttuale);
 
+	public void stampaDescrizione(){
+		System.out.println();
+		System.out.println(getDescrizione());
+		System.out.println();
+	}
 
 	public String getDescrizione() {
 		return descrizione;

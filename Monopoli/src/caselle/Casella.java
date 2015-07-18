@@ -1,6 +1,3 @@
-/**
- * 
- */
 package caselle;
 
 import java.io.*;

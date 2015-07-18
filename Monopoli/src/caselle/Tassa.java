@@ -10,6 +10,7 @@ import main.Giocatore;
 public class Tassa extends Casella{
 	
 	private final static String CASELLA_TASSA = "\nSei finito sulla casella %s, devi %.2f euro alla banca \n\n";
+	private final static String CAPITALE_INSUFFICIENTE = "\nNon hai sufficiente denaro per pagare la %s\n";
 	
 	private double malus;
 	
@@ -34,8 +35,13 @@ public class Tassa extends Casella{
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		giocatoreAttuale.prelevaCapitale(this.getMalus());
-		System.out.printf(CASELLA_TASSA, this.getNome(), this.getMalus());
-		
+		if(giocatoreAttuale.puoPermetterselo(getMalus())){
+		    giocatoreAttuale.prelevaCapitale(this.getMalus());
+		    System.out.printf(CASELLA_TASSA, this.getNome(), this.getMalus());
+		}
+		else{
+			giocatoreAttuale.finitoCapitale();
+		    System.out.printf(CAPITALE_INSUFFICIENTE, getNome());
+		}
 	}
 }
