@@ -17,7 +17,7 @@ public class Data {
 	//------------------IMPOSTAZIONI DI DEFAULT-------------------
 	public final static int NUMERO_TURNI = 20;
 	public final static int POSIZIONE_DEFAULT = 0;
-	public final static int CAPITALE_DEFAULT = 100;
+	public final static int CAPITALE_DEFAULT = 5000;
 	public final static int PRIGIONE = 10;
 	public final static double BONUS_VIA = 500;
 	public final static double TASSA_PRIGIONE = 50;

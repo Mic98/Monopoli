@@ -16,7 +16,7 @@ public class Main {
 	private final static String FINE_PARTITA = "La partita e' finita! Un'altra? ";
 
 	// ------------MENU PRINCIPALE---------------
-	private final static String TITOLO_INIZIALE = "Benvenuti nel gioco del Monopoleh!";
+	private final static String TITOLO_INIZIALE = "Benvenuti nel gioco del Monopoli!";
 	private final static String VOCE_INIZIALE01 = "Nuova partita";
 	private final static String VOCE_INIZIALE02 = "Riprendi partita";
 	private final static String[] VOCI_MENU_INIZIALE = { VOCE_INIZIALE01,
