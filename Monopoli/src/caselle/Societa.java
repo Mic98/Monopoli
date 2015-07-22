@@ -56,23 +56,6 @@ public class Societa extends Acquistabile {
 		return MOLTIPLICATORE_DOPPIO * Gioco.dado.risultato();
 	}
 	
-	/**
-	 * @return true se il giocatore possiede tutte le societa'
-	 */
-	@Override
-	public boolean possiedeTutti(Giocatore giocatoreAttuale, Acquistabile casella) {
-		int contatore = 0;
-		Vector<Acquistabile> proprieta = giocatoreAttuale.getProprieta();
-		
-		for(int i=0; i<proprieta.size(); i++)
-			if(casella.getColore().equalsIgnoreCase(proprieta.get(i).getColore()))
-				contatore++;
-		
-		if(contatore==2)
-			return true;
-		
-		return false;
-	}
 	
 
 

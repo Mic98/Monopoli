@@ -61,7 +61,7 @@ public class Data {
 	private final static double prezzoViaMarcoPolo = 220;
 	private final static double prezzoCorsoMagellano = 220;
 	private final static double prezzoLargoColombo = 240;
-	private final static double prezzoVialeCostantino = 260;
+	private final static double prezzoVialeCostantino = 280;
 	private final static double prezzoVialeTraiano = 260;
 	private final static double prezzoPiazzaGiulioCesare = 280;
 	private final static double prezzoViaRoma = 300;
@@ -96,7 +96,7 @@ public class Data {
 	private final static String CASELLA_12 = "SOCIETA' ELETTRICA";
 	private final static String CASELLA_13 = "CORSO ATENEO";
 	private final static String CASELLA_14 = "PIAZZA UNIVERSITA";
-	private final static String CASELLA_15 = "STAVIONE OVEST";
+	private final static String CASELLA_15 = "STAZIONE OVEST";
 	private final static String CASELLA_16 = "VIA VERDI";
 	private final static String CASELLA_17 = "PROBABILITA";
 	private final static String CASELLA_18 = "CORSO RAFFAELLO";

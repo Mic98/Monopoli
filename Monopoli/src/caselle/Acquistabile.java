@@ -2,6 +2,7 @@ package caselle;
 
 import java.util.Vector;
 
+import main.Data;
 import main.Giocatore;
 import main.Gioco;
 
@@ -74,8 +75,34 @@ public abstract class Acquistabile extends Casella {
 	public abstract double getCosto();
 	
 	public abstract double getCostoDoppio();
+	
 
-	public abstract boolean possiedeTutti(Giocatore propietario, Acquistabile casella);
+	/**
+	 * @return true se il giocatore possiede tutti i terreni dello stesso colore o tutte e due le societa'
+	 */
+	public boolean possiedeTutti(Giocatore proprietario, Acquistabile casella) {
+		int contatore = 0;
+		Vector<Acquistabile> proprieta = proprietario.getProprieta();
+		
+		for(int i=0; i<proprieta.size(); i++)
+			if(casella.getColore().equalsIgnoreCase(proprieta.get(i).getColore()))
+				contatore++;
+			
+		System.out.println(contatore);
+		
+	if(casella.getColore().equalsIgnoreCase(Data.NERO))
+		    return false;
+				
+	if(casella.getColore().equalsIgnoreCase(Data.VIOLA) || this.getColore().equalsIgnoreCase(Data.ROSA) || this.getColore().equalsIgnoreCase(Data.BIANCO)){
+		if(contatore==2)
+		    return true;
+	}
+	else
+		if(contatore==3)
+			return true;
+	
+	return false;
+	}
 	
 	public double getValore() {
 		return valore;

@@ -54,9 +54,11 @@ public class Gioco {
 	private final static String NESSUNA_PARTITA_SALVATA = "\nNon c'e' nessuna partita preesistente";
 	private final static String PARTITA_SALVATA = "La partita e' stata salvata, vuoi continuare a giocare?";
 	private final static String NIENTE_DA_SALVARE = "Non esistono dati da salvare";
+	private final static String IMPOSSIBILE_SALVARE = "Impossibile salvare, puoi salvare solo nel caso tu debba ancora tirare\n\n";
 
 		
 	private final static File filePartita = new File(PARTITA_FILE);
+	
 
 	public static Tabellone tabellone = new Tabellone();
 	public static Dado dado;
@@ -130,6 +132,8 @@ public class Gioco {
 			int scelta;
 			boolean passa;
 			
+			
+			
 			do {
 				System.out.print("\n\n");
 				scelta = menuGioco.scegli();
@@ -163,13 +167,18 @@ public class Gioco {
 					break;
 					
 				case 5:
-					salvaPartita();
-					if(!MyUtil.yesOrNo(PARTITA_SALVATA)){ 
-						giocatoreAttuale.setToken(false);
-						passa = true;
-						inGame = false;
-						
+					if(giocatoreAttuale.hasToken()){
+					   salvaPartita();
+					   if(!MyUtil.yesOrNo(PARTITA_SALVATA)){ 
+						 giocatoreAttuale.setToken(false);
+						 passa = true;
+						 inGame = false;
+					 }
 					}
+					else
+						System.out.println(IMPOSSIBILE_SALVARE);
+						
+					
 					break;
 					
 					
@@ -375,12 +384,12 @@ public class Gioco {
 	 * Salva la partita in corso
 	 */
 	private void salvaPartita() {
-		if (!tabellone.getElencoGiocatori().isEmpty()) {
-			ServizioFile.salvaSingoloOggetto(filePartita, tabellone);
-			System.out.println(FILE_SALVATI);
-		} else
-			System.out.printf(NIENTE_DA_SALVARE);
-
-	}// fine salvaPartita
-
+			   if (!tabellone.getElencoGiocatori().isEmpty()) {
+			  ServizioFile.salvaSingoloOggetto(filePartita, tabellone);
+			  System.out.println(FILE_SALVATI);
+		 } else
+			  System.out.printf(NIENTE_DA_SALVARE);
+		
+		
+	}
 }

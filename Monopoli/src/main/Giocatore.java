@@ -85,9 +85,11 @@ public class Giocatore implements Serializable {
      * @param risultatoLancio Risultato del tiro dei dadi
      */
     public void controlloFineTiro(int risultatoLancio){
-    	this.muoviGiocatore(risultatoLancio); //Muove il giocatore
-		Casella casellaAttuale = Gioco.tabellone.getCaselle().get(this.getPosizione());
-		casellaAttuale.effetto(this);
+    	if(!this.inBancaRotta()){
+    	   this.muoviGiocatore(risultatoLancio); //Muove il giocatore
+		   Casella casellaAttuale = Gioco.tabellone.getCaselle().get(this.getPosizione());
+		   casellaAttuale.effetto(this);
+    	}
     }
     
 	/**
@@ -305,7 +307,7 @@ public class Giocatore implements Serializable {
 		visualizza.append("\n");
 		
 		for(int i=0; i<proprieta.size(); i++){
-		    if((i+1)%4 == 0)
+		    if((i)%3 == 0)
 			    visualizza.append("\n\n");	
 			
 			visualizza.append(String.format(BelleStringhe.incolonna(("\t\t" + proprieta.get(i).getNumero() + "  " + proprieta.get(i).getNome() + "\t\t"),35)));

@@ -54,34 +54,6 @@ public class Terreno extends Acquistabile{
 	}
 	
 	
-	/**
-	 * @return true se il giocatore possiede tutti i terreni dello stesso colore
-	 */
-	@Override
-	public boolean possiedeTutti(Giocatore proprietario, Acquistabile casella) {
-		int contatore = 0;
-		Vector<Acquistabile> proprieta = proprietario.getProprieta();
-		
-		for(int i=0; i<proprieta.size(); i++)
-			if(casella.getColore().equalsIgnoreCase(proprieta.get(i).getColore()))
-				contatore++;
-			
-		
-		
-	if(casella.getColore().equalsIgnoreCase(Data.NERO))
-		    return false;
-				
-	if(casella.getColore().equalsIgnoreCase(Data.VIOLA) || this.getColore().equalsIgnoreCase(Data.ROSA)){
-		if(contatore==2)
-		    return true;
-	}
-	else
-		if(contatore==3)
-			return true;
-	
-	return false;
-	}
-	
 	
 	/**
 	 * Gestisce il passaggio di un giocatore su una casella di tipo Terreno
