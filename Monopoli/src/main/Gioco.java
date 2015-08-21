@@ -14,7 +14,7 @@ import utilities.ServizioFile;
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class Gioco {
+public class Gioco{
 
 	private final static String MESSAGGIO_FINE_TURNO = "Il tuo turno e' concluso";
 	private final static String MESSAGGIO_TROPPI_LANCI = "Hai ottenuto tre volte di seguito lo stesso punteggio per entrambi i dadi, andrai in prigione";
@@ -62,6 +62,7 @@ public class Gioco {
 
 	public static Tabellone tabellone = new Tabellone();
 	public static Dado dado;
+	private static Gioco gioco;
 
 	
 	
@@ -70,10 +71,17 @@ public class Gioco {
 	/**
 	 * Costruttore della classe Gioco
 	 */
-	public Gioco() {
+	private Gioco() {
 		tabellone = Data.creaTabellone();
 	}
 
+	public static Gioco getIstanza(){
+		if(gioco==null)
+			gioco = new Gioco();
+		
+		return gioco;
+	}
+	
 	/**
 	 * Crea una nuova partita
 	 */
@@ -390,6 +398,12 @@ public class Gioco {
 		 } else
 			  System.out.printf(NIENTE_DA_SALVARE);
 		
+		
+	}
+
+	public void resettaGioco() {
+		gioco = null;
+		getIstanza();
 		
 	}
 }

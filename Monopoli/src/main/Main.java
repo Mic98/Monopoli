@@ -26,7 +26,7 @@ public class Main {
 			VOCI_MENU_INIZIALE);
 	
 	
-	private static Gioco gioco = new Gioco();
+	private static Gioco gioco = Gioco.getIstanza();
 
 	public static void main(String[] args) {
 		int scelta;
@@ -61,7 +61,7 @@ public class Main {
 		int scelta = MyUtil.yesOrNo(FINE_PARTITA) ? 1 : 0;
 		
 		if(scelta == 1)
-			gioco = new Gioco();
+			gioco.resettaGioco();
 			
 			
 		return scelta;
