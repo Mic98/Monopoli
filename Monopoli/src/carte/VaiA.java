@@ -8,14 +8,14 @@ import main.Giocatore;
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class VaiA extends Carta{
+public class VaiA extends Decorator{
 	
 	private final static String MESSAGGIO_VIA = "\nSei passato dal via! Riceverai %.2f euro di bonus\n";
 
 	private int destinazione;
 	
-	public VaiA(String descrizione, int destinazione) {
-		super(descrizione);
+	public VaiA(int destinazione) {
+
 	    this.destinazione = destinazione;	
 	}
 
@@ -24,8 +24,7 @@ public class VaiA extends Carta{
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		stampaDescrizione();
-		
+
 		int passi = destinazione - giocatoreAttuale.getPosizione();
 		if(passi>0)
 			giocatoreAttuale.muoviGiocatore(passi);

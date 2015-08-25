@@ -8,7 +8,7 @@ import main.Gioco;
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class Compleanno extends Carta {
+public class Compleanno extends Decorator {
 	
 	private double regalo;
 	
@@ -17,8 +17,7 @@ public class Compleanno extends Carta {
 	 * @param descrizione La descrizione della carta
 	 * @param regalo La quantita' di denaro che ogni giocatore deve a chi ha pescato la carta
 	 */
-	public Compleanno(String descrizione, double regalo){
-		super(descrizione);
+	public Compleanno(double regalo){
 		this.regalo = regalo;
 	}
 	
@@ -30,7 +29,6 @@ public class Compleanno extends Carta {
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale){
-		stampaDescrizione();
 		
 		for(Giocatore giocatore: Gioco.tabellone.getElencoGiocatori()){
 			if(!giocatore.getNome().equalsIgnoreCase(giocatoreAttuale.getNome())){

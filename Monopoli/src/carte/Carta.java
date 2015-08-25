@@ -13,16 +13,7 @@ import main.Giocatore;
  */
 public abstract class Carta implements Serializable {
 	
-	private String descrizione;
 	
-	
-	/**
-	 * Costruttore della classe Carta
-	 * @param descrizione La descrizione dell'effetto della carta
-	 */
-	public Carta(String descrizione){
-		this.descrizione = descrizione;
-	}
 
 	/**
 	 * Viene eseguita l'istruzione riportata sulla descrizione della carta
@@ -30,15 +21,7 @@ public abstract class Carta implements Serializable {
 	 */
 	public abstract void effetto(Giocatore giocatoreAttuale);
 
-	public void stampaDescrizione(){
-		System.out.println();
-		System.out.println(getDescrizione());
-		System.out.println();
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
+	
 
 }
 

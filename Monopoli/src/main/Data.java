@@ -224,14 +224,29 @@ public class Data {
 		
 		Mazzo temporaneo = new Mazzo();
 		
-		temporaneo.aggiungiCarta(new VaiA(IMPREVISTI_01, 24));
-		temporaneo.aggiungiCarta(new VaiInPrigione(IMPREVISTI_02));
-		temporaneo.aggiungiCarta(new TornaIndietro(IMPREVISTI_03, 3));
-		temporaneo.aggiungiCarta(new VaiA(IMPREVISTI_04, 11));
-		temporaneo.aggiungiCarta(new PagaDebito(IMPREVISTI_05, BENEFICIENZA));
-		temporaneo.aggiungiCarta(new RitiraCredito(IMPREVISTI_06, CEDOLE_CARTELLE));
-		temporaneo.aggiungiCarta(new RitiraCredito(IMPREVISTI_07, INTERESSI));
-		temporaneo.aggiungiCarta(new VaiA(IMPREVISTI_08, 0));
+		VaiA imprevisto01 = new VaiA(24);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_01, imprevisto01));
+		
+		VaiInPrigione imprevisto02 = new VaiInPrigione();
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_02, imprevisto02));
+		
+		TornaIndietro imprevisto03 = new TornaIndietro(3);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_03, imprevisto03));
+		
+		VaiA imprevisto04 = new VaiA(11);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_04, imprevisto04));
+		
+		PagaDebito imprevisto05 = new PagaDebito(BENEFICIENZA);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_05, imprevisto05));
+		
+		RitiraCredito imprevisto06 = new RitiraCredito(CEDOLE_CARTELLE);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_06, imprevisto06));
+		
+		RitiraCredito imprevisto07 = new RitiraCredito(INTERESSI);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_07, imprevisto07));
+		
+		VaiA imprevisto08 = new VaiA(0);
+		temporaneo.aggiungiCarta(new CartaConcreta(IMPREVISTI_08, imprevisto08));
 		
 		Collections.shuffle(temporaneo.getCarte());
 		
@@ -245,14 +260,29 @@ public class Data {
 	public static Mazzo creaProbabilita(){
         Mazzo temporaneo = new Mazzo();
 		
-		temporaneo.aggiungiCarta(new VaiNoVia(PROBABILITA_01, 1));
-		temporaneo.aggiungiCarta(new RitiraCredito(PROBABILITA_02, CEDOLE_AZIONI));
-		temporaneo.aggiungiCarta(new PagaDebito(PROBABILITA_03, PREMIO_ASSICURAZIONE));
-		temporaneo.aggiungiCarta(new VaiA(PROBABILITA_04, 0));
-		temporaneo.aggiungiCarta(new RitiraCredito(PROBABILITA_05, CREDITORI));
-		temporaneo.aggiungiCarta(new PagaDebito(PROBABILITA_06, CAUSA));
-		temporaneo.aggiungiCarta(new VaiInPrigione(PROBABILITA_07));
-		temporaneo.aggiungiCarta(new Compleanno(PROBABILITA_08, REGALO));
+        VaiNoVia probabilita01 = new VaiNoVia(1);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_01, probabilita01));
+		
+		RitiraCredito probabilita02 = new RitiraCredito(CEDOLE_AZIONI);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_02, probabilita02));
+		
+		PagaDebito probabilita03 = new PagaDebito(PREMIO_ASSICURAZIONE);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_03, probabilita03));
+		
+		VaiA probabilita04 = new VaiA(0);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_04, probabilita04));
+		
+		RitiraCredito probabilita05 = new RitiraCredito(CREDITORI);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_05, probabilita05));
+		
+		PagaDebito probabilita06 = new PagaDebito(CAUSA);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_06, probabilita06));
+		
+		VaiInPrigione probabilita07 = new VaiInPrigione();
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_07, probabilita07));
+		
+		Compleanno probabilita08 = new Compleanno(REGALO);
+		temporaneo.aggiungiCarta(new CartaConcreta(PROBABILITA_08, probabilita08));
 		
 		Collections.shuffle(temporaneo.getCarte());
 		

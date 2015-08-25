@@ -75,6 +75,11 @@ public class Gioco{
 		tabellone = Data.creaTabellone();
 	}
 
+	
+	/**
+	 * 
+	 * @return restituisce l'istanza di gioco
+	 */
 	public static Gioco getIstanza(){
 		if(gioco==null)
 			gioco = new Gioco();
@@ -92,7 +97,7 @@ public class Gioco{
 		while (!ok) {
 			String nome;
 			do{
-			nome = MyUtil.riceviString(RICHIESTA_NOME_GIOCATORE);
+			nome = MyUtil.StringNonVuota(RICHIESTA_NOME_GIOCATORE);
 			if(tabellone.esisteGia(nome, nuoviGiocatori))
 				System.out.printf(ERR_ESISTE_GIA);
 			}
@@ -401,6 +406,9 @@ public class Gioco{
 		
 	}
 
+	/**
+	 * Inizializza l'istanza di gioco e la ricrea
+	 */
 	public void resettaGioco() {
 		gioco = null;
 		getIstanza();

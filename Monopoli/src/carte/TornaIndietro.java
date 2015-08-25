@@ -7,7 +7,7 @@ import main.Giocatore;
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class TornaIndietro extends Carta {
+public class TornaIndietro extends Decorator {
 	
 	private int passiIndietro;
 
@@ -16,8 +16,7 @@ public class TornaIndietro extends Carta {
 	 * @param descrizione La descrizione della Carta
 	 * @param passiIndietro Numero di passi da fare indietro
 	 */
-	public TornaIndietro(String descrizione, int passiIndietro) {
-		super(descrizione);
+	public TornaIndietro(int passiIndietro) {
 		this.passiIndietro = passiIndietro;
 	}
 
@@ -25,9 +24,7 @@ public class TornaIndietro extends Carta {
 	 * Sposta il giocatore indietro dei numeri di passi riportati sulla carta
 	 */
 	@Override
-	public void effetto(Giocatore giocatoreAttuale) {
-		stampaDescrizione();
-		
+	public void effetto(Giocatore giocatoreAttuale) {		
 		int nuovaPosizione = giocatoreAttuale.getPosizione() - passiIndietro;
 		
 		if(nuovaPosizione < 0){

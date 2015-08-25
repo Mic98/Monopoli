@@ -7,7 +7,7 @@ import main.Giocatore;
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class RitiraCredito extends Carta {
+public class RitiraCredito extends Decorator {
 
 	private double daRitirare;
 	
@@ -16,8 +16,7 @@ public class RitiraCredito extends Carta {
 	 * @param descrizione La descrizione della carta
 	 * @param daRitirare La quantita' di denaro da ritirare
 	 */
-	public RitiraCredito(String descrizione, double daRitirare) {
-		super(descrizione);
+	public RitiraCredito(double daRitirare) {
 		this.daRitirare = daRitirare;
 			}
 	
@@ -28,8 +27,7 @@ public class RitiraCredito extends Carta {
 	 */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		stampaDescrizione();
-		
+
 		giocatoreAttuale.aggiungiCapitale(daRitirare);
 		
 	}

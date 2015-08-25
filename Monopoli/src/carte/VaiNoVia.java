@@ -7,7 +7,7 @@ import main.Giocatore;
  * @author Daniele Barattieri Carlo Giannini Alessandro Grazioli
  *
  */
-public class VaiNoVia extends Carta {
+public class VaiNoVia extends Decorator {
 	
 	private int destinazione;
 	
@@ -16,8 +16,7 @@ public class VaiNoVia extends Carta {
 	 * @param descrizione La descrizione della carta
 	 * @param destinazione La posizione della casella di destinazione
 	 */
-	public VaiNoVia(String descrizione, int destinazione) {
-		super(descrizione);
+	public VaiNoVia(int destinazione) {
 		this.destinazione = destinazione;
 	}
 
@@ -27,8 +26,6 @@ public class VaiNoVia extends Carta {
      */
 	@Override
 	public void effetto(Giocatore giocatoreAttuale) {
-		stampaDescrizione();
-		
 		giocatoreAttuale.setPosizione(destinazione);
 		
 	}
