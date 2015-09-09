@@ -13,7 +13,6 @@ public class RitiraCredito extends Decorator {
 	
 	/**
 	 * Costruttore della classe RitiraCredito
-	 * @param descrizione La descrizione della carta
 	 * @param daRitirare La quantita' di denaro da ritirare
 	 */
 	public RitiraCredito(double daRitirare) {
