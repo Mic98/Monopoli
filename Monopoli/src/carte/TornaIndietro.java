@@ -13,7 +13,6 @@ public class TornaIndietro extends Decorator {
 
 	/**
 	 * Costruttore della classe TornaIndietro
-	 * @param descrizione La descrizione della Carta
 	 * @param passiIndietro Numero di passi da fare indietro
 	 */
 	public TornaIndietro(int passiIndietro) {

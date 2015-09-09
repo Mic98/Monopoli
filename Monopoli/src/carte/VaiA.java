@@ -14,6 +14,10 @@ public class VaiA extends Decorator{
 
 	private int destinazione;
 	
+	/**
+	 * Costruttore della classe VaiA
+	 * @param destinazione 
+	 */
 	public VaiA(int destinazione) {
 
 	    this.destinazione = destinazione;	

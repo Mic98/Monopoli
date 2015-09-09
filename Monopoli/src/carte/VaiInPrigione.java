@@ -12,7 +12,6 @@ public class VaiInPrigione extends Decorator {
 	
 	/**
 	 * Costruttore della classe VaiInPrigione
-	 * @param descrizione La descrizione della carta
 	 */
 	public VaiInPrigione(){
 	}

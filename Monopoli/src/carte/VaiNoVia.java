@@ -13,7 +13,6 @@ public class VaiNoVia extends Decorator {
 	
 	/**
 	 * Costruttore della classe VaiNoVIa
-	 * @param descrizione La descrizione della carta
 	 * @param destinazione La posizione della casella di destinazione
 	 */
 	public VaiNoVia(int destinazione) {

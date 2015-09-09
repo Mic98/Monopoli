@@ -14,7 +14,6 @@ public class Compleanno extends Decorator {
 	
 	/**
 	 * 
-	 * @param descrizione La descrizione della carta
 	 * @param regalo La quantita' di denaro che ogni giocatore deve a chi ha pescato la carta
 	 */
 	public Compleanno(double regalo){

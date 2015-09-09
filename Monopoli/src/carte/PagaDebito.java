@@ -13,11 +13,10 @@ public class PagaDebito extends Decorator{
 	
 	/**
 	 * Costruttore della classe PagaDebito
-	 * @param descrizione La descrizione della carta
 	 * @param daPagare La quantita' di denaro da pagare
 	 */
 	public PagaDebito(double daPagare){
-		
+		this.daPagare = daPagare;
 	}
 
 	/**
